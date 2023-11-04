@@ -5,26 +5,10 @@
 // get the respective category string given the enum constant equivalent
 char* getCategoryName(enum category category)
 {
-    switch(category)
-    {
-        case Program: return "Program"; break;
-        case Function: return "Function"; break;
-        case Parameters: return "Parameters"; break;
-        case Parameter: return "Parameter"; break;
-        case Arguments: return "Arguments";break;
-        case Integer: return "Integer"; break;
-        case Double: return "Double"; break;
-        case Identifier: return "Identifier"; break;
-        case Natural: return "Natural"; break;
-        case Decimal: return "Decimal"; break;
-        case Call: return "Call"; break;
-        case If: return "If"; break;
-        case Add: return "Add"; break;
-        case Sub: return "Sub"; break;
-        case Mul: return "Mul"; break;
-        case Div: return "Div"; break;
-        default: return NULL;
-    }
+    char *strings[] = { "Program","Declaration","FuncDeclaration","FuncDefinition","ParamList","FuncBody","ParamDeclaratio","StatList","Or","And","Eq","Ne","Ly","Gt",
+                "Le","Ge","Add","Sub","Mul","Div","Mod","Not","Minus","Plus","Store","Comma","Call","BitWiseAnd","BitWiseXor","BitWiseOr","Char","ChrLit","Identifier","Int",
+                "Short","Natural","Double","Decimal","Void","Null" };
+    return strings[category]; 
 }
 
 // create a node of a given category with a given lexical symbol
