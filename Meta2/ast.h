@@ -1,8 +1,9 @@
 #ifndef _AST_H
 #define _AST_H
 
-enum category { Program, Function, Parameters, Parameter, Arguments, Integer, Double, Identifier, Natural, Decimal, Call, If, Add, Sub, Mul, Div };
-
+enum category { Program,Declaration,FuncDeclaration,FuncDefinition,ParamList,FuncBody,ParamDeclaration,StatList,Or,And,Eq,Ne,Ly,Gt,
+                Le,Ge,Add,Sub,Mul,Div,Mod,Not,Minus,Plus,Store,Comma,Call,BitWiseAnd,BitWiseXor,BitWiseOr,Char,ChrLit,Identifier,Int,
+                Short,Natural,Double,Decimal,Void,Null };
 struct node {
     enum category category;
     char *token;
