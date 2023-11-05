@@ -32,7 +32,7 @@ reservedWords "++"|"--"|"["|"]"|"_Bool"|"_Complex"|"_Imaginary"|"auto"|"break"|"
 <COMMENT>(\n|\r\n)      { line+=1; column = 0; }
 <COMMENT>"*/"           { commentState = 0; BEGIN(INITIAL);}
 
-{reservedWords}         { if(type) printf("RESERVED(%s)\n",yytext);}
+{reservedWords}         { if(type){printf("RESERVED(%s)\n",yytext);} PASS_TOKEN(); return RESERVED;}
 {keyWords}              { 
     if(type)
     {
@@ -42,6 +42,8 @@ reservedWords "++"|"--"|"["|"]"|"_Bool"|"_Complex"|"_Imaginary"|"auto"|"break"|"
         } 
         printf("\n");
     }
+    PASS_TOKEN();
+    return KEYWORD;
 }   
 
 
@@ -52,7 +54,7 @@ reservedWords "++"|"--"|"["|"]"|"_Bool"|"_Complex"|"_Imaginary"|"auto"|"break"|"
 \^                      { if(type) {printf("BITWISEXOR\n");} return BITWISEXOR;}
 \&\&                    { if(type) {printf("AND\n");} return AND;}
 \=                      { if(type) {printf("ASSIGN\n");} return ASSIGN;}
-\*                      { if(type) {printf("MUL\n");} return mul;}
+\*                      { if(type) {printf("MUL\n");} return MUL;}
 \,                      { if(type) {printf("COMMA\n");} return COMMA;}
 \=\=                    { if(type) {printf("EQ\n");} return EQ;}
 \>\=                    { if(type) {printf("GE\n");} return GE;}
@@ -77,7 +79,7 @@ reservedWords "++"|"--"|"["|"]"|"_Bool"|"_Complex"|"_Imaginary"|"auto"|"break"|"
 \)                      { if(type) {printf("RPAR\n");} return RPAR;}
 \;                      { if(type) {printf("SEMI\n");} return SEMI;}
 
-\'([^\n\\']|\\n|\\t|\\\\|\\\'|\\\"|\\([0-7]{1,3}))\' { if(type) {printf("CHR(%s)\n",yytext);BEGIN(INITIAL);} PASS_TOKEN(); return CHR;}
+\'([^\n\\']|\\n|\\t|\\\\|\\\'|\\\"|\\([0-7]{1,3}))\' { if(type) {printf("CHRLIT(%s)\n",yytext);BEGIN(INITIAL);} PASS_TOKEN(); return CHRLIT;}
 \'([^\n\\']*|\\\'|\\\\|\\[^\n\\']+)+(\\)?            { column -= yyleng-1; printf("Line %d, column %d: unterminated char constant\n",line,column); column += yyleng-1;BEGIN(INITIAL);}
 \'([^\n\\']*|\\\'|\\\\|\\[^\n\'])+\'                 { column -= yyleng-1; printf("Line %d, column %d: invalid char constant (%s)\n",line,column,yytext); column += yyleng-1;BEGIN(INITIAL);}
                 
@@ -86,19 +88,19 @@ reservedWords "++"|"--"|"["|"]"|"_Bool"|"_Complex"|"_Imaginary"|"auto"|"break"|"
 \n|\r\n|\r                      { line+=1; column = 0; }
 
 {letter}({digit}|{letter})*                     { if(type) {printf("IDENTIFIER(%s)\n",yytext);} PASS_TOKEN(); return IDENTIFIER; }
-{digit}+                                        { if(type) {printf("NATURAL(%s)\n",yytext);} return NATURAL; }
+{digit}+                                        { if(type) {printf("NATURAL(%s)\n",yytext);} PASS_TOKEN(); return NATURAL; }
 
 {digit}+"."([eE][+-]?{digit}+)?|{digit}+"."{digit}+([eE][+-]?{digit}+)? {
     if(type) {printf("DECIMAL(%s)\n", yytext);
-} return DECIMAL;}
+} PASS_TOKEN();return DECIMAL;}
 
 "."{digit}+([eE][+-]?{digit}+)? {
     if(type) {printf("DECIMAL(%s)\n", yytext);
-} return DECIMAL;}
+} PASS_TOKEN();return DECIMAL;}
 
 {digit}+[eE][+-]?{digit}+ {
     if(type) {printf("DECIMAL(%s)\n", yytext);
-} return DECIMAL;}
+} PASS_TOKEN();return DECIMAL;}
 
 .                       { printf("Line %d, column %d: unrecognized character (%s)\n",line,column,yytext);}
 
