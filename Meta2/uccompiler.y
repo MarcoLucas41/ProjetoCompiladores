@@ -69,7 +69,7 @@ Declaration: TypeSpec Declarator Declaration0+ SEMI
 Declaration0+: COMMA Declarator
              | Declaration0+ COMMA Declarator
 
-TypeSpec: CHAR {$$ = newnode(Char,NULL));} 
+TypeSpec: CHAR {$$ = newnode(Char,NULL);} 
         | INT 
         | VOID 
         | SHORT 
