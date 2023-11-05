@@ -82,8 +82,8 @@ Statement: Expr SEMI {$$ = $1;}
          | SEMI {;}
          | LBRACE RBRACE {;}
          | LBRACE Statement0+ RBRACE {$$ = $2;}
-         | IF LPAR Expr RPAR Statement ELSE Statement {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5); addchild($$,$7);}
-         | IF LPAR Expr RPAR Statement {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5);}
+         | IF LPAR Expr RPAR Statement ELSE Statement %prec LOW {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5); addchild($$,$7);}
+         | IF LPAR Expr RPAR Statement %prec LOW {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5);}
          | WHILE LPAR Expr RPAR Statement {$$ = newnode(While,NULL); addchild($$,$3); addchild($$,$5);}
          | RETURN Expr SEMI {$$ = newnode(Return,NULL); addchild($$,$2);}
          | RETURN SEMI {$$ = newnode(Return,NULL); addchild($$,$2);}

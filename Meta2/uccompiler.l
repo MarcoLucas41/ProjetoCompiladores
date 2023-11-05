@@ -108,9 +108,10 @@ reservedWords "++"|"--"|"["|"]"|"_Bool"|"_Complex"|"_Imaginary"|"auto"|"break"|"
 extern int yylex();
 int main(int argc, char *argv[]) 
 {
-    if(argv[1] != NULL && strcmp(argv[1],"-l") == 0)
+    if(argv[1] != NULL)
     {
-        type = true;
+        if(strcmp(argv[1],"-l") == 0) type = true;
+        if(strcmp(argv[1],"-t") == 0);
     }
     yylex();    /* run the lexical analysis automaton */
     return 0;
