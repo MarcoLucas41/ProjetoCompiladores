@@ -105,6 +105,53 @@ reservedWords "++"|"--"|"["|"]"|"_Bool"|"_Complex"|"_Imaginary"|"auto"|"break"|"
 .                       { printf("Line %d, column %d: unrecognized character (%s)\n",line,column,yytext);}
 
 %%
+void show(struct node *node, int depth) 
+{
+    struct node_list *temp = node->children->next;
+    for(int i = 0; i < depth+1; i++)
+    {
+        printf(".");
+    }
+    if(node->token != NULL)
+    {
+        printf("%s(%s)\n",getCategoryName(node->category), node->token);
+    }
+    else
+    {
+        printf("%s\n",getCategoryName(node->category));
+    }
+
+    while(temp != NULL)
+    {
+        show(temp->node,depth+1);
+        temp = temp->next;
+    }
+
+    
+    //printf("%s\n",getCategoryName(node->children->next->node->category));
+    //printf("%s\n",getCategoryName(node->children->next->next->node->category));
+    
+}
+
+
+
+void cleanup(struct node *node)
+{
+    struct node_list *temp = node->children->next;
+
+    while(temp != NULL)
+    {
+        cleanup(temp->node);
+        temp = temp->next;
+    }
+    free(node->children);
+    free(node);
+
+}
+
+
+
+
 extern int yylex();
 int main(int argc, char *argv[]) 
 {
