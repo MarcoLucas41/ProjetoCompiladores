@@ -83,7 +83,8 @@ Statement: OPTIONAL SEMI                                        {$$ = $1;}
          | RETURN Expr SEMI                                     {$$ = newnode(Return,NULL); addchild($$,$2);}
          | RETURN SEMI                                          {$$ = newnode(Return,NULL); addchild($$,$2);}
 
-OPTIONAL:  SEMI                                                 {;}
+OPTIONAL:  Expr SEMI                                            {;}
+         | SEMI                                                 {;}
          | ;
 
 ZEROPLUS: LBRACE RBRACE                                        {;}
