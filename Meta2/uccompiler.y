@@ -27,102 +27,111 @@ struct node *program;
 /* START grammar rules section -- BNF grammar */
 
 %%
-FunctionsAndDeclarations: FunctionDefinition                            {$$ = newnode(Program,NULL); addchild($$,$1);}
-                        | FunctionDeclaration                           {$$ = newnode(Program,NULL); addchild($$,$1);}
-                        | Declaration                                   {$$ = newnode(Program,NULL); addchild($$,$1);}
-                        | FunctionsAndDeclarations FunctionDefinition   {$$ = $1; addchild($$,$2);}
-                        | FunctionsAndDeclarations FunctionDeclaration  {$$ = $1; addchild($$,$2);}
-                        | FunctionsAndDeclarations Declaration          {$$ = $1; addchild($$,$2);}
+FunctionsAndDeclarations: FunctionDefinition ZEROPLUS1
+                        | FunctionDeclaration ZEROPLUS1
+                        | Declaration ZEROPLUS1
+
+ZEROPLUS1: ZEROPLUS1 FunctionDefinition
+         | ZEROPLUS1 FunctionDeclaration
+         | ZEROPLUS1 Declaration
+         | ;
+                                
                                
-                    
+FunctionDefinition: TypeSpec FunctionDeclarator FunctionBody {}
 
-FunctionDefinition: TypeSpec FunctionDeclarator FunctionBody            {$$ = newnode(FuncDefinition,NULL); addchild($$,$1); addchild($$,$2); addchild($$,$3);}
+FunctionBody: LBRACE OPTIONAL1 RBRACE {}
 
-FunctionBody: LBRACE DeclarationsAndStatements RBRACE                   {$$ = newnode(FuncBody,NULL); addchild($$,$2);}
-            | LBRACE RBRACE                                             {$$ = newnode(FuncBody,NULL);}
+OPTIONAL1: DeclarationsAndStatements {}
+        | ;
 
 
-DeclarationsAndStatements: Statement DeclarationsAndStatements          {addchild($$,$1); addchild($$,$2);}
-                         | Declaration DeclarationsAndStatements        {addchild($$,$1); addchild($$,$2);}
-                         | Statement                                    {addchild($$,$1);}
-                         | Declaration                                  {addchild($$,$1);}
+DeclarationsAndStatements: Statement DeclarationsAndStatements {}
+                         | Declaration DeclarationsAndStatements {}
+                         | Statement {}
+                         | Declaration {}
 
-FunctionDeclaration: TypeSpec FunctionDeclarator SEMI                   {$$ = newnode(FuncDeclaration,NULL); addchild($$,$1); addchild($$,$2);}                         
+FunctionDeclaration: TypeSpec FunctionDeclarator SEMI {}                         
 
-FunctionDeclarator: IDENTIFIER LPAR ParameterList RPAR                  {struct node *identifier = newnode(Identifier,$1); addchild($$,identifier); addchild($$,$3);}                         
+FunctionDeclarator: IDENTIFIER LPAR ParameterList RPAR {}                         
 
-ParameterList: ParameterDeclaration ParameterList0+                     {}
-             | ParameterDeclaration                                     {}
+ParameterList: ParameterDeclaration ZEROPLUS2{}
 
-ParameterList0+: COMMA ParameterDeclaration
-               | ParameterList0+ COMMA ParemeterDeclaration
+ZEROPLUS2: ZEROPLUS2 COMMA ParameterDeclaration
+        | ;
+             
 
-ParameterDeclaration: TypeSpec IDENTIFIER
-                    | TypeSpec
+ParameterDeclaration: TypeSpec OPCIONAL2
 
-Declaration: TypeSpec Declarator Declaration0+ SEMI
-           | TypeSpec Declarator SEMI
+OPCIONAL2: IDENTIFIER
+        | ;
 
-Declaration0+: COMMA Declarator
-             | Declaration0+ COMMA Declarator
+Declaration: TypeSpec Declarator ZEROPLUS3 SEMI
 
-TypeSpec: CHAR                          {$$ = newnode(Char,NULL);} 
-        | INT                           {$$ = newnode(Int,NULL);}
-        | VOID                          {$$ = newnode(Void,NULL);}
-        | SHORT                         {$$ = newnode(Short,NULL);}
-        | DOUBLE                        {$$ = newnode(Double,NULL);}
+ZEROPLUS3: ZEROPLUS3 COMMA Declarator
+        | ;
 
-Declarator: IDENTIFIER ASSIGN Expr      {struct node *identifier = newnode(Identifier,$1); addchild($$,$1); addchild($$,$3);}
-          | IDENTIFIER                  {struct node *identifier = newnode(Identifier,$1); addchild($$,$1);}
+TypeSpec: CHAR 
+        | INT 
+        | VOID 
+        | SHORT 
+        | DOUBLE 
 
-Statement: OPTIONAL SEMI                                        {$$ = $1;}
-         | LBRACE ZEROPLUS RBRACE                               {$$ = $2;}
-         | IF LPAR Expr RPAR Statement ELSE Statement %prec LOW {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5); addchild($$,$7);}
-         | IF LPAR Expr RPAR Statement %prec LOW                {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5);}
-         | WHILE LPAR Expr RPAR Statement                       {$$ = newnode(While,NULL); addchild($$,$3); addchild($$,$5);}
-         | RETURN Expr SEMI                                     {$$ = newnode(Return,NULL); addchild($$,$2);}
-         | RETURN SEMI                                          {$$ = newnode(Return,NULL); addchild($$,$2);}
+Declarator: IDENTIFIER OPCIONAL3{}
 
-OPTIONAL:  Expr SEMI                                            {;}
-         | SEMI                                                 {;}
+OPCIONAL3: ASSIGN Expr
+        | ;         
+
+Statement: OPCIONAL4 SEMI
+         | LBRACE ZEROPLUS4 RBRACE
+         | IF LPAR Expr RPAR Statement OPCIONAL5 %prec LOW {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5); addchild($$,$7);}
+         | IF LPAR Expr RPAR Statement %prec LOW {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5);}
+         | WHILE LPAR Expr RPAR Statement {$$ = newnode(While,NULL); addchild($$,$3); addchild($$,$5);}
+         | RETURN OPCIONAL4 SEMI {}
+
+OPCIONAL4: Expr
          | ;
+OPCIONAL5: ELSE Statement
+        | ;
 
-ZEROPLUS: LBRACE RBRACE                                        {;}
-         | Statement1+ Statement                                {$$ = $1;}
-         | ;
+ZEROPLUS4: ZEROPLUS4 Statement
+        | ;
 
-Expr: Expr ASSIGN Expr          {$$ = newnode(Assign, NULL); addchild($$, $1); addchild($$, $3);}
-    | Expr COMMA Expr           {$$ = newnode(Comma, NULL); addchild($$, $1); addchild($$, $3);}
-    | Expr PLUS Expr            {$$ = newnode(Plus, NULL); addchild($$, $1); addchild($$, $3);}
-    | Expr MINUS Expr           {$$ = newnode(Minus, NULL); addchild($$, $1); addchild($$, $3);}
-    | Expr MUL Expr             {$$ = newnode(Mul, NULL); addchild($$, $1); addchild($$, $3);}
-    | Expr DIV Expr             {$$ = newnode(Div, NULL); addchild($$, $1); addchild($$, $3);}
-    | Expr MOD Expr             {$$ = newnode(Mod, NULL); addchild($$, $1); addchild($$, $3);}
-    | Expr OR Expr              {$$ = newnode(Or, NULL); addchild($$, $1); addchild($$, $3);}
-    | Expr AND Expr             {$$ = newnode(And, NULL); addchild($$, $1); addchild($$, $3);}
-    | Expr BITWISEAND Expr      {$$ = newnode(BitWiseAnd,NULL); addchild($$,$1); addchild($$,$2);}
-    | Expr BITWISEOR Expr       {$$ = newnode(BitWiseOr,NULL); addchild($$,$1); addchild($$,$2);}
-    | Expr BITWISEXOR Expr      {$$ = newnode(Bitwisexor, NULL); addchild($$, $1); addchild($$, $3);}
-    | Expr EQ Expr              {$$ = newnode(Eq, NULL); addchild($$, $1); addchild($$, $3);}
-    | Expr NE Expr              {$$ = newnode(Ne, NULL); addchild($$, $1); addchild($$, $3);}
-    | Expr LE Expr              {$$ = newnode(Le, NULL); addchild($$, $1); addchild($$, $3);}
-    | Expr GE Expr              {$$ = newnode(Ge, NULL); addchild($$, $1); addchild($$, $3);}
-    | Expr LT Expr              {$$ = newnode(Lt, NULL); addchild($$, $1); addchild($$, $3);}
-    | Expr GT Expr              {$$ = newnode(Gt, NULL); addchild($$, $1); addchild($$, $3);}
-    | PLUS Expr                 {$$ = newnode(PLUS, NULL); addchild($$, $1); addchild($$, $3);}
-    | MINUS Expr                {$$ = newnode(Minus, NULL); addchild($$, $1);}
-    | NOT Expr                  {$$ = newnode(Not,NULL); addchild($$,$1);}
-    | IDENTIFIER LPAR RPAR      
-    | IDENTIFIER LPAR Expr RPAR
-    | IDENTIFIER LPAR Expr Expr0+ RPAR
-    | IDENTIFIER                {$$ = newnode(Identifier,$1);}
-    | NATURAL                   {$$ = newnode(Natural,$1);}
-    | CHRLIT                    {$$ = newnode(Chrlit,$1);}
-    | DECIMAL                   {$$ = newnode(Decimal,$1);}
-    | LPAR Expr RPAR            {$$ = $2;}
 
-Expr0+: COMMA Expr
-      | Expr0+ COMMA Expr
+Expr: Expr ASSIGN Expr 
+    | Expr COMMA Expr 
+    | Expr PLUS Expr 
+    | Expr MINUS Expr 
+    | Expr MUL Expr 
+    | Expr DIV Expr 
+    | Expr MOD Expr 
+    | Expr OR Expr 
+    | Expr AND Expr 
+    | Expr BITWISEAND Expr {$$ = newnode(BitWiseAnd,NULL); addchild($$,$1); addchild($$,$2);}
+    | Expr BITWISEOR Expr {$$ = newnode(BitWiseOr,NULL); addchild($$,$1); addchild($$,$2);}
+    | Expr BITWISEXOR Expr 
+    | Expr EQ Expr 
+    | Expr NE Expr 
+    | Expr LE Expr 
+    | Expr GE Expr 
+    | Expr LT Expr 
+    | Expr GT Expr 
+    | PLUS Expr 
+    | MINUS Expr
+    | NOT Expr {+}
+    | IDENTIFIER LPAR OPCIONAL6 RPAR 
+    | IDENTIFIER {$$ = newnode(Identifier,$1);}
+    | NATURAL {$$ = newnode(Natural,$1);}
+    | CHRLIT {$$ = newnode(Chrlit,$1);}
+    | DECIMAL {$$ = newnode(Decimal,$1);}
+    | LPAR Expr RPAR {$$ = $2;}
+
+OPCIONAL6: Expr ZEROPLUS5  
+        | ;
+
+ZEROPLUS5: ZEROPLUS5 COMMA Expr
+     | ;
+//if: n há problemas de associatividade
+//else: é necessário associar a um IF
 
 %%
 
