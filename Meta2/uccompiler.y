@@ -66,10 +66,10 @@ ParameterList: ParameterList COMMA ParameterDeclaration
 
              
 
-ParameterDeclaration: TypeSpec OPCIONAL2
+ParameterDeclaration: TypeSpec OPTIONAL2
                     | ;
 
-OPCIONAL2: IDENTIFIER
+OPTIONAL2: IDENTIFIER
         | ;
 
 Declaration: TypeSpec Declarator ZEROPLUS1 SEMI
@@ -85,26 +85,26 @@ TypeSpec: CHAR
         | DOUBLE 
         ;
 
-Declarator: IDENTIFIER OPCIONAL3{}
+Declarator: IDENTIFIER OPTIONAL3{}
           ;
 
 OPCIONAL3: ASSIGN Expr
         | ;         
 
-Statement: OPCIONAL4 SEMI
+Statement: OPTIONAL4 SEMI
          | LBRACE ZEROPLUS2 RBRACE
          | LBRACE ERROR RBRACE
-         | IF LPAR Expr RPAR Statement OPCIONAL5 %prec LOW {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5); addchild($$,$7);}
+         | IF LPAR Expr RPAR Statement OPTIONAL5 %prec LOW {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5); addchild($$,$7);}
          | IF LPAR Expr RPAR Statement %prec LOW {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5);}
          | WHILE LPAR Expr RPAR Statement {$$ = newnode(While,NULL); addchild($$,$3); addchild($$,$5);}
          | RETURN OPCIONAL4 SEMI {}
          | ERROR SEMI
          ;
 
-OPCIONAL4: Expr
+OPTIONAL4: Expr
          | ;
 
-OPCIONAL5: ELSE Statement
+OPTIONAL5: ELSE Statement
         | ;
 
 ZEROPLUS2: ZEROPLUS2 Statement
@@ -133,7 +133,7 @@ Expr: Expr ASSIGN Expr
     | MINUS Expr
     | NOT Expr {+}
     | IDENTIFIER LPAR ERROR RPAR
-    | IDENTIFIER LPAR OPCIONAL6 RPAR 
+    | IDENTIFIER LPAR OPTIONAL6 RPAR 
     | IDENTIFIER {$$ = newnode(Identifier,$1);}
     | NATURAL {$$ = newnode(Natural,$1);}
     | CHRLIT {$$ = newnode(Chrlit,$1);}
@@ -142,7 +142,7 @@ Expr: Expr ASSIGN Expr
     | LPAR ERROR RPAR
     ;
 
-OPCIONAL6: ZEROPLUS3  
+OPTIONAL6: ZEROPLUS3  
          | ;
 
 ZEROPLUS3: ZEROPLUS3 COMMA Expr
