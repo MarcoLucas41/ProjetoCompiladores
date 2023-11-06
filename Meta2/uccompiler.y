@@ -77,27 +77,16 @@ Declarator: IDENTIFIER ASSIGN Expr      {struct node *identifier = newnode(Ident
 
 Statement: Expr SEMI                                            {$$ = $1;}
          | SEMI                                                 {;}
-         | LBRACE RBRACE                                        {;}
-         | LBRACE Statement0+ RBRACE                            {$$ = $2;}
+         | LBRACE ZEROPLUS RBRACE                            {$$ = $2;}
          | IF LPAR Expr RPAR Statement ELSE Statement %prec LOW {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5); addchild($$,$7);}
          | IF LPAR Expr RPAR Statement %prec LOW                {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5);}
          | WHILE LPAR Expr RPAR Statement                       {$$ = newnode(While,NULL); addchild($$,$3); addchild($$,$5);}
          | RETURN Expr SEMI                                     {$$ = newnode(Return,NULL); addchild($$,$2);}
          | RETURN SEMI                                          {$$ = newnode(Return,NULL); addchild($$,$2);}
 
-Statement0+: Statement {$$ = $1;}
-           | Statement0+ Statement         
-/*
-
-if []: LBRACE RBRACE
-     | LBRACE Statement RBRACE
-
-if {}: LBRACE RBRACE
-     | LBRACE Statement0+ RBRACE
-
-Statement0+: Statement
-           | Stament0+ Statement
-*/
+ZEROPLUS: LBRACE RBRACE                                        {;}
+         | Statement1+ Statement                  {$$ = $1;}
+         | ;
 
 Expr: Expr ASSIGN Expr          {$$ = newnode(Assign, NULL); addchild($$, $1); addchild($$, $3);}
     | Expr COMMA Expr           {$$ = newnode(Comma, NULL); addchild($$, $1); addchild($$, $3);}
