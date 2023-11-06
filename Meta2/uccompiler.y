@@ -27,86 +27,75 @@ struct node *program;
 /* START grammar rules section -- BNF grammar */
 
 %%
-FunctionsAndDeclarations: FunctionDefinition {$$ = newnode(Program,NULL); addchild($$,$1);}
-                        | FunctionDeclaration {$$ = newnode(Program,NULL); addchild($$,$1);}
-                        | Declaration {$$ = newnode(Program,NULL); addchild($$,$1);}
-                        | FunctionsAndDeclarations FunctionDefinition {$$ = $1; addchild($$,$2);}
-                        | FunctionsAndDeclarations FunctionDeclaration {$$ = $1; addchild($$,$2);}
-                        | FunctionsAndDeclarations Declaration {$$ = $1; addchild($$,$2);}
+FunctionsAndDeclarations: FunctionDefinition ZEROPLUS1
+                        | FunctionDeclaration ZEROPLUS1
+                        | Declaration ZEROPLUS1
+
+ZEROPLUS1: ZEROPLUS1 FunctionDefinition
+         | ZEROPLUS1 FunctionDeclaration
+         | ZEROPLUS1 Declaration
+         | ;
+                                
                                
-                    
+FunctionDefinition: TypeSpec FunctionDeclarator FunctionBody {}
 
-FunctionDefinition: TypeSpec FunctionDeclarator FunctionBody {$$ = newnode(FuncDefinition,NULL); addchild($$,$1); addchild($$,$2); addchild($$,$3);}
+FunctionBody: LBRACE OPTIONAL1 RBRACE {}
 
-FunctionBody: LBRACE DeclarationsAndStatements RBRACE {$$ = newnode(FuncBody,NULL); addchild($$,$2);}
-            | LBRACE RBRACE {$$ = newnode(FuncBody,NULL);}
+OPTIONAL1: DeclarationsAndStatements {}
+        | ;
 
 
-DeclarationsAndStatements: Statement DeclarationsAndStatements {addchild($$,$1); addchild($$,$2);}
-                         | Declaration DeclarationsAndStatements {addchild($$,$1); addchild($$,$2);}
-                         | Statement {addchild($$,$1);}
-                         | Declaration {addchild($$,$1);}
+DeclarationsAndStatements: Statement DeclarationsAndStatements {}
+                         | Declaration DeclarationsAndStatements {}
+                         | Statement {}
+                         | Declaration {}
 
-FunctionDeclaration: TypeSpec FunctionDeclarator SEMI {$$ = newnode(FuncDeclaration,NULL); addchild($$,$1); addchild($$,$2);}                         
+FunctionDeclaration: TypeSpec FunctionDeclarator SEMI {}                         
 
-FunctionDeclarator: IDENTIFIER LPAR ParameterList RPAR {struct node *identifier = newnode(Identifier,$1);
-                                                        addchild($$,identifier);
-                                                        addchild($$,$3);
-                                                        }                         
+FunctionDeclarator: IDENTIFIER LPAR ParameterList RPAR {}                         
 
-ParameterList: ParameterDeclaration ParameterList0+ {}
-             | ParameterDeclaration {}
+ParameterList: ParameterDeclaration ZEROPLUS2{}
 
-ParameterList0+: COMMA ParameterDeclaration
-               | ParameterList0+ COMMA ParemeterDeclaration
+ZEROPLUS2: ZEROPLUS2 COMMA ParameterDeclaration
+        | ;
+             
 
-ParameterDeclaration: TypeSpec IDENTIFIER
-                    | TypeSpec
+ParameterDeclaration: TypeSpec OPCIONAL2
 
-Declaration: TypeSpec Declarator Declaration0+ SEMI
-           | TypeSpec Declarator SEMI
+OPCIONAL2: IDENTIFIER
+        | ;
 
-Declaration0+: COMMA Declarator
-             | Declaration0+ COMMA Declarator
+Declaration: TypeSpec Declarator ZEROPLUS3 SEMI
 
-TypeSpec: CHAR {$$ = newnode(Char,NULL);} 
+ZEROPLUS3: ZEROPLUS3 COMMA Declarator
+        | ;
+
+TypeSpec: CHAR 
         | INT 
         | VOID 
         | SHORT 
         | DOUBLE 
 
-Declarator: IDENTIFIER ASSIGN Expr {struct node *identifier = newnode(Identifier,$1); addchild($$,$1); addchild($$,$3);}
-          | IDENTIFIER {struct node *identifier = newnode(Identifier,$1); addchild($$,$1);}
+Declarator: IDENTIFIER OPCIONAL3{}
 
-Statement: Expr SEMI {$$ = $1;}
-         | SEMI {;}
-         | LBRACE
+OPCIONAL3: ASSIGN Expr
+        | ;         
 
-//if: n há problemas de associatividade
-//else: é necessário associar a um IF
-
-
-         | IF LPAR Expr RPAR Statement OPCIONAL %prec LOW {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5); addchild($$,$7);}
+Statement: OPCIONAL4 SEMI
+         | LBRACE ZEROPLUS4 RBRACE
+         | IF LPAR Expr RPAR Statement OPCIONAL5 %prec LOW {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5); addchild($$,$7);}
          | IF LPAR Expr RPAR Statement %prec LOW {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5);}
          | WHILE LPAR Expr RPAR Statement {$$ = newnode(While,NULL); addchild($$,$3); addchild($$,$5);}
-         | RETURN OPCIONAL SEMI {}
+         | RETURN OPCIONAL4 SEMI {}
 
-OPCIONAL: ELSE Statement
+OPCIONAL4: Expr
+         | ;
+OPCIONAL5: ELSE Statement
         | ;
 
-OPCIONAL: Expr
-        | ;    
-/*
+ZEROPLUS4: ZEROPLUS4 Statement
+        | ;
 
-if []: LBRACE RBRACE {}
-     | LBRACE Statement RBRACE {}
-
-if {}: LBRACE RBRACE {}
-     | LBRACE Statement1+ RBRACE {}
-
-Statement1+: Statement {}
-           | Statement1+ Statement {}
-*/
 
 Expr: Expr ASSIGN Expr 
     | Expr COMMA Expr 
@@ -128,21 +117,21 @@ Expr: Expr ASSIGN Expr
     | Expr GT Expr 
     | PLUS Expr 
     | MINUS Expr
-    | NOT Expr {$$ = newnode(Not,NULL); addchild($$,$1);}
-    | IDENTIFIER LPAR OPCIONAL RPAR 
-    
+    | NOT Expr {+}
+    | IDENTIFIER LPAR OPCIONAL6 RPAR 
     | IDENTIFIER {$$ = newnode(Identifier,$1);}
     | NATURAL {$$ = newnode(Natural,$1);}
     | CHRLIT {$$ = newnode(Chrlit,$1);}
     | DECIMAL {$$ = newnode(Decimal,$1);}
     | LPAR Expr RPAR {$$ = $2;}
 
-OPCIONAL: Expr ZERO+  
+OPCIONAL6: Expr ZEROPLUS5  
         | ;
 
-ZEROPLUS: ZERO+ COMMA Expr
+ZEROPLUS5: ZEROPLUS5 COMMA Expr
      | ;
-
+//if: n há problemas de associatividade
+//else: é necessário associar a um IF
 
 %%
 
