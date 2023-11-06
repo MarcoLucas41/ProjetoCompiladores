@@ -75,17 +75,19 @@ TypeSpec: CHAR                          {$$ = newnode(Char,NULL);}
 Declarator: IDENTIFIER ASSIGN Expr      {struct node *identifier = newnode(Identifier,$1); addchild($$,$1); addchild($$,$3);}
           | IDENTIFIER                  {struct node *identifier = newnode(Identifier,$1); addchild($$,$1);}
 
-Statement: Expr SEMI                                            {$$ = $1;}
-         | SEMI                                                 {;}
-         | LBRACE ZEROPLUS RBRACE                            {$$ = $2;}
+Statement: OPTIONAL SEMI                                        {$$ = $1;}
+         | LBRACE ZEROPLUS RBRACE                               {$$ = $2;}
          | IF LPAR Expr RPAR Statement ELSE Statement %prec LOW {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5); addchild($$,$7);}
          | IF LPAR Expr RPAR Statement %prec LOW                {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5);}
          | WHILE LPAR Expr RPAR Statement                       {$$ = newnode(While,NULL); addchild($$,$3); addchild($$,$5);}
          | RETURN Expr SEMI                                     {$$ = newnode(Return,NULL); addchild($$,$2);}
          | RETURN SEMI                                          {$$ = newnode(Return,NULL); addchild($$,$2);}
 
+OPTIONAL:  SEMI                                                 {;}
+         | ;
+
 ZEROPLUS: LBRACE RBRACE                                        {;}
-         | Statement1+ Statement                  {$$ = $1;}
+         | Statement1+ Statement                                {$$ = $1;}
          | ;
 
 Expr: Expr ASSIGN Expr          {$$ = newnode(Assign, NULL); addchild($$, $1); addchild($$, $3);}
