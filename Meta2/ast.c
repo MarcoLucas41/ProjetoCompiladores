@@ -5,7 +5,7 @@
 // get the respective category string given the enum constant equivalent
 char* getCategoryName(enum category category)
 {
-    char *strings[] = { "Program","Declaration","FuncDeclaration","FuncDefinition","ParamList","FuncBody","ParamDeclaratio","StatList","Or","And","Eq","Ne","Ly","Gt",
+    char *strings[] = { "Program","Declaration","FuncDeclaration","FuncDefinition","ParamList","FuncBody","ParamDeclaration","StatList","If","While","Return","Or","And","Eq","Ne","Ly","Gt",
                 "Le","Ge","Add","Sub","Mul","Div","Mod","Not","Minus","Plus","Store","Comma","Call","BitWiseAnd","BitWiseXor","BitWiseOr","Char","ChrLit","Identifier","Int",
                 "Short","Natural","Double","Decimal","Void","Null" };
     return strings[category]; 
@@ -33,4 +33,46 @@ void addchild(struct node *parent, struct node *child) {
         children = children->next;
     children->next = new;
     printf("Adding child %s to parent %s!\n",getCategoryName(child->category),getCategoryName(parent->category));
+}
+
+// print the syntax tree given root node
+void show(struct node *node, int depth) 
+{
+    struct node_list *temp = node->children->next;
+    for(int i = 0; i < depth+1; i++)
+    {
+        printf(".");
+    }
+    if(node->token != NULL)
+    {
+        printf("%s(%s)\n",getCategoryName(node->category), node->token);
+    }
+    else
+    {
+        printf("%s\n",getCategoryName(node->category));
+    }
+
+    while(temp != NULL)
+    {
+        show(temp->node,depth+1);
+        temp = temp->next;
+    }
+    //printf("%s\n",getCategoryName(node->children->next->node->category));
+    //printf("%s\n",getCategoryName(node->children->next->next->node->category));
+    
+}
+
+// frees all nodes from syntax tree given root node
+void cleanup(struct node *node)
+{
+    struct node_list *temp = node->children->next;
+
+    while(temp != NULL)
+    {
+        cleanup(temp->node);
+        temp = temp->next;
+    }
+    free(node->children);
+    free(node);
+
 }

@@ -150,9 +150,12 @@ ZEROPLUS3: ZEROPLUS3 COMMA Expr
 
 //NULL: #include <stdio.h>
 
+ERROR:   
 
 %%
-
+void yyerror(char *error) {
+    printf("Line %d, column %d: %s '%s'\n",line,column,error,yytext);
+}
 /* START subroutines section */
 
 // all needed functions are collected in the .l and ast.* files

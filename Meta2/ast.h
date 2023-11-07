@@ -18,5 +18,7 @@ struct node_list {
 struct node *newnode(enum category category, char *token);
 void addchild(struct node *parent, struct node *child);
 char* getCategoryName(enum category category);
+void show(struct node *node, int depth); 
+void cleanup(struct node *node);
 
 #endif
