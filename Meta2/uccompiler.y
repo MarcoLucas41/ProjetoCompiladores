@@ -34,10 +34,6 @@ FunctionsAndDeclarations: FunctionsAndDeclarations FunctionDefinition
                         | FunctionDeclaration 
                         | Declaration 
 
-ZEROPLUS1: ZEROPLUS1 FunctionDefinition
-         | ZEROPLUS1 FunctionDeclaration
-         | ZEROPLUS1 Declaration
-         | ;
                                 
                                
 FunctionDefinition: TypeSpec FunctionDeclarator FunctionBody {}
@@ -152,8 +148,6 @@ ZEROPLUS3: ZEROPLUS3 COMMA Expr
 //else: é necessário associar a um IF
 
 //NULL: #include <stdio.h>
-
-ERROR:   
 
 %%
 void yyerror(char *error) {
