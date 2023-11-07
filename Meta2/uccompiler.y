@@ -27,9 +27,12 @@ struct node *program;
 /* START grammar rules section -- BNF grammar */
 
 %%
-FunctionsAndDeclarations: FunctionDefinition ZEROPLUS1
-                        | FunctionDeclaration ZEROPLUS1
-                        | Declaration ZEROPLUS1
+FunctionsAndDeclarations: FunctionsAndDeclarations FunctionDefinition
+                        | FunctionsAndDeclarations FunctionDeclaration
+                        | FunctionsAndDeclarations Declarator
+                        | FunctionDefinition 
+                        | FunctionDeclaration 
+                        | Declaration 
 
 ZEROPLUS1: ZEROPLUS1 FunctionDefinition
          | ZEROPLUS1 FunctionDeclaration
@@ -90,20 +93,20 @@ OPCIONAL3: ASSIGN Expr
         | ;         
 
 Statement: OPTIONAL4 SEMI
+         | error SEMI
          | LBRACE ZEROPLUS2 RBRACE
-         | LBRACE ERROR RBRACE
+         | LBRACE error RBRACE
          | IF LPAR Expr RPAR Statement OPTIONAL5 %prec LOW {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5); addchild($$,$7);}
          | IF LPAR Expr RPAR Statement %prec LOW {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5);}
          | WHILE LPAR Expr RPAR Statement {$$ = newnode(While,NULL); addchild($$,$3); addchild($$,$5);}
          | RETURN OPCIONAL4 SEMI {}
-         | ERROR SEMI
          ;
 
 OPTIONAL4: Expr
          | ;
 
 OPTIONAL5: ELSE Statement
-        | ;
+         | ;
 
 ZEROPLUS2: ZEROPLUS2 Statement
         | ;
@@ -130,14 +133,14 @@ Expr: Expr ASSIGN Expr
     | PLUS Expr 
     | MINUS Expr
     | NOT Expr {+}
-    | IDENTIFIER LPAR ERROR RPAR
+    | IDENTIFIER LPAR error RPAR
     | IDENTIFIER LPAR OPTIONAL6 RPAR 
     | IDENTIFIER {$$ = newnode(Identifier,$1);}
     | NATURAL {$$ = newnode(Natural,$1);}
     | CHRLIT {$$ = newnode(Chrlit,$1);}
     | DECIMAL {$$ = newnode(Decimal,$1);}
     | LPAR Expr RPAR {$$ = $2;}
-    | LPAR ERROR RPAR
+    | LPAR error RPAR 
     ;
 
 OPTIONAL6: ZEROPLUS3  
