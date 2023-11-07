@@ -42,6 +42,17 @@ reservedWords "++"|"--"|"["|"]"|"_Bool"|"_Complex"|"_Imaginary"|"auto"|"break"|"
         } 
         printf("\n");
     } 
+    switch(yytext){
+        case "char": return CHAR;
+        case "else": return ELSE;
+        case "while": return WHILE;
+        case "if": return IF;
+        case "int": return INT;
+        case "short": return SHORT;
+        case "double": return DOUBLE;
+        case "return": return RETURN;
+        case "void": return VOID;
+    }
 }   
 
 
