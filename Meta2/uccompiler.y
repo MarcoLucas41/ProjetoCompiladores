@@ -11,7 +11,7 @@ struct node *program;
 
 %}
 
-%token INTEGER DOUBLE IF THEN ELSE LBRACE RBRACE
+%token 
 %token<lexeme> RESERVED CHRLIT IDENTIFIER NATURAL DECIMAL
 %type<node> FunctionsAndDeclarations FunctionDefinition FunctionBody DeclarationsAndStatements FunctionDeclaration FunctionDeclarator ParameterList ParameterDeclaration Declaration TypeSpec Declarator Statement Expr
 

@@ -41,9 +41,7 @@ reservedWords "++"|"--"|"["|"]"|"_Bool"|"_Complex"|"_Imaginary"|"auto"|"break"|"
             printf("%c",yytext[i]-32);
         } 
         printf("\n");
-    }
-    PASS_TOKEN();
-    return KEYWORD;
+    } 
 }   
 
 
