@@ -11,7 +11,7 @@ struct node *program;
 
 %}
 
-%token 
+%token CHAR ELSE WHILE IF INT SHORT DOUBLE RETURN VOID BITWISEAND BITWISEOR BITWISEXOR AND ASSIGN MUL COMMA EQ GE GT DIV LBRACE LE LPAR LT MINUS MOD NE NOT OR PLUS RBRACE RPAR SEMI
 %token<lexeme> RESERVED CHRLIT IDENTIFIER NATURAL DECIMAL
 %type<node> FunctionsAndDeclarations FunctionDefinition FunctionBody DeclarationsAndStatements FunctionDeclaration FunctionDeclarator ParameterList ParameterDeclaration Declaration TypeSpec Declarator Statement Expr
 
