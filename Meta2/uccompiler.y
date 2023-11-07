@@ -3,11 +3,8 @@
 
 #include "ast.h"
 
-int yylex(void);
 void yyerror(char *);
 //int yydebug=1;
-
-struct node *program;
 
 %}
 
@@ -27,53 +24,51 @@ struct node *program;
 /* START grammar rules section -- BNF grammar */
 
 %%
-FunctionsAndDeclarations: FunctionsAndDeclarations FunctionDefinition
-                        | FunctionsAndDeclarations FunctionDeclaration
-                        | FunctionsAndDeclarations Declarator
-                        | FunctionDefinition 
-                        | FunctionDeclaration 
-                        | Declaration 
-
-
-                                
+FunctionsAndDeclarations: FunctionsAndDeclarations FunctionDefinition {$$ = $1; addchild($$,$1);}
+                        | FunctionsAndDeclarations FunctionDeclaration {$$ = $1; addchild($$,$1);}
+                        | FunctionsAndDeclarations Declarator {$$ = $1; addchild($$,$1);}
+                        | FunctionDefinition {$$ = newnode(Program,NULL); addchild($$,$1);}
+                        | FunctionDeclaration {$$ = newnode(Program,NULL); addchild($$,$1);}
+                        | Declaration {$$ = newnode(Program,NULL); addchild($$,$1);}                          
                                
-FunctionDefinition: TypeSpec FunctionDeclarator FunctionBody {}
+FunctionDefinition: TypeSpec FunctionDeclarator FunctionBody {$$ = newnode(FuncDefinition,NULL); addchild($$,$1); addchild($$,$2); addchild($$,$3);}
 
-FunctionBody: LBRACE OPTIONAL1 RBRACE {}
+FunctionBody: LBRACE OPTIONAL1 RBRACE {$$ = newnode(FuncBody,NULL); addchild($$,$2);}
 
-OPTIONAL1: DeclarationsAndStatements {}
-        | ;
+OPTIONAL1: DeclarationsAndStatements {$$ = $1;}
+         | ;
 
 
-DeclarationsAndStatements: Statement DeclarationsAndStatements {}
-                         | Declaration DeclarationsAndStatements {}
-                         | Statement {}
-                         | Declaration {}
+DeclarationsAndStatements: Statement DeclarationsAndStatements {addchild($$,$1); addchild($$,$2);}
+                         | Declaration DeclarationsAndStatements {addchild($$,$1); addchild($$,$2);}
+                         | Statement {$$ = $1; }
+                         | Declaration {$$ = $1; }
                          ;
 
-FunctionDeclaration: TypeSpec FunctionDeclarator SEMI {}  
+FunctionDeclaration: TypeSpec FunctionDeclarator SEMI {$$ = newnode(FuncDeclaration,NULL); addchild($$,$1); addchild($$,$2);}  
                    | ;                       
 
-FunctionDeclarator: IDENTIFIER LPAR ParameterList RPAR {}
+FunctionDeclarator: IDENTIFIER LPAR ParameterList RPAR {$$ = newnode(FuncDeclarator,NULL); addchild($$,$1); addchild($$,$3);}
                   | ;                                    
 
-ParameterList: ParameterList COMMA ParameterDeclaration
-             | ParameterDeclaration
+ParameterList: ParameterList COMMA ParameterDeclaration {addchild($$,$1); addchild($$,$3);}
+             | ParameterDeclaration {$$ = newnode(ParamList,NULL); addchild($$,$1);}
              ;
 
 
              
 
-ParameterDeclaration: TypeSpec OPTIONAL2
+ParameterDeclaration: TypeSpec OPTIONAL2 {$$ = newnode(ParamDeclaration,NULL); addchild($$,$1); addchild($$,$2);}
                     | ;
 
-OPTIONAL2: IDENTIFIER
-        | ;
+OPTIONAL2: IDENTIFIER {$$= newnode(Identifier,$1);}
+         | ;
 
-Declaration: TypeSpec Declarator ZEROPLUS1 SEMI {$$ = newnode(Declaration,NULL); addchild($$,$1); addchild}
-           | ERROR SEMI;
+Declaration: TypeSpec Declarator ZEROPLUS1 SEMI {$$ = newnode(Declaration,NULL); addchild($$,$1); addchild($$,$2);}
+           | error SEMI
+           ;
 
-ZEROPLUS1: ZEROPLUS1 COMMA Declarator 
+ZEROPLUS1: ZEROPLUS1 COMMA Declarator { addchild($$,$1); addchild($$,$3);}
          | ;
 
 TypeSpec: CHAR                          {$$ = newnode(Char,NULL);} 
@@ -83,30 +78,30 @@ TypeSpec: CHAR                          {$$ = newnode(Char,NULL);}
         | DOUBLE                        {$$ = newnode(Double,NULL);}
         ;
 
-Declarator: IDENTIFIER OPTIONAL3 {struct node *identifier = newnode(Identifier,$1); addchild($$,$1); addchild($$,$3);}
+Declarator: IDENTIFIER OPTIONAL3 {struct node *identifier = newnode(Identifier,$1); addchild($$,$1); addchild($$,$2);}
           ;
 
-OPCIONAL3: ASSIGN Expr {$$ = $2;}
+OPTIONAL3: ASSIGN Expr {$$ = $2;}
         | ;         
 
 Statement: OPTIONAL4 SEMI {$$ = $1;}
          | error SEMI
-         | LBRACE ZEROPLUS2 RBRACE {$$ = $1;}
+         | LBRACE ZEROPLUS2 RBRACE {$$ = $2;}
          | LBRACE error RBRACE
-         | IF LPAR Expr RPAR Statement OPTIONAL5 %prec LOW {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5); addchild($$,$7);}
+         | IF LPAR Expr RPAR Statement OPTIONAL5 %prec LOW {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5); addchild($$,$6);}
          | IF LPAR Expr RPAR Statement %prec LOW {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5);}
          | WHILE LPAR Expr RPAR Statement {$$ = newnode(While,NULL); addchild($$,$3); addchild($$,$5);}
-         | RETURN OPCIONAL4 SEMI {$$ = newnode(Return,NULL); addchild($$,$1);}
+         | RETURN OPTIONAL4 SEMI {$$ = newnode(Return,NULL); addchild($$,$2);}
          ;
 
 OPTIONAL4: Expr {$$ = $1;}
          | ;
 
-OPTIONAL5: ELSE Statement
+OPTIONAL5: ELSE Statement {$$ = newnode(Else,NULL); addchild($$,$2);}
          | ;
 
 ZEROPLUS2: ZEROPLUS2 Statement {$$ = $2;}
-        | ;
+         | ;
 
 
 Expr: Expr ASSIGN Expr          {$$ = newnode(Assign, NULL); addchild($$, $1); addchild($$, $3);}
@@ -118,8 +113,8 @@ Expr: Expr ASSIGN Expr          {$$ = newnode(Assign, NULL); addchild($$, $1); a
     | Expr MOD Expr             {$$ = newnode(Mod, NULL); addchild($$, $1); addchild($$, $3);}
     | Expr OR Expr              {$$ = newnode(Or, NULL); addchild($$, $1); addchild($$, $3);}
     | Expr AND Expr             {$$ = newnode(And, NULL); addchild($$, $1); addchild($$, $3);}
-    | Expr BITWISEAND Expr      {$$ = newnode(BitWiseAnd,NULL); addchild($$,$1); addchild($$,$2);}
-    | Expr BITWISEOR Expr       {$$ = newnode(BitWiseOr,NULL); addchild($$,$1); addchild($$,$2);}
+    | Expr BITWISEAND Expr      {$$ = newnode(BitWiseAnd,NULL); addchild($$,$1); addchild($$,$3);}
+    | Expr BITWISEOR Expr       {$$ = newnode(BitWiseOr,NULL); addchild($$,$1); addchild($$,$3);}
     | Expr BITWISEXOR Expr      {$$ = newnode(Bitwisexor, NULL); addchild($$, $1); addchild($$, $3);}
     | Expr EQ Expr              {$$ = newnode(Eq, NULL); addchild($$, $1); addchild($$, $3);}
     | Expr NE Expr              {$$ = newnode(Ne, NULL); addchild($$, $1); addchild($$, $3);}
@@ -127,11 +122,11 @@ Expr: Expr ASSIGN Expr          {$$ = newnode(Assign, NULL); addchild($$, $1); a
     | Expr GE Expr              {$$ = newnode(Ge, NULL); addchild($$, $1); addchild($$, $3);}
     | Expr LT Expr              {$$ = newnode(Lt, NULL); addchild($$, $1); addchild($$, $3);}
     | Expr GT Expr              {$$ = newnode(Gt, NULL); addchild($$, $1); addchild($$, $3);}
-    | PLUS Expr                 {$$ = newnode(PLUS, NULL); addchild($$, $1); addchild($$, $3);}
-    | MINUS Expr                {$$ = newnode(Minus, NULL); addchild($$, $1);}
-    | NOT Expr                  {$$ = newnode(Not,NULL); addchild($$,$1);}
+    | PLUS Expr                 {$$ = newnode(PLUS, NULL);  addchild($$, $2);}
+    | MINUS Expr                {$$ = newnode(Minus, NULL); addchild($$, $2);}
+    | NOT Expr                  {$$ = newnode(Not,NULL); addchild($$,$2);}
     | IDENTIFIER LPAR error RPAR
-    | IDENTIFIER LPAR OPTIONAL6 RPAR 
+    | IDENTIFIER LPAR OPTIONAL6 RPAR {struct node *identifier = newnode(Identifier,$1); addchild($$,$1); addchild($$,$3);}
     | IDENTIFIER                {$$ = newnode(Identifier,$1);}
     | NATURAL                   {$$ = newnode(Natural,$1);}
     | CHRLIT                    {$$ = newnode(Chrlit,$1);}
@@ -140,11 +135,12 @@ Expr: Expr ASSIGN Expr          {$$ = newnode(Assign, NULL); addchild($$, $1); a
     | LPAR error RPAR 
     ;
 
-OPTIONAL6: ZEROPLUS3  
+OPTIONAL6: ZEROPLUS3  {$$ = $1;}
          | ;
 
-ZEROPLUS3: ZEROPLUS3 COMMA Expr
-         | Expr;
+ZEROPLUS3: ZEROPLUS3 COMMA Expr {addchild($$,$1); addchild($$,$3);}
+         | Expr {$$ = $1;}
+         ;
 //if: n há problemas de associatividade
 //else: é necessário associar a um IF
 
@@ -153,6 +149,7 @@ ZEROPLUS3: ZEROPLUS3 COMMA Expr
 %%
 void yyerror(char *error) {
     printf("Line %d, column %d: %s '%s'\n",line,column,error,yytext);
+    cleanup(program);
 }
 /* START subroutines section */
 

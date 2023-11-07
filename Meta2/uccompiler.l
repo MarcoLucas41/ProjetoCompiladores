@@ -112,30 +112,11 @@ reservedWords "++"|"--"|"["|"]"|"_Bool"|"_Complex"|"_Imaginary"|"auto"|"break"|"
 } PASS_TOKEN();return DECIMAL;}
 
 .                       { printf("Line %d, column %d: unrecognized character (%s)\n",line,column,yytext);}
-
+<<EOF>>                 { return 0; }
 %%
 
 
-
-
-void cleanup(struct node *node)
-{
-    struct node_list *temp = node->children->next;
-
-    while(temp != NULL)
-    {
-        cleanup(temp->node);
-        temp = temp->next;
-    }
-    free(node->children);
-    free(node);
-
-}
-
-
-
-
-extern int yylex();
+extern int yyparse();
 int main(int argc, char *argv[]) 
 {
     if(argv[1] != NULL)
@@ -143,7 +124,7 @@ int main(int argc, char *argv[])
         if(strcmp(argv[1],"-l") == 0) type = true;
         if(strcmp(argv[1],"-t") == 0);
     }
-    yylex();    /* run the lexical analysis automaton */
+    yyparse();    /* run the lexical analysis automaton */
     return 0;
 }
 int yywrap() {  /* called on EOF, return 1 to terminate */
@@ -151,5 +132,7 @@ int yywrap() {  /* called on EOF, return 1 to terminate */
     {
         printf("Line %d, column %d: unterminated comment\n",commentLine,commentColumn);
     }
+    show(program);
+    cleanup(program);
     return 1;
 }

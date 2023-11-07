@@ -1,6 +1,6 @@
 #ifndef _AST_H
 #define _AST_H
-
+struct node *program;
 enum category { Program,Declaration,FuncDeclaration,FuncDefinition,ParamList,FuncBody,ParamDeclaration,StatList,Or,And,Eq,Ne,Ly,Gt,
                 Le,Ge,Add,Sub,Mul,Div,Mod,Not,Minus,Plus,Store,Comma,Call,BitWiseAnd,BitWiseXor,BitWiseOr,Char,ChrLit,Identifier,Int,
                 Short,Natural,Double,Decimal,Void,Null };
