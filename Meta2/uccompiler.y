@@ -2,21 +2,25 @@
 %{
 
 #include "ast.h"
-
+extern int yylex(void);
+extern char *yytext;
+extern int line;
+extern int column;
 void yyerror(char *);
 //int yydebug=1;
 
 %}
 
+
 %token CHAR ELSE WHILE IF INT SHORT DOUBLE RETURN VOID BITWISEAND BITWISEOR BITWISEXOR AND ASSIGN MUL COMMA EQ GE GT DIV LBRACE LE LPAR LT MINUS MOD NE NOT OR PLUS RBRACE RPAR SEMI
-%token<lexeme> RESERVED CHRLIT IDENTIFIER NATURAL DECIMAL
+%token<lexeme> CHRLITS IDENTIFIER NATURAL DECIMAL
 %type<node> FunctionsAndDeclarations FunctionDefinition FunctionBody DeclarationsAndStatements FunctionDeclaration FunctionDeclarator ParameterList ParameterDeclaration Declaration TypeSpec Declarator Statement Expr ZEROPLUS1 ZEROPLUS2 ZEROPLUS3 OPTIONAL1 OPTIONAL2 OPTIONAL3 OPTIONAL4 OPTIONAL5 OPTIONAL6
 
 %left LOW
 %left PLUS MINUS
 %left MUL DIV
 
-%union{
+%union{ 
     char *lexeme;
     struct node *node;
 }
@@ -48,7 +52,7 @@ DeclarationsAndStatements: Statement DeclarationsAndStatements {addchild($$,$1);
 FunctionDeclaration: TypeSpec FunctionDeclarator SEMI {$$ = newnode(FuncDeclaration,NULL); addchild($$,$1); addchild($$,$2);}  
                    | ;                       
 
-FunctionDeclarator: IDENTIFIER LPAR ParameterList RPAR {$$ = newnode(FuncDeclarator,NULL); addchild($$,$1); addchild($$,$3);}
+FunctionDeclarator: IDENTIFIER LPAR ParameterList RPAR {addchild($$,$1); addchild($$,$3);}
                   | ;                                    
 
 ParameterList: ParameterList COMMA ParameterDeclaration {addchild($$,$1); addchild($$,$3);}
@@ -85,9 +89,9 @@ OPTIONAL3: ASSIGN Expr {$$ = $2;}
         | ;         
 
 Statement: OPTIONAL4 SEMI {$$ = $1;}
-         | error SEMI
+         | error SEMI {;}
          | LBRACE ZEROPLUS2 RBRACE {$$ = $2;}
-         | LBRACE error RBRACE
+         | LBRACE error RBRACE {;}
          | IF LPAR Expr RPAR Statement OPTIONAL5 %prec LOW {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5); addchild($$,$6);}
          | IF LPAR Expr RPAR Statement %prec LOW {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5);}
          | WHILE LPAR Expr RPAR Statement {$$ = newnode(While,NULL); addchild($$,$3); addchild($$,$5);}
@@ -129,7 +133,7 @@ Expr: Expr ASSIGN Expr          {$$ = newnode(Assign, NULL); addchild($$, $1); a
     | IDENTIFIER LPAR OPTIONAL6 RPAR {struct node *identifier = newnode(Identifier,$1); addchild($$,$1); addchild($$,$3);}
     | IDENTIFIER                {$$ = newnode(Identifier,$1);}
     | NATURAL                   {$$ = newnode(Natural,$1);}
-    | CHRLIT                    {$$ = newnode(Chrlit,$1);}
+    | CHRLITS                    {$$ = newnode(ChrLit,$1);}
     | DECIMAL                   {$$ = newnode(Decimal,$1);}
     | LPAR Expr RPAR            {$$ = $2;}
     | LPAR error RPAR 

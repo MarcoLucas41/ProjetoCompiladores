@@ -1,14 +1,19 @@
 %{
+    #include "y.tab.h"
+    #include "ast.h"
     #include <stdio.h>
     #include <stdbool.h>
+    #include <stdlib.h>
     #include <string.h>
+    int yyparse(void);
     bool type = false;
     int line = 1;
     int column = 0;
     int commentLine = 0;
     int commentColumn = 0;
     int commentState= 0;
-    #define YY_USER_ACTION column += yyleng; 
+    #define YY_USER_ACTION column += yyleng;
+    #define PASS_TOKEN() yylval.lexeme = strdup(yytext); 
 %}
 
 
@@ -32,7 +37,7 @@ reservedWords "++"|"--"|"["|"]"|"_Bool"|"_Complex"|"_Imaginary"|"auto"|"break"|"
 <COMMENT>(\n|\r\n)      { line+=1; column = 0; }
 <COMMENT>"*/"           { commentState = 0; BEGIN(INITIAL);}
 
-{reservedWords}         { if(type){printf("RESERVED(%s)\n",yytext);} PASS_TOKEN(); return RESERVED;}
+{reservedWords}         { if(type){printf("RESERVED(%s)\n",yytext);} }
 {keyWords}              { 
     if(type)
     {
@@ -42,18 +47,18 @@ reservedWords "++"|"--"|"["|"]"|"_Bool"|"_Complex"|"_Imaginary"|"auto"|"break"|"
         } 
         printf("\n");
     } 
-    switch(yytext){
-        case "char": return CHAR;
-        case "else": return ELSE;
-        case "while": return WHILE;
-        case "if": return IF;
-        case "int": return INT;
-        case "short": return SHORT;
-        case "double": return DOUBLE;
-        case "return": return RETURN;
-        case "void": return VOID;
+    if(strcmp(yytext,"char")==0){return CHAR;}
+    if(strcmp(yytext,"else")==0){return ELSE;}
+    if(strcmp(yytext,"while")==0){return WHILE;}
+    if(strcmp(yytext,"if")==0){return IF;}
+    if(strcmp(yytext,"int")==0){return INT;}
+    if(strcmp(yytext,"short")==0){return SHORT;}
+    if(strcmp(yytext,"double")==0){return DOUBLE;}
+    if(strcmp(yytext,"return")==0){return RETURN;}
+    if(strcmp(yytext,"void")==0){return VOID;}    
+       
     }
-}   
+   
 
 
 
@@ -88,7 +93,7 @@ reservedWords "++"|"--"|"["|"]"|"_Bool"|"_Complex"|"_Imaginary"|"auto"|"break"|"
 \)                      { if(type) {printf("RPAR\n");} return RPAR;}
 \;                      { if(type) {printf("SEMI\n");} return SEMI;}
 
-\'([^\n\\']|\\n|\\t|\\\\|\\\'|\\\"|\\([0-7]{1,3}))\' { if(type) {printf("CHRLIT(%s)\n",yytext);BEGIN(INITIAL);} PASS_TOKEN(); return CHRLIT;}
+\'([^\n\\']|\\n|\\t|\\\\|\\\'|\\\"|\\([0-7]{1,3}))\' { if(type) {printf("CHRLIT(%s)\n",yytext);BEGIN(INITIAL);} PASS_TOKEN(); return CHRLITS;}
 \'([^\n\\']*|\\\'|\\\\|\\[^\n\\']+)+(\\)?            { column -= yyleng-1; printf("Line %d, column %d: unterminated char constant\n",line,column); column += yyleng-1;BEGIN(INITIAL);}
 \'([^\n\\']*|\\\'|\\\\|\\[^\n\'])+\'                 { column -= yyleng-1; printf("Line %d, column %d: invalid char constant (%s)\n",line,column,yytext); column += yyleng-1;BEGIN(INITIAL);}
                 
@@ -116,7 +121,6 @@ reservedWords "++"|"--"|"["|"]"|"_Bool"|"_Complex"|"_Imaginary"|"auto"|"break"|"
 %%
 
 
-extern int yyparse();
 int main(int argc, char *argv[]) 
 {
     if(argv[1] != NULL)
@@ -132,7 +136,7 @@ int yywrap() {  /* called on EOF, return 1 to terminate */
     {
         printf("Line %d, column %d: unterminated comment\n",commentLine,commentColumn);
     }
-    show(program);
+    show(program,0);
     cleanup(program);
     return 1;
 }

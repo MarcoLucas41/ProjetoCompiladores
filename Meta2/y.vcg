@@ -353,7 +353,7 @@ graph: {
 	}
 	node: {
 		title:	"22"
-		label:	"state 22\n OPTIONAL3 -> ASSIGN . Expr\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 22\n OPTIONAL3 -> ASSIGN . Expr\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	edge: {
 		sourcename:	"22"
@@ -386,7 +386,7 @@ graph: {
 	edge: {
 		sourcename:	"22"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -495,7 +495,7 @@ graph: {
 	}
 	node: {
 		title:	"26"
-		label:	"state 26\n FunctionBody -> LBRACE . OPTIONAL1 RBRACE\n OPTIONAL1 -> . DeclarationsAndStatements\n OPTIONAL1 -> .[RBRACE]\n DeclarationsAndStatements -> . Statement DeclarationsAndStatements\n DeclarationsAndStatements -> . Declaration DeclarationsAndStatements\n DeclarationsAndStatements -> . Statement\n DeclarationsAndStatements -> . Declaration\n Declaration -> . TypeSpec Declarator ZEROPLUS1 SEMI\n Declaration -> . error SEMI\n TypeSpec -> . CHAR\n TypeSpec -> . INT\n TypeSpec -> . VOID\n TypeSpec -> . SHORT\n TypeSpec -> . DOUBLE\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement OPTIONAL5\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 26\n FunctionBody -> LBRACE . OPTIONAL1 RBRACE\n OPTIONAL1 -> . DeclarationsAndStatements\n OPTIONAL1 -> .[RBRACE]\n DeclarationsAndStatements -> . Statement DeclarationsAndStatements\n DeclarationsAndStatements -> . Declaration DeclarationsAndStatements\n DeclarationsAndStatements -> . Statement\n DeclarationsAndStatements -> . Declaration\n Declaration -> . TypeSpec Declarator ZEROPLUS1 SEMI\n Declaration -> . error SEMI\n TypeSpec -> . CHAR\n TypeSpec -> . INT\n TypeSpec -> . VOID\n TypeSpec -> . SHORT\n TypeSpec -> . DOUBLE\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement OPTIONAL5\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	edge: {
 		sourcename:	"26"
@@ -598,7 +598,7 @@ graph: {
 	edge: {
 		sourcename:	"26"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -700,7 +700,7 @@ graph: {
 	}
 	node: {
 		title:	"30"
-		label:	"state 30\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> LPAR . Expr RPAR\n Expr -> . LPAR error RPAR\n Expr -> LPAR . error RPAR"
+		label:	"state 30\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> LPAR . Expr RPAR\n Expr -> . LPAR error RPAR\n Expr -> LPAR . error RPAR"
 	}
 	edge: {
 		sourcename:	"30"
@@ -740,7 +740,7 @@ graph: {
 	edge: {
 		sourcename:	"30"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -774,7 +774,7 @@ graph: {
 	}
 	node: {
 		title:	"31"
-		label:	"state 31\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> MINUS . Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 31\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> MINUS . Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"31"
@@ -807,7 +807,7 @@ graph: {
 	edge: {
 		sourcename:	"31"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -841,7 +841,7 @@ graph: {
 	}
 	node: {
 		title:	"32"
-		label:	"state 32\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> NOT . Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 32\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> NOT . Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"32"
@@ -874,7 +874,7 @@ graph: {
 	edge: {
 		sourcename:	"32"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -908,7 +908,7 @@ graph: {
 	}
 	node: {
 		title:	"33"
-		label:	"state 33\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> PLUS . Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 33\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> PLUS . Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"33"
@@ -941,7 +941,7 @@ graph: {
 	edge: {
 		sourcename:	"33"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -975,7 +975,7 @@ graph: {
 	}
 	node: {
 		title:	"34"
-		label:	"state 34\n Expr -> CHRLIT ."
+		label:	"state 34\n Expr -> CHRLITS ."
 	}
 	node: {
 		title:	"35"
@@ -1201,7 +1201,7 @@ graph: {
 	}
 	node: {
 		title:	"45"
-		label:	"state 45\n Statement -> RETURN . OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 45\n Statement -> RETURN . OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"45"
@@ -1234,7 +1234,7 @@ graph: {
 	backedge: {
 		sourcename:	"45"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -1275,7 +1275,7 @@ graph: {
 	}
 	node: {
 		title:	"46"
-		label:	"state 46\n Statement -> LBRACE . ZEROPLUS2 RBRACE\n Statement -> LBRACE . error RBRACE\n ZEROPLUS2 -> . ZEROPLUS2 Statement\n ZEROPLUS2 -> .[error, WHILE, IF, RETURN, LBRACE, LPAR, MINUS, NOT, PLUS, RBRACE, SEMI, CHRLIT, IDENTIFIER, NATURAL, DECIMAL]"
+		label:	"state 46\n Statement -> LBRACE . ZEROPLUS2 RBRACE\n Statement -> LBRACE . error RBRACE\n ZEROPLUS2 -> . ZEROPLUS2 Statement\n ZEROPLUS2 -> .[error, WHILE, IF, RETURN, LBRACE, LPAR, MINUS, NOT, PLUS, RBRACE, SEMI, CHRLITS, IDENTIFIER, NATURAL, DECIMAL]"
 	}
 	edge: {
 		sourcename:	"46"
@@ -1308,7 +1308,7 @@ graph: {
 	}
 	node: {
 		title:	"49"
-		label:	"state 49\n DeclarationsAndStatements -> . Statement DeclarationsAndStatements\n DeclarationsAndStatements -> . Declaration DeclarationsAndStatements\n DeclarationsAndStatements -> Declaration . DeclarationsAndStatements\n DeclarationsAndStatements -> . Statement\n DeclarationsAndStatements -> . Declaration[RBRACE]\n DeclarationsAndStatements -> Declaration .[RBRACE]\n Declaration -> . TypeSpec Declarator ZEROPLUS1 SEMI\n Declaration -> . error SEMI\n TypeSpec -> . CHAR\n TypeSpec -> . INT\n TypeSpec -> . VOID\n TypeSpec -> . SHORT\n TypeSpec -> . DOUBLE\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement OPTIONAL5\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 49\n DeclarationsAndStatements -> . Statement DeclarationsAndStatements\n DeclarationsAndStatements -> . Declaration DeclarationsAndStatements\n DeclarationsAndStatements -> Declaration . DeclarationsAndStatements\n DeclarationsAndStatements -> . Statement\n DeclarationsAndStatements -> . Declaration[RBRACE]\n DeclarationsAndStatements -> Declaration .[RBRACE]\n Declaration -> . TypeSpec Declarator ZEROPLUS1 SEMI\n Declaration -> . error SEMI\n TypeSpec -> . CHAR\n TypeSpec -> . INT\n TypeSpec -> . VOID\n TypeSpec -> . SHORT\n TypeSpec -> . DOUBLE\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement OPTIONAL5\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"49"
@@ -1411,7 +1411,7 @@ graph: {
 	backedge: {
 		sourcename:	"49"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -1498,7 +1498,7 @@ graph: {
 	}
 	node: {
 		title:	"51"
-		label:	"state 51\n DeclarationsAndStatements -> . Statement DeclarationsAndStatements\n DeclarationsAndStatements -> Statement . DeclarationsAndStatements\n DeclarationsAndStatements -> . Declaration DeclarationsAndStatements\n DeclarationsAndStatements -> . Statement[RBRACE]\n DeclarationsAndStatements -> Statement .[RBRACE]\n DeclarationsAndStatements -> . Declaration\n Declaration -> . TypeSpec Declarator ZEROPLUS1 SEMI\n Declaration -> . error SEMI\n TypeSpec -> . CHAR\n TypeSpec -> . INT\n TypeSpec -> . VOID\n TypeSpec -> . SHORT\n TypeSpec -> . DOUBLE\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement OPTIONAL5\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 51\n DeclarationsAndStatements -> . Statement DeclarationsAndStatements\n DeclarationsAndStatements -> Statement . DeclarationsAndStatements\n DeclarationsAndStatements -> . Declaration DeclarationsAndStatements\n DeclarationsAndStatements -> . Statement[RBRACE]\n DeclarationsAndStatements -> Statement .[RBRACE]\n DeclarationsAndStatements -> . Declaration\n Declaration -> . TypeSpec Declarator ZEROPLUS1 SEMI\n Declaration -> . error SEMI\n TypeSpec -> . CHAR\n TypeSpec -> . INT\n TypeSpec -> . VOID\n TypeSpec -> . SHORT\n TypeSpec -> . DOUBLE\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement OPTIONAL5\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"51"
@@ -1601,7 +1601,7 @@ graph: {
 	backedge: {
 		sourcename:	"51"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -2343,7 +2343,7 @@ graph: {
 	}
 	node: {
 		title:	"61"
-		label:	"state 61\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> IDENTIFIER LPAR . error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> IDENTIFIER LPAR . OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR\n OPTIONAL6 -> . ZEROPLUS3\n OPTIONAL6 -> .[RPAR]\n ZEROPLUS3 -> . ZEROPLUS3 COMMA Expr\n ZEROPLUS3 -> . Expr"
+		label:	"state 61\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> IDENTIFIER LPAR . error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> IDENTIFIER LPAR . OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR\n OPTIONAL6 -> . ZEROPLUS3\n OPTIONAL6 -> .[RPAR]\n ZEROPLUS3 -> . ZEROPLUS3 COMMA Expr\n ZEROPLUS3 -> . Expr"
 	}
 	edge: {
 		sourcename:	"61"
@@ -2383,7 +2383,7 @@ graph: {
 	backedge: {
 		sourcename:	"61"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -2431,7 +2431,7 @@ graph: {
 	}
 	node: {
 		title:	"62"
-		label:	"state 62\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> Expr BITWISEAND . Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 62\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> Expr BITWISEAND . Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"62"
@@ -2464,7 +2464,7 @@ graph: {
 	backedge: {
 		sourcename:	"62"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -2498,7 +2498,7 @@ graph: {
 	}
 	node: {
 		title:	"63"
-		label:	"state 63\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> Expr BITWISEOR . Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 63\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> Expr BITWISEOR . Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"63"
@@ -2531,7 +2531,7 @@ graph: {
 	backedge: {
 		sourcename:	"63"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -2565,7 +2565,7 @@ graph: {
 	}
 	node: {
 		title:	"64"
-		label:	"state 64\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> Expr BITWISEXOR . Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 64\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> Expr BITWISEXOR . Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"64"
@@ -2598,7 +2598,7 @@ graph: {
 	backedge: {
 		sourcename:	"64"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -2632,7 +2632,7 @@ graph: {
 	}
 	node: {
 		title:	"65"
-		label:	"state 65\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> Expr AND . Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 65\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> Expr AND . Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"65"
@@ -2665,7 +2665,7 @@ graph: {
 	backedge: {
 		sourcename:	"65"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -2699,7 +2699,7 @@ graph: {
 	}
 	node: {
 		title:	"66"
-		label:	"state 66\n Expr -> . Expr ASSIGN Expr\n Expr -> Expr ASSIGN . Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 66\n Expr -> . Expr ASSIGN Expr\n Expr -> Expr ASSIGN . Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"66"
@@ -2732,7 +2732,7 @@ graph: {
 	backedge: {
 		sourcename:	"66"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -2766,7 +2766,7 @@ graph: {
 	}
 	node: {
 		title:	"67"
-		label:	"state 67\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> Expr MUL . Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 67\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> Expr MUL . Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"67"
@@ -2799,7 +2799,7 @@ graph: {
 	backedge: {
 		sourcename:	"67"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -2833,7 +2833,7 @@ graph: {
 	}
 	node: {
 		title:	"68"
-		label:	"state 68\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> Expr COMMA . Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 68\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> Expr COMMA . Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"68"
@@ -2866,7 +2866,7 @@ graph: {
 	backedge: {
 		sourcename:	"68"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -2900,7 +2900,7 @@ graph: {
 	}
 	node: {
 		title:	"69"
-		label:	"state 69\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> Expr EQ . Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 69\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> Expr EQ . Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"69"
@@ -2933,7 +2933,7 @@ graph: {
 	backedge: {
 		sourcename:	"69"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -2967,7 +2967,7 @@ graph: {
 	}
 	node: {
 		title:	"70"
-		label:	"state 70\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> Expr GE . Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 70\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> Expr GE . Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"70"
@@ -3000,7 +3000,7 @@ graph: {
 	backedge: {
 		sourcename:	"70"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -3034,7 +3034,7 @@ graph: {
 	}
 	node: {
 		title:	"71"
-		label:	"state 71\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> Expr GT . Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 71\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> Expr GT . Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"71"
@@ -3067,7 +3067,7 @@ graph: {
 	backedge: {
 		sourcename:	"71"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -3101,7 +3101,7 @@ graph: {
 	}
 	node: {
 		title:	"72"
-		label:	"state 72\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> Expr DIV . Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 72\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> Expr DIV . Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"72"
@@ -3134,7 +3134,7 @@ graph: {
 	backedge: {
 		sourcename:	"72"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -3168,7 +3168,7 @@ graph: {
 	}
 	node: {
 		title:	"73"
-		label:	"state 73\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> Expr LE . Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 73\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> Expr LE . Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"73"
@@ -3201,7 +3201,7 @@ graph: {
 	backedge: {
 		sourcename:	"73"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -3235,7 +3235,7 @@ graph: {
 	}
 	node: {
 		title:	"74"
-		label:	"state 74\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> Expr LT . Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 74\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> Expr LT . Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"74"
@@ -3268,7 +3268,7 @@ graph: {
 	backedge: {
 		sourcename:	"74"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -3302,7 +3302,7 @@ graph: {
 	}
 	node: {
 		title:	"75"
-		label:	"state 75\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> Expr MINUS . Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 75\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> Expr MINUS . Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"75"
@@ -3335,7 +3335,7 @@ graph: {
 	backedge: {
 		sourcename:	"75"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -3369,7 +3369,7 @@ graph: {
 	}
 	node: {
 		title:	"76"
-		label:	"state 76\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> Expr MOD . Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 76\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> Expr MOD . Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"76"
@@ -3402,7 +3402,7 @@ graph: {
 	backedge: {
 		sourcename:	"76"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -3436,7 +3436,7 @@ graph: {
 	}
 	node: {
 		title:	"77"
-		label:	"state 77\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> Expr NE . Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 77\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> Expr NE . Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"77"
@@ -3469,7 +3469,7 @@ graph: {
 	backedge: {
 		sourcename:	"77"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -3503,7 +3503,7 @@ graph: {
 	}
 	node: {
 		title:	"78"
-		label:	"state 78\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> Expr OR . Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 78\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> Expr OR . Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"78"
@@ -3536,7 +3536,7 @@ graph: {
 	backedge: {
 		sourcename:	"78"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -3570,7 +3570,7 @@ graph: {
 	}
 	node: {
 		title:	"79"
-		label:	"state 79\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> Expr PLUS . Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 79\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> Expr PLUS . Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"79"
@@ -3603,7 +3603,7 @@ graph: {
 	backedge: {
 		sourcename:	"79"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -3702,11 +3702,11 @@ graph: {
 	}
 	node: {
 		title:	"84"
-		label:	"state 84\n Declaration -> error SEMI .[error, CHAR, WHILE, IF, INT, SHORT, DOUBLE, RETURN, VOID, LBRACE, LPAR, MINUS, NOT, PLUS, RBRACE, SEMI, CHRLIT, IDENTIFIER, NATURAL, DECIMAL]\n Statement -> error SEMI .[error, CHAR, WHILE, IF, INT, SHORT, DOUBLE, RETURN, VOID, LBRACE, LPAR, MINUS, NOT, PLUS, RBRACE, SEMI, CHRLIT, IDENTIFIER, NATURAL, DECIMAL]"
+		label:	"state 84\n Declaration -> error SEMI .[error, CHAR, WHILE, IF, INT, SHORT, DOUBLE, RETURN, VOID, LBRACE, LPAR, MINUS, NOT, PLUS, RBRACE, SEMI, CHRLITS, IDENTIFIER, NATURAL, DECIMAL]\n Statement -> error SEMI .[error, CHAR, WHILE, IF, INT, SHORT, DOUBLE, RETURN, VOID, LBRACE, LPAR, MINUS, NOT, PLUS, RBRACE, SEMI, CHRLITS, IDENTIFIER, NATURAL, DECIMAL]"
 	}
 	node: {
 		title:	"85"
-		label:	"state 85\n Statement -> WHILE LPAR . Expr RPAR Statement\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 85\n Statement -> WHILE LPAR . Expr RPAR Statement\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"85"
@@ -3739,7 +3739,7 @@ graph: {
 	backedge: {
 		sourcename:	"85"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -3773,7 +3773,7 @@ graph: {
 	}
 	node: {
 		title:	"86"
-		label:	"state 86\n Statement -> IF LPAR . Expr RPAR Statement OPTIONAL5\n Statement -> IF LPAR . Expr RPAR Statement\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 86\n Statement -> IF LPAR . Expr RPAR Statement OPTIONAL5\n Statement -> IF LPAR . Expr RPAR Statement\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"86"
@@ -3806,7 +3806,7 @@ graph: {
 	backedge: {
 		sourcename:	"86"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -3862,7 +3862,7 @@ graph: {
 	}
 	node: {
 		title:	"89"
-		label:	"state 89\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> LBRACE ZEROPLUS2 . RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement OPTIONAL5\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n ZEROPLUS2 -> ZEROPLUS2 . Statement\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 89\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> LBRACE ZEROPLUS2 . RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement OPTIONAL5\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n ZEROPLUS2 -> ZEROPLUS2 . Statement\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	edge: {
 		sourcename:	"89"
@@ -3937,7 +3937,7 @@ graph: {
 	backedge: {
 		sourcename:	"89"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -6745,7 +6745,7 @@ graph: {
 	}
 	node: {
 		title:	"129"
-		label:	"state 129\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR\n ZEROPLUS3 -> ZEROPLUS3 COMMA . Expr"
+		label:	"state 129\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR\n ZEROPLUS3 -> ZEROPLUS3 COMMA . Expr"
 	}
 	backedge: {
 		sourcename:	"129"
@@ -6778,7 +6778,7 @@ graph: {
 	backedge: {
 		sourcename:	"129"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -6812,7 +6812,7 @@ graph: {
 	}
 	node: {
 		title:	"130"
-		label:	"state 130\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement OPTIONAL5\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> WHILE LPAR Expr RPAR . Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 130\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement OPTIONAL5\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> WHILE LPAR Expr RPAR . Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"130"
@@ -6880,7 +6880,7 @@ graph: {
 	backedge: {
 		sourcename:	"130"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -6928,7 +6928,7 @@ graph: {
 	}
 	node: {
 		title:	"131"
-		label:	"state 131\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement OPTIONAL5\n Statement -> IF LPAR Expr RPAR . Statement OPTIONAL5\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> IF LPAR Expr RPAR . Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 131\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement OPTIONAL5\n Statement -> IF LPAR Expr RPAR . Statement OPTIONAL5\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> IF LPAR Expr RPAR . Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"131"
@@ -6996,7 +6996,7 @@ graph: {
 	backedge: {
 		sourcename:	"131"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}
@@ -7182,7 +7182,7 @@ graph: {
 	}
 	node: {
 		title:	"135"
-		label:	"state 135\n Statement -> IF LPAR Expr RPAR Statement . OPTIONAL5\n Statement -> IF LPAR Expr RPAR Statement .[error, CHAR, ELSE, WHILE, IF, INT, SHORT, DOUBLE, RETURN, VOID, LBRACE, LPAR, MINUS, NOT, PLUS, RBRACE, SEMI, CHRLIT, IDENTIFIER, NATURAL, DECIMAL]\n OPTIONAL5 -> . ELSE Statement\n OPTIONAL5 -> .[error, CHAR, ELSE, WHILE, IF, INT, SHORT, DOUBLE, RETURN, VOID, LBRACE, LPAR, MINUS, NOT, PLUS, RBRACE, SEMI, CHRLIT, IDENTIFIER, NATURAL, DECIMAL]"
+		label:	"state 135\n Statement -> IF LPAR Expr RPAR Statement . OPTIONAL5\n Statement -> IF LPAR Expr RPAR Statement .[error, CHAR, ELSE, WHILE, IF, INT, SHORT, DOUBLE, RETURN, VOID, LBRACE, LPAR, MINUS, NOT, PLUS, RBRACE, SEMI, CHRLITS, IDENTIFIER, NATURAL, DECIMAL]\n OPTIONAL5 -> . ELSE Statement\n OPTIONAL5 -> .[error, CHAR, ELSE, WHILE, IF, INT, SHORT, DOUBLE, RETURN, VOID, LBRACE, LPAR, MINUS, NOT, PLUS, RBRACE, SEMI, CHRLITS, IDENTIFIER, NATURAL, DECIMAL]"
 	}
 	edge: {
 		sourcename:	"135"
@@ -7200,7 +7200,7 @@ graph: {
 	}
 	node: {
 		title:	"136"
-		label:	"state 136\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement OPTIONAL5\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n OPTIONAL5 -> ELSE . Statement\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLIT\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 136\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement OPTIONAL5\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n OPTIONAL5 -> ELSE . Statement\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"136"
@@ -7268,7 +7268,7 @@ graph: {
 	backedge: {
 		sourcename:	"136"
 		targetname:	"34"
-		label:	"CHRLIT"
+		label:	"CHRLITS"
 		color:	blue
 		textcolor:	black
 	}

@@ -1,8 +1,3 @@
-Terminals which are not used
-
-   RESERVED
-
-
 Rules never reduced
 
    48 OPTIONAL5: /* empty */
@@ -137,7 +132,7 @@ Grammar
    73     | IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | IDENTIFIER
    75     | NATURAL
-   76     | CHRLIT
+   76     | CHRLITS
    77     | DECIMAL
    78     | LPAR Expr RPAR
    79     | LPAR error RPAR
@@ -186,64 +181,63 @@ PLUS (287) 53 69
 RBRACE (288) 8 39 40
 RPAR (289) 17 41 42 43 72 73 78 79
 SEMI (290) 15 25 26 37 38 44
-RESERVED (291)
-CHRLIT (292) 76
-IDENTIFIER (293) 17 23 34 72 73 74
-NATURAL (294) 75
-DECIMAL (295) 77
-LOW (296)
+CHRLITS (291) 76
+IDENTIFIER (292) 17 23 34 72 73 74
+NATURAL (293) 75
+DECIMAL (294) 77
+LOW (295)
 
 
 Nonterminals, with rules where they appear
 
-$accept (42)
+$accept (41)
     on left: 0
-FunctionsAndDeclarations (43)
+FunctionsAndDeclarations (42)
     on left: 1 2 3 4 5 6, on right: 0 1 2 3
-FunctionDefinition (44)
+FunctionDefinition (43)
     on left: 7, on right: 1 4
-FunctionBody (45)
+FunctionBody (44)
     on left: 8, on right: 7
-OPTIONAL1 (46)
+OPTIONAL1 (45)
     on left: 9 10, on right: 8
-DeclarationsAndStatements (47)
+DeclarationsAndStatements (46)
     on left: 11 12 13 14, on right: 9 11 12
-FunctionDeclaration (48)
+FunctionDeclaration (47)
     on left: 15 16, on right: 2 5
-FunctionDeclarator (49)
+FunctionDeclarator (48)
     on left: 17 18, on right: 7 15
-ParameterList (50)
+ParameterList (49)
     on left: 19 20, on right: 17 19
-ParameterDeclaration (51)
+ParameterDeclaration (50)
     on left: 21 22, on right: 19 20
-OPTIONAL2 (52)
+OPTIONAL2 (51)
     on left: 23 24, on right: 21
-Declaration (53)
+Declaration (52)
     on left: 25 26, on right: 6 12 14
-ZEROPLUS1 (54)
+ZEROPLUS1 (53)
     on left: 27 28, on right: 25 27
-TypeSpec (55)
+TypeSpec (54)
     on left: 29 30 31 32 33, on right: 7 15 21 25
-Declarator (56)
+Declarator (55)
     on left: 34, on right: 3 25 27
-OPTIONAL3 (57)
+OPTIONAL3 (56)
     on left: 35 36, on right: 34
-Statement (58)
+Statement (57)
     on left: 37 38 39 40 41 42 43 44, on right: 11 13 41 42 43 47 49
-OPTIONAL4 (59)
+OPTIONAL4 (58)
     on left: 45 46, on right: 37 44
-OPTIONAL5 (60)
+OPTIONAL5 (59)
     on left: 47 48, on right: 41
-ZEROPLUS2 (61)
+ZEROPLUS2 (60)
     on left: 49 50, on right: 39 49
-Expr (62)
+Expr (61)
     on left: 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68
     69 70 71 72 73 74 75 76 77 78 79, on right: 35 41 42 43 45 51 52
     53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 78 82
     83
-OPTIONAL6 (63)
+OPTIONAL6 (62)
     on left: 80 81, on right: 73
-ZEROPLUS3 (64)
+ZEROPLUS3 (63)
     on left: 82 83, on right: 80 82
 
 
@@ -535,7 +529,7 @@ state 22
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -544,7 +538,7 @@ state 22
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -643,7 +637,7 @@ state 26
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -662,7 +656,7 @@ state 26
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -729,7 +723,7 @@ state 30
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    78     | LPAR . Expr RPAR
@@ -741,7 +735,7 @@ state 30
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -777,7 +771,7 @@ state 31
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -786,7 +780,7 @@ state 31
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -822,7 +816,7 @@ state 32
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -831,7 +825,7 @@ state 32
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -867,7 +861,7 @@ state 33
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -876,7 +870,7 @@ state 33
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -886,7 +880,7 @@ state 33
 
 state 34
 
-   76 Expr: CHRLIT .
+   76 Expr: CHRLITS .
 
     $default  reduce using rule 76 (Expr)
 
@@ -1043,7 +1037,7 @@ state 45
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -1052,7 +1046,7 @@ state 45
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -1068,7 +1062,7 @@ state 46
    39 Statement: LBRACE . ZEROPLUS2 RBRACE
    40          | LBRACE . error RBRACE
    49 ZEROPLUS2: . ZEROPLUS2 Statement
-   50          | .  [error, WHILE, IF, RETURN, LBRACE, LPAR, MINUS, NOT, PLUS, RBRACE, SEMI, CHRLIT, IDENTIFIER, NATURAL, DECIMAL]
+   50          | .  [error, WHILE, IF, RETURN, LBRACE, LPAR, MINUS, NOT, PLUS, RBRACE, SEMI, CHRLITS, IDENTIFIER, NATURAL, DECIMAL]
 
     error  shift, and go to state 88
 
@@ -1083,7 +1077,7 @@ state 46
     PLUS        reduce using rule 50 (ZEROPLUS2)
     RBRACE      reduce using rule 50 (ZEROPLUS2)
     SEMI        reduce using rule 50 (ZEROPLUS2)
-    CHRLIT      reduce using rule 50 (ZEROPLUS2)
+    CHRLITS     reduce using rule 50 (ZEROPLUS2)
     IDENTIFIER  reduce using rule 50 (ZEROPLUS2)
     NATURAL     reduce using rule 50 (ZEROPLUS2)
     DECIMAL     reduce using rule 50 (ZEROPLUS2)
@@ -1155,7 +1149,7 @@ state 49
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -1174,7 +1168,7 @@ state 49
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -1250,7 +1244,7 @@ state 51
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -1269,7 +1263,7 @@ state 51
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -1616,7 +1610,7 @@ state 61
    73     | IDENTIFIER LPAR . OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -1630,7 +1624,7 @@ state 61
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -1670,7 +1664,7 @@ state 62
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -1679,7 +1673,7 @@ state 62
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -1715,7 +1709,7 @@ state 63
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -1724,7 +1718,7 @@ state 63
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -1760,7 +1754,7 @@ state 64
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -1769,7 +1763,7 @@ state 64
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -1805,7 +1799,7 @@ state 65
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -1814,7 +1808,7 @@ state 65
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -1850,7 +1844,7 @@ state 66
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -1859,7 +1853,7 @@ state 66
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -1895,7 +1889,7 @@ state 67
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -1904,7 +1898,7 @@ state 67
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -1940,7 +1934,7 @@ state 68
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -1949,7 +1943,7 @@ state 68
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -1985,7 +1979,7 @@ state 69
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -1994,7 +1988,7 @@ state 69
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -2030,7 +2024,7 @@ state 70
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -2039,7 +2033,7 @@ state 70
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -2075,7 +2069,7 @@ state 71
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -2084,7 +2078,7 @@ state 71
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -2120,7 +2114,7 @@ state 72
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -2129,7 +2123,7 @@ state 72
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -2165,7 +2159,7 @@ state 73
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -2174,7 +2168,7 @@ state 73
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -2210,7 +2204,7 @@ state 74
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -2219,7 +2213,7 @@ state 74
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -2255,7 +2249,7 @@ state 75
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -2264,7 +2258,7 @@ state 75
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -2300,7 +2294,7 @@ state 76
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -2309,7 +2303,7 @@ state 76
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -2345,7 +2339,7 @@ state 77
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -2354,7 +2348,7 @@ state 77
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -2390,7 +2384,7 @@ state 78
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -2399,7 +2393,7 @@ state 78
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -2435,7 +2429,7 @@ state 79
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -2444,7 +2438,7 @@ state 79
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -2498,8 +2492,8 @@ state 83
 
 state 84
 
-   26 Declaration: error SEMI .  [error, CHAR, WHILE, IF, INT, SHORT, DOUBLE, RETURN, VOID, LBRACE, LPAR, MINUS, NOT, PLUS, RBRACE, SEMI, CHRLIT, IDENTIFIER, NATURAL, DECIMAL]
-   38 Statement: error SEMI .  [error, CHAR, WHILE, IF, INT, SHORT, DOUBLE, RETURN, VOID, LBRACE, LPAR, MINUS, NOT, PLUS, RBRACE, SEMI, CHRLIT, IDENTIFIER, NATURAL, DECIMAL]
+   26 Declaration: error SEMI .  [error, CHAR, WHILE, IF, INT, SHORT, DOUBLE, RETURN, VOID, LBRACE, LPAR, MINUS, NOT, PLUS, RBRACE, SEMI, CHRLITS, IDENTIFIER, NATURAL, DECIMAL]
+   38 Statement: error SEMI .  [error, CHAR, WHILE, IF, INT, SHORT, DOUBLE, RETURN, VOID, LBRACE, LPAR, MINUS, NOT, PLUS, RBRACE, SEMI, CHRLITS, IDENTIFIER, NATURAL, DECIMAL]
 
     error       reduce using rule 26 (Declaration)
     error       [reduce using rule 38 (Statement)]
@@ -2533,8 +2527,8 @@ state 84
     RBRACE      [reduce using rule 38 (Statement)]
     SEMI        reduce using rule 26 (Declaration)
     SEMI        [reduce using rule 38 (Statement)]
-    CHRLIT      reduce using rule 26 (Declaration)
-    CHRLIT      [reduce using rule 38 (Statement)]
+    CHRLITS     reduce using rule 26 (Declaration)
+    CHRLITS     [reduce using rule 38 (Statement)]
     IDENTIFIER  reduce using rule 26 (Declaration)
     IDENTIFIER  [reduce using rule 38 (Statement)]
     NATURAL     reduce using rule 26 (Declaration)
@@ -2572,7 +2566,7 @@ state 85
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -2581,7 +2575,7 @@ state 85
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -2618,7 +2612,7 @@ state 86
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -2627,7 +2621,7 @@ state 86
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -2688,7 +2682,7 @@ state 89
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -2703,7 +2697,7 @@ state 89
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
     RBRACE      shift, and go to state 125
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -4111,7 +4105,7 @@ state 129
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -4121,7 +4115,7 @@ state 129
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -4167,7 +4161,7 @@ state 130
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -4181,7 +4175,7 @@ state 130
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -4232,7 +4226,7 @@ state 131
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -4246,7 +4240,7 @@ state 131
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37
@@ -4320,9 +4314,9 @@ state 134
 state 135
 
    41 Statement: IF LPAR Expr RPAR Statement . OPTIONAL5
-   42          | IF LPAR Expr RPAR Statement .  [error, CHAR, ELSE, WHILE, IF, INT, SHORT, DOUBLE, RETURN, VOID, LBRACE, LPAR, MINUS, NOT, PLUS, RBRACE, SEMI, CHRLIT, IDENTIFIER, NATURAL, DECIMAL]
+   42          | IF LPAR Expr RPAR Statement .  [error, CHAR, ELSE, WHILE, IF, INT, SHORT, DOUBLE, RETURN, VOID, LBRACE, LPAR, MINUS, NOT, PLUS, RBRACE, SEMI, CHRLITS, IDENTIFIER, NATURAL, DECIMAL]
    47 OPTIONAL5: . ELSE Statement
-   48          | .  [error, CHAR, ELSE, WHILE, IF, INT, SHORT, DOUBLE, RETURN, VOID, LBRACE, LPAR, MINUS, NOT, PLUS, RBRACE, SEMI, CHRLIT, IDENTIFIER, NATURAL, DECIMAL]
+   48          | .  [error, CHAR, ELSE, WHILE, IF, INT, SHORT, DOUBLE, RETURN, VOID, LBRACE, LPAR, MINUS, NOT, PLUS, RBRACE, SEMI, CHRLITS, IDENTIFIER, NATURAL, DECIMAL]
 
     ELSE  shift, and go to state 136
 
@@ -4360,8 +4354,8 @@ state 135
     RBRACE      [reduce using rule 48 (OPTIONAL5)]
     SEMI        reduce using rule 42 (Statement)
     SEMI        [reduce using rule 48 (OPTIONAL5)]
-    CHRLIT      reduce using rule 42 (Statement)
-    CHRLIT      [reduce using rule 48 (OPTIONAL5)]
+    CHRLITS     reduce using rule 42 (Statement)
+    CHRLITS     [reduce using rule 48 (OPTIONAL5)]
     IDENTIFIER  reduce using rule 42 (Statement)
     IDENTIFIER  [reduce using rule 48 (OPTIONAL5)]
     NATURAL     reduce using rule 42 (Statement)
@@ -4411,7 +4405,7 @@ state 136
    73     | . IDENTIFIER LPAR OPTIONAL6 RPAR
    74     | . IDENTIFIER
    75     | . NATURAL
-   76     | . CHRLIT
+   76     | . CHRLITS
    77     | . DECIMAL
    78     | . LPAR Expr RPAR
    79     | . LPAR error RPAR
@@ -4425,7 +4419,7 @@ state 136
     MINUS       shift, and go to state 31
     NOT         shift, and go to state 32
     PLUS        shift, and go to state 33
-    CHRLIT      shift, and go to state 34
+    CHRLITS     shift, and go to state 34
     IDENTIFIER  shift, and go to state 35
     NATURAL     shift, and go to state 36
     DECIMAL     shift, and go to state 37

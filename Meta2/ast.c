@@ -5,7 +5,7 @@
 // get the respective category string given the enum constant equivalent
 char* getCategoryName(enum category category)
 {
-    char *strings[] = { "Program","Declaration","FuncDeclaration","FuncDefinition","ParamList","FuncBody","ParamDeclaration","StatList","If","While","Return","Or","And","Eq","Ne","Ly","Gt",
+    char *strings[] = { "Program","Declaration","FuncDeclaration","FuncDefinition","ParamList","FuncBody","ParamDeclaration","StatList","If","Else","While","Return","Or","And","Eq","Ne","Ly","Gt",
                 "Le","Ge","Add","Sub","Mul","Div","Mod","Not","Minus","Plus","Store","Comma","Call","BitWiseAnd","BitWiseXor","BitWiseOr","Char","ChrLit","Identifier","Int",
                 "Short","Natural","Double","Decimal","Void","Null" };
     return strings[category]; 

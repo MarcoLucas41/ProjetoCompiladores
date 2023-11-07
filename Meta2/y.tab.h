@@ -72,12 +72,11 @@
      RBRACE = 288,
      RPAR = 289,
      SEMI = 290,
-     RESERVED = 291,
-     CHRLIT = 292,
-     IDENTIFIER = 293,
-     NATURAL = 294,
-     DECIMAL = 295,
-     LOW = 296
+     CHRLITS = 291,
+     IDENTIFIER = 292,
+     NATURAL = 293,
+     DECIMAL = 294,
+     LOW = 295
    };
 #endif
 /* Tokens.  */
@@ -114,25 +113,24 @@
 #define RBRACE 288
 #define RPAR 289
 #define SEMI 290
-#define RESERVED 291
-#define CHRLIT 292
-#define IDENTIFIER 293
-#define NATURAL 294
-#define DECIMAL 295
-#define LOW 296
+#define CHRLITS 291
+#define IDENTIFIER 292
+#define NATURAL 293
+#define DECIMAL 294
+#define LOW 295
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 19 "uccompiler.y"
-{
+#line 23 "uccompiler.y"
+{ 
     char *lexeme;
     struct node *node;
 }
 /* Line 1529 of yacc.c.  */
-#line 136 "y.tab.h"
+#line 134 "y.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
