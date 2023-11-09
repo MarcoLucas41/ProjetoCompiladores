@@ -19,7 +19,7 @@ struct node *newnode(enum category category, char *token) {
     new->children = malloc(sizeof(struct node_list));
     new->children->node = NULL;
     new->children->next = NULL;
-    printf("New node created! %s\n",getCategoryName(category));
+    //printf("New node created! %s\n",getCategoryName(category));
     return new;
 }
 
@@ -32,7 +32,7 @@ void addchild(struct node *parent, struct node *child) {
     while(children->next != NULL)
         children = children->next;
     children->next = new;
-    printf("Adding child %s to parent %s!\n",getCategoryName(child->category),getCategoryName(parent->category));
+    //printf("Adding child %s to parent %s!\n",getCategoryName(child->category),getCategoryName(parent->category));
 }
 
 // print the syntax tree given root node

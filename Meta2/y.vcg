@@ -118,7 +118,7 @@ graph: {
 	}
 	node: {
 		title:	"7"
-		label:	"state  7\n $accept -> FunctionsAndDeclarations . $end\n FunctionsAndDeclarations -> FunctionsAndDeclarations . FunctionDefinition\n FunctionsAndDeclarations -> FunctionsAndDeclarations . FunctionDeclaration\n FunctionsAndDeclarations -> FunctionsAndDeclarations . Declarator\n FunctionDefinition -> . TypeSpec FunctionDeclarator FunctionBody\n FunctionDeclaration -> . TypeSpec FunctionDeclarator SEMI\n FunctionDeclaration -> .[$end, CHAR, INT, SHORT, DOUBLE, VOID, IDENTIFIER]\n TypeSpec -> . CHAR\n TypeSpec -> . INT\n TypeSpec -> . VOID\n TypeSpec -> . SHORT\n TypeSpec -> . DOUBLE\n Declarator -> . IDENTIFIER OPTIONAL3"
+		label:	"state  7\n $accept -> FunctionsAndDeclarations . $end\n FunctionsAndDeclarations -> FunctionsAndDeclarations . FunctionDefinition\n FunctionsAndDeclarations -> FunctionsAndDeclarations . FunctionDeclaration\n FunctionsAndDeclarations -> FunctionsAndDeclarations . Declarator\n FunctionDefinition -> . TypeSpec FunctionDeclarator FunctionBody\n FunctionDeclaration -> . TypeSpec FunctionDeclarator SEMI\n FunctionDeclaration -> .[$end, CHAR, INT, SHORT, DOUBLE, VOID, IDENTIFIER]\n TypeSpec -> . CHAR\n TypeSpec -> . INT\n TypeSpec -> . VOID\n TypeSpec -> . SHORT\n TypeSpec -> . DOUBLE\n Declarator -> . IDENTIFIER OPTIONAL3\n Declarator -> .[$end, CHAR, INT, SHORT, DOUBLE, VOID, IDENTIFIER]"
 	}
 	edge: {
 		sourcename:	"7"
@@ -211,7 +211,7 @@ graph: {
 	}
 	node: {
 		title:	"11"
-		label:	"state 11\n FunctionDefinition -> TypeSpec . FunctionDeclarator FunctionBody\n FunctionDeclaration -> TypeSpec . FunctionDeclarator SEMI\n FunctionDeclarator -> . IDENTIFIER LPAR ParameterList RPAR\n FunctionDeclarator -> .[LBRACE, SEMI]\n Declaration -> TypeSpec . Declarator ZEROPLUS1 SEMI\n Declarator -> . IDENTIFIER OPTIONAL3"
+		label:	"state 11\n FunctionDefinition -> TypeSpec . FunctionDeclarator FunctionBody\n FunctionDeclaration -> TypeSpec . FunctionDeclarator SEMI\n FunctionDeclarator -> . IDENTIFIER LPAR ParameterList RPAR\n FunctionDeclarator -> .[LBRACE, SEMI]\n Declaration -> TypeSpec . Declarator ZEROPLUS1 SEMI\n Declarator -> . IDENTIFIER OPTIONAL3\n Declarator -> .[COMMA, SEMI]"
 	}
 	edge: {
 		sourcename:	"11"
@@ -1480,7 +1480,7 @@ graph: {
 	}
 	node: {
 		title:	"50"
-		label:	"state 50\n Declaration -> TypeSpec . Declarator ZEROPLUS1 SEMI\n Declarator -> . IDENTIFIER OPTIONAL3"
+		label:	"state 50\n Declaration -> TypeSpec . Declarator ZEROPLUS1 SEMI\n Declarator -> . IDENTIFIER OPTIONAL3\n Declarator -> .[COMMA, SEMI]"
 	}
 	backedge: {
 		sourcename:	"50"
@@ -1811,7 +1811,7 @@ graph: {
 	}
 	node: {
 		title:	"54"
-		label:	"state 54\n ZEROPLUS1 -> ZEROPLUS1 COMMA . Declarator\n Declarator -> . IDENTIFIER OPTIONAL3"
+		label:	"state 54\n ZEROPLUS1 -> ZEROPLUS1 COMMA . Declarator\n Declarator -> . IDENTIFIER OPTIONAL3\n Declarator -> .[COMMA, SEMI]"
 	}
 	backedge: {
 		sourcename:	"54"

@@ -7,7 +7,7 @@ extern char *yytext;
 extern int line;
 extern int column;
 void yyerror(char *);
-//int yydebug=1;
+int yydebug=1;
 
 %}
 
@@ -68,7 +68,7 @@ ParameterDeclaration: TypeSpec OPTIONAL2 {$$ = newnode(ParamDeclaration,NULL); a
 OPTIONAL2: IDENTIFIER {$$= newnode(Identifier,$1);}
          | ;
 
-Declaration: TypeSpec Declarator ZEROPLUS1 SEMI {$$ = newnode(Declaration,NULL); addchild($$,$1); addchild($$,$2);}
+Declaration: TypeSpec Declarator ZEROPLUS1 SEMI {$$ = newnode(Declaration,NULL); addchild($$,$1); addchild($$,$2); addchild($$,$3);}
            | error SEMI
            ;
 
@@ -82,8 +82,8 @@ TypeSpec: CHAR                          {$$ = newnode(Char,NULL);}
         | DOUBLE                        {$$ = newnode(Double,NULL);}
         ;
 
-Declarator: IDENTIFIER OPTIONAL3 {struct node *identifier = newnode(Identifier,$1); addchild($$,$1); addchild($$,$2);}
-          ;
+Declarator: IDENTIFIER OPTIONAL3 {addchild($$,newnode(Identifier,$1)); addchild($$,$2);}
+          | ;
 
 OPTIONAL3: ASSIGN Expr {$$ = $2;}
         | ;         
@@ -119,7 +119,7 @@ Expr: Expr ASSIGN Expr          {$$ = newnode(Assign, NULL); addchild($$, $1); a
     | Expr AND Expr             {$$ = newnode(And, NULL); addchild($$, $1); addchild($$, $3);}
     | Expr BITWISEAND Expr      {$$ = newnode(BitWiseAnd,NULL); addchild($$,$1); addchild($$,$3);}
     | Expr BITWISEOR Expr       {$$ = newnode(BitWiseOr,NULL); addchild($$,$1); addchild($$,$3);}
-    | Expr BITWISEXOR Expr      {$$ = newnode(Bitwisexor, NULL); addchild($$, $1); addchild($$, $3);}
+    | Expr BITWISEXOR Expr      {$$ = newnode(BitWiseXor, NULL); addchild($$, $1); addchild($$, $3);}
     | Expr EQ Expr              {$$ = newnode(Eq, NULL); addchild($$, $1); addchild($$, $3);}
     | Expr NE Expr              {$$ = newnode(Ne, NULL); addchild($$, $1); addchild($$, $3);}
     | Expr LE Expr              {$$ = newnode(Le, NULL); addchild($$, $1); addchild($$, $3);}
