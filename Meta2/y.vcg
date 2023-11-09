@@ -437,7 +437,7 @@ graph: {
 	}
 	node: {
 		title:	"22"
-		label:	"state 22\n FunctionBody -> LBRACE . RBRACE\n FunctionBody -> LBRACE . DeclarationsAndStatements RBRACE\n DeclarationsAndStatements -> . Statement DeclarationsAndStatements\n DeclarationsAndStatements -> . Declaration DeclarationsAndStatements\n DeclarationsAndStatements -> . Statement\n DeclarationsAndStatements -> . Declaration\n Declaration -> . TypeSpec Declarator ZEROPLUS1 SEMI\n Declaration -> . error SEMI\n TypeSpec -> . CHAR\n TypeSpec -> . INT\n TypeSpec -> . VOID\n TypeSpec -> . SHORT\n TypeSpec -> . DOUBLE\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement OPTIONAL5\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 22\n FunctionBody -> LBRACE . RBRACE\n FunctionBody -> LBRACE . DeclarationsAndStatements RBRACE\n DeclarationsAndStatements -> . Statement DeclarationsAndStatements\n DeclarationsAndStatements -> . Declaration DeclarationsAndStatements\n DeclarationsAndStatements -> . Statement\n DeclarationsAndStatements -> . Declaration\n Declaration -> . TypeSpec Declarator ZEROPLUS1 SEMI\n Declaration -> . error SEMI\n TypeSpec -> . CHAR\n TypeSpec -> . INT\n TypeSpec -> . VOID\n TypeSpec -> . SHORT\n TypeSpec -> . DOUBLE\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement ELSE Statement\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	edge: {
 		sourcename:	"22"
@@ -1125,7 +1125,7 @@ graph: {
 	}
 	node: {
 		title:	"40"
-		label:	"state 40\n Statement -> IF . LPAR Expr RPAR Statement OPTIONAL5\n Statement -> IF . LPAR Expr RPAR Statement"
+		label:	"state 40\n Statement -> IF . LPAR Expr RPAR Statement ELSE Statement\n Statement -> IF . LPAR Expr RPAR Statement"
 	}
 	edge: {
 		sourcename:	"40"
@@ -1243,7 +1243,7 @@ graph: {
 	}
 	node: {
 		title:	"45"
-		label:	"state 45\n DeclarationsAndStatements -> . Statement DeclarationsAndStatements\n DeclarationsAndStatements -> . Declaration DeclarationsAndStatements\n DeclarationsAndStatements -> Declaration . DeclarationsAndStatements\n DeclarationsAndStatements -> . Statement\n DeclarationsAndStatements -> . Declaration[RBRACE]\n DeclarationsAndStatements -> Declaration .[RBRACE]\n Declaration -> . TypeSpec Declarator ZEROPLUS1 SEMI\n Declaration -> . error SEMI\n TypeSpec -> . CHAR\n TypeSpec -> . INT\n TypeSpec -> . VOID\n TypeSpec -> . SHORT\n TypeSpec -> . DOUBLE\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement OPTIONAL5\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 45\n DeclarationsAndStatements -> . Statement DeclarationsAndStatements\n DeclarationsAndStatements -> . Declaration DeclarationsAndStatements\n DeclarationsAndStatements -> Declaration . DeclarationsAndStatements\n DeclarationsAndStatements -> . Statement\n DeclarationsAndStatements -> . Declaration[RBRACE]\n DeclarationsAndStatements -> Declaration .[RBRACE]\n Declaration -> . TypeSpec Declarator ZEROPLUS1 SEMI\n Declaration -> . error SEMI\n TypeSpec -> . CHAR\n TypeSpec -> . INT\n TypeSpec -> . VOID\n TypeSpec -> . SHORT\n TypeSpec -> . DOUBLE\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement ELSE Statement\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"45"
@@ -1433,7 +1433,7 @@ graph: {
 	}
 	node: {
 		title:	"47"
-		label:	"state 47\n DeclarationsAndStatements -> . Statement DeclarationsAndStatements\n DeclarationsAndStatements -> Statement . DeclarationsAndStatements\n DeclarationsAndStatements -> . Declaration DeclarationsAndStatements\n DeclarationsAndStatements -> . Statement[RBRACE]\n DeclarationsAndStatements -> Statement .[RBRACE]\n DeclarationsAndStatements -> . Declaration\n Declaration -> . TypeSpec Declarator ZEROPLUS1 SEMI\n Declaration -> . error SEMI\n TypeSpec -> . CHAR\n TypeSpec -> . INT\n TypeSpec -> . VOID\n TypeSpec -> . SHORT\n TypeSpec -> . DOUBLE\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement OPTIONAL5\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 47\n DeclarationsAndStatements -> . Statement DeclarationsAndStatements\n DeclarationsAndStatements -> Statement . DeclarationsAndStatements\n DeclarationsAndStatements -> . Declaration DeclarationsAndStatements\n DeclarationsAndStatements -> . Statement[RBRACE]\n DeclarationsAndStatements -> Statement .[RBRACE]\n DeclarationsAndStatements -> . Declaration\n Declaration -> . TypeSpec Declarator ZEROPLUS1 SEMI\n Declaration -> . error SEMI\n TypeSpec -> . CHAR\n TypeSpec -> . INT\n TypeSpec -> . VOID\n TypeSpec -> . SHORT\n TypeSpec -> . DOUBLE\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement ELSE Statement\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"47"
@@ -3704,7 +3704,7 @@ graph: {
 	}
 	node: {
 		title:	"81"
-		label:	"state 81\n Statement -> IF LPAR . Expr RPAR Statement OPTIONAL5\n Statement -> IF LPAR . Expr RPAR Statement\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 81\n Statement -> IF LPAR . Expr RPAR Statement ELSE Statement\n Statement -> IF LPAR . Expr RPAR Statement\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"81"
@@ -3793,7 +3793,7 @@ graph: {
 	}
 	node: {
 		title:	"84"
-		label:	"state 84\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> LBRACE ZEROPLUS2 . RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement OPTIONAL5\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n ZEROPLUS2 -> ZEROPLUS2 . Statement\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 84\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> LBRACE ZEROPLUS2 . RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement ELSE Statement\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n ZEROPLUS2 -> ZEROPLUS2 . Statement\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	edge: {
 		sourcename:	"84"
@@ -6480,7 +6480,7 @@ graph: {
 	}
 	node: {
 		title:	"117"
-		label:	"state 117\n Statement -> IF LPAR Expr . RPAR Statement OPTIONAL5\n Statement -> IF LPAR Expr . RPAR Statement\n Expr -> Expr . ASSIGN Expr\n Expr -> Expr . COMMA Expr\n Expr -> Expr . PLUS Expr\n Expr -> Expr . MINUS Expr\n Expr -> Expr . MUL Expr\n Expr -> Expr . DIV Expr\n Expr -> Expr . MOD Expr\n Expr -> Expr . OR Expr\n Expr -> Expr . AND Expr\n Expr -> Expr . BITWISEAND Expr\n Expr -> Expr . BITWISEOR Expr\n Expr -> Expr . BITWISEXOR Expr\n Expr -> Expr . EQ Expr\n Expr -> Expr . NE Expr\n Expr -> Expr . LE Expr\n Expr -> Expr . GE Expr\n Expr -> Expr . LT Expr\n Expr -> Expr . GT Expr"
+		label:	"state 117\n Statement -> IF LPAR Expr . RPAR Statement ELSE Statement\n Statement -> IF LPAR Expr . RPAR Statement\n Expr -> Expr . ASSIGN Expr\n Expr -> Expr . COMMA Expr\n Expr -> Expr . PLUS Expr\n Expr -> Expr . MINUS Expr\n Expr -> Expr . MUL Expr\n Expr -> Expr . DIV Expr\n Expr -> Expr . MOD Expr\n Expr -> Expr . OR Expr\n Expr -> Expr . AND Expr\n Expr -> Expr . BITWISEAND Expr\n Expr -> Expr . BITWISEOR Expr\n Expr -> Expr . BITWISEXOR Expr\n Expr -> Expr . EQ Expr\n Expr -> Expr . NE Expr\n Expr -> Expr . LE Expr\n Expr -> Expr . GE Expr\n Expr -> Expr . LT Expr\n Expr -> Expr . GT Expr"
 	}
 	backedge: {
 		sourcename:	"117"
@@ -6719,7 +6719,7 @@ graph: {
 	}
 	node: {
 		title:	"126"
-		label:	"state 126\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement OPTIONAL5\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> WHILE LPAR Expr RPAR . Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 126\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement ELSE Statement\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> WHILE LPAR Expr RPAR . Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"126"
@@ -6835,7 +6835,7 @@ graph: {
 	}
 	node: {
 		title:	"127"
-		label:	"state 127\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement OPTIONAL5\n Statement -> IF LPAR Expr RPAR . Statement OPTIONAL5\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> IF LPAR Expr RPAR . Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 127\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement ELSE Statement\n Statement -> IF LPAR Expr RPAR . Statement ELSE Statement\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> IF LPAR Expr RPAR . Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"127"
@@ -7082,7 +7082,7 @@ graph: {
 	}
 	node: {
 		title:	"131"
-		label:	"state 131\n Statement -> IF LPAR Expr RPAR Statement . OPTIONAL5\n Statement -> IF LPAR Expr RPAR Statement .[error, CHAR, ELSE, WHILE, IF, INT, SHORT, DOUBLE, RETURN, VOID, LBRACE, LPAR, MINUS, NOT, PLUS, RBRACE, SEMI, CHRLITS, IDENTIFIER, NATURAL, DECIMAL]\n OPTIONAL5 -> . ELSE Statement\n OPTIONAL5 -> .[error, CHAR, ELSE, WHILE, IF, INT, SHORT, DOUBLE, RETURN, VOID, LBRACE, LPAR, MINUS, NOT, PLUS, RBRACE, SEMI, CHRLITS, IDENTIFIER, NATURAL, DECIMAL]"
+		label:	"state 131\n Statement -> IF LPAR Expr RPAR Statement . ELSE Statement\n Statement -> IF LPAR Expr RPAR Statement .[error, CHAR, ELSE, WHILE, IF, INT, SHORT, DOUBLE, RETURN, VOID, LBRACE, LPAR, MINUS, NOT, PLUS, RBRACE, SEMI, CHRLITS, IDENTIFIER, NATURAL, DECIMAL]"
 	}
 	edge: {
 		sourcename:	"131"
@@ -7091,16 +7091,9 @@ graph: {
 		color:	blue
 		textcolor:	black
 	}
-	edge: {
-		sourcename:	"131"
-		targetname:	"133"
-		label:	"OPTIONAL5"
-		color:	green
-		textcolor:	black
-	}
 	node: {
 		title:	"132"
-		label:	"state 132\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement OPTIONAL5\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n OPTIONAL5 -> ELSE . Statement\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
+		label:	"state 132\n Statement -> . OPTIONAL4 SEMI\n Statement -> . error SEMI\n Statement -> . LBRACE ZEROPLUS2 RBRACE\n Statement -> . LBRACE error RBRACE\n Statement -> . IF LPAR Expr RPAR Statement ELSE Statement\n Statement -> IF LPAR Expr RPAR Statement ELSE . Statement\n Statement -> . IF LPAR Expr RPAR Statement\n Statement -> . WHILE LPAR Expr RPAR Statement\n Statement -> . RETURN OPTIONAL4 SEMI\n OPTIONAL4 -> . Expr\n OPTIONAL4 -> .[SEMI]\n Expr -> . Expr ASSIGN Expr\n Expr -> . Expr COMMA Expr\n Expr -> . Expr PLUS Expr\n Expr -> . Expr MINUS Expr\n Expr -> . Expr MUL Expr\n Expr -> . Expr DIV Expr\n Expr -> . Expr MOD Expr\n Expr -> . Expr OR Expr\n Expr -> . Expr AND Expr\n Expr -> . Expr BITWISEAND Expr\n Expr -> . Expr BITWISEOR Expr\n Expr -> . Expr BITWISEXOR Expr\n Expr -> . Expr EQ Expr\n Expr -> . Expr NE Expr\n Expr -> . Expr LE Expr\n Expr -> . Expr GE Expr\n Expr -> . Expr LT Expr\n Expr -> . Expr GT Expr\n Expr -> . PLUS Expr\n Expr -> . MINUS Expr\n Expr -> . NOT Expr\n Expr -> . IDENTIFIER LPAR error RPAR\n Expr -> . IDENTIFIER LPAR OPTIONAL6 RPAR\n Expr -> . IDENTIFIER\n Expr -> . NATURAL\n Expr -> . CHRLITS\n Expr -> . DECIMAL\n Expr -> . LPAR Expr RPAR\n Expr -> . LPAR error RPAR"
 	}
 	backedge: {
 		sourcename:	"132"
@@ -7195,7 +7188,7 @@ graph: {
 	}
 	edge: {
 		sourcename:	"132"
-		targetname:	"134"
+		targetname:	"133"
 		label:	"Statement"
 		color:	green
 		textcolor:	black
@@ -7216,11 +7209,7 @@ graph: {
 	}
 	node: {
 		title:	"133"
-		label:	"state 133\n Statement -> IF LPAR Expr RPAR Statement OPTIONAL5 ."
-	}
-	node: {
-		title:	"134"
-		label:	"state 134\n OPTIONAL5 -> ELSE Statement ."
+		label:	"state 133\n Statement -> IF LPAR Expr RPAR Statement ELSE Statement ."
 	}
 
 

@@ -15,7 +15,7 @@ int yydebug=1;
 %token CHAR ELSE WHILE IF INT SHORT DOUBLE RETURN VOID BITWISEAND BITWISEOR BITWISEXOR AND ASSIGN MUL EQ GE GT DIV LBRACE LE LPAR LT MINUS MOD NE NOT OR PLUS RBRACE RPAR SEMI
 %token<lexeme> CHRLITS IDENTIFIER NATURAL DECIMAL RESERVED
 %type<node> Expr
-%type<node> FunctionsAndDeclarations FunctionDefinition FunctionBody DeclarationsAndStatements FunctionDeclaration FunctionDeclarator ParameterList ParameterDeclaration Declaration TypeSpec Declarator Statement ZEROPLUS1 ZEROPLUS2 ZEROPLUS3 OPTIONAL4 OPTIONAL5 OPTIONAL6
+%type<node> FunctionsAndDeclarations FunctionDefinition FunctionBody DeclarationsAndStatements FunctionDeclaration FunctionDeclarator ParameterList ParameterDeclaration Declaration TypeSpec Declarator Statement ZEROPLUS1 ZEROPLUS2 ZEROPLUS3 OPTIONAL4 OPTIONAL6
 
 %left LOW
 %left PLUS MINUS
@@ -68,11 +68,12 @@ ParameterDeclaration: TypeSpec IDENTIFIER {;}
 
 
 Declaration: TypeSpec Declarator ZEROPLUS1 SEMI {;}
-           | error SEMI
+           | error SEMI {;}
            ;
 
 ZEROPLUS1: ZEROPLUS1 COMMA Declarator {;}
-         | ;
+         | {;}
+         ;
 
 TypeSpec: CHAR                          {;} 
         | INT                           {;}
@@ -89,21 +90,20 @@ Statement: OPTIONAL4 SEMI {;}
          | error SEMI {;}
          | LBRACE ZEROPLUS2 RBRACE {;}
          | LBRACE error RBRACE {;}
-         | IF LPAR Expr RPAR Statement OPTIONAL5 %prec LOW {;}
-         | IF LPAR Expr RPAR Statement %prec LOW {;}
+         | IF LPAR Expr RPAR Statement ELSE Statement %prec LOW {;}
+         | IF LPAR Expr RPAR Statement {;}
          | WHILE LPAR Expr RPAR Statement {;}
          | RETURN OPTIONAL4 SEMI {;}
          ;
 
 OPTIONAL4: Expr {;}
-         | ;
-
-OPTIONAL5: ELSE Statement {;}
-         |
+         | {;}
          ;
 
+
 ZEROPLUS2: ZEROPLUS2 Statement {;}
-         | ;
+         | {;}
+         ;
 
 
 Expr: Expr ASSIGN Expr          {;}
@@ -127,18 +127,19 @@ Expr: Expr ASSIGN Expr          {;}
     | PLUS Expr                 {;}
     | MINUS Expr                {;}
     | NOT Expr                  {;}
-    | IDENTIFIER LPAR error RPAR
+    | IDENTIFIER LPAR error RPAR {;}
     | IDENTIFIER LPAR OPTIONAL6 RPAR {;}
     | IDENTIFIER                {;}
     | NATURAL                   {;}
     | CHRLITS                    {;}
     | DECIMAL                   {;}
     | LPAR Expr RPAR            {;}
-    | LPAR error RPAR 
+    | LPAR error RPAR           {;}
     ;
 
 OPTIONAL6: ZEROPLUS3  {;}
-         | ;
+         | {;} 
+         ;
 
 ZEROPLUS3: ZEROPLUS3 COMMA Expr {;}
          | Expr {;}
