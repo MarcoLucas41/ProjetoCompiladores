@@ -1,0 +1,4 @@
+void voidfunc(char* letras){
+  extern int x; 
+  int a, b, c = 5, 6, 7;
+}

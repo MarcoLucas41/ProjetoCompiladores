@@ -54,29 +54,30 @@
      AND = 270,
      ASSIGN = 271,
      MUL = 272,
-     COMMA = 273,
-     EQ = 274,
-     GE = 275,
-     GT = 276,
-     DIV = 277,
-     LBRACE = 278,
-     LE = 279,
-     LPAR = 280,
-     LT = 281,
-     MINUS = 282,
-     MOD = 283,
-     NE = 284,
-     NOT = 285,
-     OR = 286,
-     PLUS = 287,
-     RBRACE = 288,
-     RPAR = 289,
-     SEMI = 290,
-     CHRLITS = 291,
-     IDENTIFIER = 292,
-     NATURAL = 293,
-     DECIMAL = 294,
-     LOW = 295
+     EQ = 273,
+     GE = 274,
+     GT = 275,
+     DIV = 276,
+     LBRACE = 277,
+     LE = 278,
+     LPAR = 279,
+     LT = 280,
+     MINUS = 281,
+     MOD = 282,
+     NE = 283,
+     NOT = 284,
+     OR = 285,
+     PLUS = 286,
+     RBRACE = 287,
+     RPAR = 288,
+     SEMI = 289,
+     CHRLITS = 290,
+     IDENTIFIER = 291,
+     NATURAL = 292,
+     DECIMAL = 293,
+     RESERVED = 294,
+     LOW = 295,
+     COMMA = 296
    };
 #endif
 /* Tokens.  */
@@ -95,42 +96,43 @@
 #define AND 270
 #define ASSIGN 271
 #define MUL 272
-#define COMMA 273
-#define EQ 274
-#define GE 275
-#define GT 276
-#define DIV 277
-#define LBRACE 278
-#define LE 279
-#define LPAR 280
-#define LT 281
-#define MINUS 282
-#define MOD 283
-#define NE 284
-#define NOT 285
-#define OR 286
-#define PLUS 287
-#define RBRACE 288
-#define RPAR 289
-#define SEMI 290
-#define CHRLITS 291
-#define IDENTIFIER 292
-#define NATURAL 293
-#define DECIMAL 294
+#define EQ 273
+#define GE 274
+#define GT 275
+#define DIV 276
+#define LBRACE 277
+#define LE 278
+#define LPAR 279
+#define LT 280
+#define MINUS 281
+#define MOD 282
+#define NE 283
+#define NOT 284
+#define OR 285
+#define PLUS 286
+#define RBRACE 287
+#define RPAR 288
+#define SEMI 289
+#define CHRLITS 290
+#define IDENTIFIER 291
+#define NATURAL 292
+#define DECIMAL 293
+#define RESERVED 294
 #define LOW 295
+#define COMMA 296
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 23 "uccompiler.y"
+#line 25 "uccompiler.y"
 { 
     char *lexeme;
     struct node *node;
 }
 /* Line 1529 of yacc.c.  */
-#line 134 "y.tab.h"
+#line 136 "y.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

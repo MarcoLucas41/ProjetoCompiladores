@@ -930,7 +930,7 @@ YY_RULE_SETUP
 case 5:
 YY_RULE_SETUP
 #line 40 "uccompiler.l"
-{ if(type){printf("RESERVED(%s)\n",yytext);} }
+{ if(type){printf("RESERVED(%s)\n",yytext);} PASS_TOKEN();return RESERVED;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
@@ -1164,7 +1164,7 @@ case YY_STATE_EOF(COMMENT):
 case YY_STATE_EOF(COMMENT2):
 case YY_STATE_EOF(CHRLIT):
 #line 120 "uccompiler.l"
-{ return 0; }
+{ column+=1; return 0; }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
@@ -2193,8 +2193,8 @@ int yywrap() {  /* called on EOF, return 1 to terminate */
     {
         printf("Line %d, column %d: unterminated comment\n",commentLine,commentColumn);
     }
-    show(program,0);
-    cleanup(program);
+    //show(program,0);
+    //cleanup(program);
     return 1;
 }
 
