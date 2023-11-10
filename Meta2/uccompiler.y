@@ -1,6 +1,5 @@
 
 %{
-
 #include "ast.h"
 extern int yylex(void);
 extern char *yytext;
@@ -8,19 +7,32 @@ extern int yyleng;
 extern int line;
 extern int column;
 void yyerror(char *);
-int yydebug=1;
+//int yydebug=1;
 
 %}
 
-%token CHAR ELSE WHILE IF INT SHORT DOUBLE RETURN VOID BITWISEAND BITWISEOR BITWISEXOR AND ASSIGN MUL EQ GE GT DIV LBRACE LE LPAR LT MINUS MOD NE NOT OR PLUS RBRACE RPAR SEMI
-%token<lexeme> CHRLITS IDENTIFIER NATURAL DECIMAL RESERVED
-%type<node> Expr
-%type<node> FunctionsAndDeclarations FunctionDefinition FunctionBody DeclarationsAndStatements FunctionDeclaration FunctionDeclarator ParameterList ParameterDeclaration Declaration TypeSpec Declarator Statement ZEROPLUS1 ZEROPLUS2 ZEROPLUS3 OPTIONAL4 OPTIONAL6
-
 %left LOW
-%left PLUS MINUS
-%left MUL DIV
 %left COMMA
+%right ASSIGN
+%right ELSE
+%left BITWISEOR 
+%left BITWISEXOR 
+%left BITWISEAND
+%left AND OR
+%left EQ NE LT LE GT GE
+%left PLUS MINUS
+%left MUL DIV MOD
+%right NOT
+%left HIGH
+
+%nonassoc LOWER
+%nonassoc HIGHER
+
+%token CHAR INT SHORT DOUBLE RETURN VOID SEMI LBRACE LPAR RBRACE RPAR WHILE IF COMMA ASSIGN ELSE BITWISEOR BITWISEXOR BITWISEAND AND OR EQ NE LT LE GT GE PLUS MINUS MUL DIV MOD NOT
+%token<lexeme> CHRLITS IDENTIFIER NATURAL DECIMAL RESERVED
+%type<node> FunctionsAndDeclarations FunctionDefinition FunctionBody DeclarationsAndStatements FunctionDeclaration FunctionDeclarator ParameterList ParameterDeclaration Declaration TypeSpec Declarator Statement Expr ZEROPLUS1 ZEROPLUS2 ZEROPLUS3 OPTIONAL4 ErrorRule 
+
+
 
 %union{ 
     char *lexeme;
@@ -41,14 +53,14 @@ FunctionDefinition: TypeSpec FunctionDeclarator FunctionBody {;}
 
 FunctionBody: LBRACE RBRACE {;}
             | LBRACE DeclarationsAndStatements RBRACE {;}
-
+            ;
 
 
 
 DeclarationsAndStatements: Statement DeclarationsAndStatements {;}
                          | Declaration DeclarationsAndStatements {;}
-                         | Statement {; }
-                         | Declaration {; }
+                         | Statement {;}
+                         | Declaration {;}
                          ;
 
 FunctionDeclaration: TypeSpec FunctionDeclarator SEMI {;}  
@@ -68,8 +80,9 @@ ParameterDeclaration: TypeSpec IDENTIFIER {;}
 
 
 Declaration: TypeSpec Declarator ZEROPLUS1 SEMI {;}
-           | error SEMI {;}
+           | ErrorRule {;}
            ;
+
 
 ZEROPLUS1: ZEROPLUS1 COMMA Declarator {;}
          | {;}
@@ -87,14 +100,16 @@ Declarator: IDENTIFIER ASSIGN Expr {;}
           ;
 
 Statement: OPTIONAL4 SEMI {;}
-         | error SEMI {;}
          | LBRACE ZEROPLUS2 RBRACE {;}
-         | LBRACE error RBRACE {;}
+         | LBRACE ErrorRule RBRACE {;}
          | IF LPAR Expr RPAR Statement ELSE Statement %prec LOW {;}
-         | IF LPAR Expr RPAR Statement {;}
+         | IF LPAR Expr RPAR Statement %prec LOW {;}
          | WHILE LPAR Expr RPAR Statement {;}
-         | RETURN OPTIONAL4 SEMI {;}
+         | RETURN Expr SEMI {;}
+         | RETURN SEMI {;}
          ;
+
+ErrorRule: error SEMI {;}
 
 OPTIONAL4: Expr {;}
          | {;}
@@ -124,26 +139,24 @@ Expr: Expr ASSIGN Expr          {;}
     | Expr GE Expr              {;}
     | Expr LT Expr              {;}
     | Expr GT Expr              {;}
-    | PLUS Expr                 {;}
-    | MINUS Expr                {;}
-    | NOT Expr                  {;}
+    | PLUS Expr    %prec NOT    {;}
+    | MINUS Expr   %prec NOT    {;}
+    | NOT Expr                   {;}
     | IDENTIFIER LPAR error RPAR {;}
-    | IDENTIFIER LPAR OPTIONAL6 RPAR {;}
+    | IDENTIFIER LPAR RPAR {;}
+    | IDENTIFIER LPAR ZEROPLUS3 RPAR {;}
     | IDENTIFIER                {;}
     | NATURAL                   {;}
-    | CHRLITS                    {;}
+    | CHRLITS                   {;}
     | DECIMAL                   {;}
     | LPAR Expr RPAR            {;}
     | LPAR error RPAR           {;}
     ;
 
-OPTIONAL6: ZEROPLUS3  {;}
-         | {;} 
+ZEROPLUS3: ZEROPLUS3 COMMA Expr %prec HIGHER {;}
+         | Expr %prec LOWER {;}
          ;
 
-ZEROPLUS3: ZEROPLUS3 COMMA Expr {;}
-         | Expr {;}
-         ;
 //if: n há problemas de associatividade
 //else: é necessário associar a um IF
 

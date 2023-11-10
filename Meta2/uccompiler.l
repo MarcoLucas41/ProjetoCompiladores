@@ -7,6 +7,7 @@
     #include <string.h>
     int yyparse(void);
     bool type = false;
+    bool type2 = false;
     int line = 1;
     int column = 0;
     int commentLine = 0;
@@ -126,7 +127,7 @@ int main(int argc, char *argv[])
     if(argv[1] != NULL)
     {
         if(strcmp(argv[1],"-l") == 0) type = true;
-        if(strcmp(argv[1],"-t") == 0);
+        if(strcmp(argv[1],"-t") == 0) type2 = true;
     }
     yyparse();    /* run the lexical analysis automaton */
     return 0;
@@ -136,7 +137,7 @@ int yywrap() {  /* called on EOF, return 1 to terminate */
     {
         printf("Line %d, column %d: unterminated comment\n",commentLine,commentColumn);
     }
-    //show(program,0);
-    //cleanup(program);
+    if (type2 && (program != NULL)) show(program,0);
+    if (program != NULL) cleanup(program);
     return 1;
 }

@@ -39,100 +39,106 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     CHAR = 258,
-     ELSE = 259,
-     WHILE = 260,
-     IF = 261,
-     INT = 262,
-     SHORT = 263,
-     DOUBLE = 264,
-     RETURN = 265,
-     VOID = 266,
-     BITWISEAND = 267,
-     BITWISEOR = 268,
-     BITWISEXOR = 269,
-     AND = 270,
-     ASSIGN = 271,
-     MUL = 272,
-     EQ = 273,
-     GE = 274,
-     GT = 275,
+     LOW = 258,
+     COMMA = 259,
+     ASSIGN = 260,
+     ELSE = 261,
+     BITWISEOR = 262,
+     BITWISEXOR = 263,
+     BITWISEAND = 264,
+     OR = 265,
+     AND = 266,
+     GE = 267,
+     GT = 268,
+     LE = 269,
+     LT = 270,
+     NE = 271,
+     EQ = 272,
+     MINUS = 273,
+     PLUS = 274,
+     MOD = 275,
      DIV = 276,
-     LBRACE = 277,
-     LE = 278,
-     LPAR = 279,
-     LT = 280,
-     MINUS = 281,
-     MOD = 282,
-     NE = 283,
-     NOT = 284,
-     OR = 285,
-     PLUS = 286,
-     RBRACE = 287,
-     RPAR = 288,
-     SEMI = 289,
-     CHRLITS = 290,
-     IDENTIFIER = 291,
-     NATURAL = 292,
-     DECIMAL = 293,
-     RESERVED = 294,
-     LOW = 295,
-     COMMA = 296
+     MUL = 277,
+     NOT = 278,
+     HIGH = 279,
+     LOWER = 280,
+     HIGHER = 281,
+     CHAR = 282,
+     INT = 283,
+     SHORT = 284,
+     DOUBLE = 285,
+     RETURN = 286,
+     VOID = 287,
+     SEMI = 288,
+     LBRACE = 289,
+     LPAR = 290,
+     RBRACE = 291,
+     RPAR = 292,
+     WHILE = 293,
+     IF = 294,
+     CHRLITS = 295,
+     IDENTIFIER = 296,
+     NATURAL = 297,
+     DECIMAL = 298,
+     RESERVED = 299
    };
 #endif
 /* Tokens.  */
-#define CHAR 258
-#define ELSE 259
-#define WHILE 260
-#define IF 261
-#define INT 262
-#define SHORT 263
-#define DOUBLE 264
-#define RETURN 265
-#define VOID 266
-#define BITWISEAND 267
-#define BITWISEOR 268
-#define BITWISEXOR 269
-#define AND 270
-#define ASSIGN 271
-#define MUL 272
-#define EQ 273
-#define GE 274
-#define GT 275
+#define LOW 258
+#define COMMA 259
+#define ASSIGN 260
+#define ELSE 261
+#define BITWISEOR 262
+#define BITWISEXOR 263
+#define BITWISEAND 264
+#define OR 265
+#define AND 266
+#define GE 267
+#define GT 268
+#define LE 269
+#define LT 270
+#define NE 271
+#define EQ 272
+#define MINUS 273
+#define PLUS 274
+#define MOD 275
 #define DIV 276
-#define LBRACE 277
-#define LE 278
-#define LPAR 279
-#define LT 280
-#define MINUS 281
-#define MOD 282
-#define NE 283
-#define NOT 284
-#define OR 285
-#define PLUS 286
-#define RBRACE 287
-#define RPAR 288
-#define SEMI 289
-#define CHRLITS 290
-#define IDENTIFIER 291
-#define NATURAL 292
-#define DECIMAL 293
-#define RESERVED 294
-#define LOW 295
-#define COMMA 296
+#define MUL 277
+#define NOT 278
+#define HIGH 279
+#define LOWER 280
+#define HIGHER 281
+#define CHAR 282
+#define INT 283
+#define SHORT 284
+#define DOUBLE 285
+#define RETURN 286
+#define VOID 287
+#define SEMI 288
+#define LBRACE 289
+#define LPAR 290
+#define RBRACE 291
+#define RPAR 292
+#define WHILE 293
+#define IF 294
+#define CHRLITS 295
+#define IDENTIFIER 296
+#define NATURAL 297
+#define DECIMAL 298
+#define RESERVED 299
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 25 "uccompiler.y"
+#line 37 "uccompiler.y"
 { 
     char *lexeme;
     struct node *node;
 }
 /* Line 1529 of yacc.c.  */
-#line 136 "y.tab.h"
+#line 142 "y.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
