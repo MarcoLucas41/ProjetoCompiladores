@@ -6,6 +6,7 @@ extern char *yytext;
 extern int yyleng;
 extern int line;
 extern int column;
+extern int type2;
 void yyerror(char *);
 //int yydebug=1;
 
@@ -170,6 +171,7 @@ void yyerror(char *error)
         column -= yyleng - 1;
     }
     printf("Line %d, column %d: %s: %s\n",line,column,error,yytext);
+    type2 = 0;
     if(program != NULL) cleanup(program);
    
 }

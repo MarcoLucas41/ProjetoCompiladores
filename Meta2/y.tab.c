@@ -166,6 +166,7 @@ extern char *yytext;
 extern int yyleng;
 extern int line;
 extern int column;
+extern int type2;
 void yyerror(char *);
 //int yydebug=1;
 
@@ -191,13 +192,13 @@ void yyerror(char *);
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 37 "uccompiler.y"
+#line 38 "uccompiler.y"
 { 
     char *lexeme;
     struct node *node;
 }
 /* Line 193 of yacc.c.  */
-#line 201 "y.tab.c"
+#line 202 "y.tab.c"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -210,7 +211,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 214 "y.tab.c"
+#line 215 "y.tab.c"
 
 #ifdef short
 # undef short
@@ -527,14 +528,14 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    45,    45,    46,    47,    48,    49,    50,    52,    54,
-      55,    60,    61,    62,    63,    66,    69,    72,    73,    77,
-      78,    82,    83,    87,    88,    91,    92,    93,    94,    95,
-      98,    99,   102,   103,   104,   105,   106,   107,   108,   109,
-     112,   114,   115,   119,   120,   124,   125,   126,   127,   128,
-     129,   130,   131,   132,   133,   134,   135,   136,   137,   138,
-     139,   140,   141,   142,   143,   144,   145,   146,   147,   148,
-     149,   150,   151,   152,   153,   156,   157
+       0,    46,    46,    47,    48,    49,    50,    51,    53,    55,
+      56,    61,    62,    63,    64,    67,    70,    73,    74,    78,
+      79,    83,    84,    88,    89,    92,    93,    94,    95,    96,
+      99,   100,   103,   104,   105,   106,   107,   108,   109,   110,
+     113,   115,   116,   120,   121,   125,   126,   127,   128,   129,
+     130,   131,   132,   133,   134,   135,   136,   137,   138,   139,
+     140,   141,   142,   143,   144,   145,   146,   147,   148,   149,
+     150,   151,   152,   153,   154,   157,   158
 };
 #endif
 
@@ -1599,383 +1600,383 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 45 "uccompiler.y"
-    {;}
-    break;
-
-  case 3:
 #line 46 "uccompiler.y"
     {;}
     break;
 
-  case 4:
+  case 3:
 #line 47 "uccompiler.y"
     {;}
     break;
 
-  case 5:
+  case 4:
 #line 48 "uccompiler.y"
     {;}
     break;
 
-  case 6:
+  case 5:
 #line 49 "uccompiler.y"
     {;}
     break;
 
-  case 7:
+  case 6:
 #line 50 "uccompiler.y"
     {;}
     break;
 
+  case 7:
+#line 51 "uccompiler.y"
+    {;}
+    break;
+
   case 8:
-#line 52 "uccompiler.y"
+#line 53 "uccompiler.y"
     {;}
     break;
 
   case 9:
-#line 54 "uccompiler.y"
-    {;}
-    break;
-
-  case 10:
 #line 55 "uccompiler.y"
     {;}
     break;
 
-  case 11:
-#line 60 "uccompiler.y"
+  case 10:
+#line 56 "uccompiler.y"
     {;}
     break;
 
-  case 12:
+  case 11:
 #line 61 "uccompiler.y"
     {;}
     break;
 
-  case 13:
+  case 12:
 #line 62 "uccompiler.y"
     {;}
     break;
 
-  case 14:
+  case 13:
 #line 63 "uccompiler.y"
     {;}
     break;
 
+  case 14:
+#line 64 "uccompiler.y"
+    {;}
+    break;
+
   case 15:
-#line 66 "uccompiler.y"
+#line 67 "uccompiler.y"
     {;}
     break;
 
   case 16:
-#line 69 "uccompiler.y"
+#line 70 "uccompiler.y"
     {;}
     break;
 
   case 17:
-#line 72 "uccompiler.y"
-    {;}
-    break;
-
-  case 18:
 #line 73 "uccompiler.y"
     {;}
     break;
 
-  case 19:
-#line 77 "uccompiler.y"
+  case 18:
+#line 74 "uccompiler.y"
     {;}
     break;
 
-  case 20:
+  case 19:
 #line 78 "uccompiler.y"
     {;}
     break;
 
-  case 21:
-#line 82 "uccompiler.y"
+  case 20:
+#line 79 "uccompiler.y"
     {;}
     break;
 
-  case 22:
+  case 21:
 #line 83 "uccompiler.y"
     {;}
     break;
 
-  case 23:
-#line 87 "uccompiler.y"
+  case 22:
+#line 84 "uccompiler.y"
     {;}
     break;
 
-  case 24:
+  case 23:
 #line 88 "uccompiler.y"
     {;}
     break;
 
-  case 25:
-#line 91 "uccompiler.y"
+  case 24:
+#line 89 "uccompiler.y"
     {;}
     break;
 
-  case 26:
+  case 25:
 #line 92 "uccompiler.y"
     {;}
     break;
 
-  case 27:
+  case 26:
 #line 93 "uccompiler.y"
     {;}
     break;
 
-  case 28:
+  case 27:
 #line 94 "uccompiler.y"
     {;}
     break;
 
-  case 29:
+  case 28:
 #line 95 "uccompiler.y"
     {;}
     break;
 
-  case 30:
-#line 98 "uccompiler.y"
+  case 29:
+#line 96 "uccompiler.y"
     {;}
     break;
 
-  case 31:
+  case 30:
 #line 99 "uccompiler.y"
     {;}
     break;
 
-  case 32:
-#line 102 "uccompiler.y"
+  case 31:
+#line 100 "uccompiler.y"
     {;}
     break;
 
-  case 33:
+  case 32:
 #line 103 "uccompiler.y"
     {;}
     break;
 
-  case 34:
+  case 33:
 #line 104 "uccompiler.y"
     {;}
     break;
 
-  case 35:
+  case 34:
 #line 105 "uccompiler.y"
     {;}
     break;
 
-  case 36:
+  case 35:
 #line 106 "uccompiler.y"
     {;}
     break;
 
-  case 37:
+  case 36:
 #line 107 "uccompiler.y"
     {;}
     break;
 
-  case 38:
+  case 37:
 #line 108 "uccompiler.y"
     {;}
     break;
 
-  case 39:
+  case 38:
 #line 109 "uccompiler.y"
     {;}
     break;
 
+  case 39:
+#line 110 "uccompiler.y"
+    {;}
+    break;
+
   case 40:
-#line 112 "uccompiler.y"
+#line 113 "uccompiler.y"
     {;}
     break;
 
   case 41:
-#line 114 "uccompiler.y"
-    {;}
-    break;
-
-  case 42:
 #line 115 "uccompiler.y"
     {;}
     break;
 
-  case 43:
-#line 119 "uccompiler.y"
+  case 42:
+#line 116 "uccompiler.y"
     {;}
     break;
 
-  case 44:
+  case 43:
 #line 120 "uccompiler.y"
     {;}
     break;
 
-  case 45:
-#line 124 "uccompiler.y"
+  case 44:
+#line 121 "uccompiler.y"
     {;}
     break;
 
-  case 46:
+  case 45:
 #line 125 "uccompiler.y"
     {;}
     break;
 
-  case 47:
+  case 46:
 #line 126 "uccompiler.y"
     {;}
     break;
 
-  case 48:
+  case 47:
 #line 127 "uccompiler.y"
     {;}
     break;
 
-  case 49:
+  case 48:
 #line 128 "uccompiler.y"
     {;}
     break;
 
-  case 50:
+  case 49:
 #line 129 "uccompiler.y"
     {;}
     break;
 
-  case 51:
+  case 50:
 #line 130 "uccompiler.y"
     {;}
     break;
 
-  case 52:
+  case 51:
 #line 131 "uccompiler.y"
     {;}
     break;
 
-  case 53:
+  case 52:
 #line 132 "uccompiler.y"
     {;}
     break;
 
-  case 54:
+  case 53:
 #line 133 "uccompiler.y"
     {;}
     break;
 
-  case 55:
+  case 54:
 #line 134 "uccompiler.y"
     {;}
     break;
 
-  case 56:
+  case 55:
 #line 135 "uccompiler.y"
     {;}
     break;
 
-  case 57:
+  case 56:
 #line 136 "uccompiler.y"
     {;}
     break;
 
-  case 58:
+  case 57:
 #line 137 "uccompiler.y"
     {;}
     break;
 
-  case 59:
+  case 58:
 #line 138 "uccompiler.y"
     {;}
     break;
 
-  case 60:
+  case 59:
 #line 139 "uccompiler.y"
     {;}
     break;
 
-  case 61:
+  case 60:
 #line 140 "uccompiler.y"
     {;}
     break;
 
-  case 62:
+  case 61:
 #line 141 "uccompiler.y"
     {;}
     break;
 
-  case 63:
+  case 62:
 #line 142 "uccompiler.y"
     {;}
     break;
 
-  case 64:
+  case 63:
 #line 143 "uccompiler.y"
     {;}
     break;
 
-  case 65:
+  case 64:
 #line 144 "uccompiler.y"
     {;}
     break;
 
-  case 66:
+  case 65:
 #line 145 "uccompiler.y"
     {;}
     break;
 
-  case 67:
+  case 66:
 #line 146 "uccompiler.y"
     {;}
     break;
 
-  case 68:
+  case 67:
 #line 147 "uccompiler.y"
     {;}
     break;
 
-  case 69:
+  case 68:
 #line 148 "uccompiler.y"
     {;}
     break;
 
-  case 70:
+  case 69:
 #line 149 "uccompiler.y"
     {;}
     break;
 
-  case 71:
+  case 70:
 #line 150 "uccompiler.y"
     {;}
     break;
 
-  case 72:
+  case 71:
 #line 151 "uccompiler.y"
     {;}
     break;
 
-  case 73:
+  case 72:
 #line 152 "uccompiler.y"
     {;}
     break;
 
-  case 74:
+  case 73:
 #line 153 "uccompiler.y"
     {;}
     break;
 
+  case 74:
+#line 154 "uccompiler.y"
+    {;}
+    break;
+
   case 75:
-#line 156 "uccompiler.y"
+#line 157 "uccompiler.y"
     {;}
     break;
 
   case 76:
-#line 157 "uccompiler.y"
+#line 158 "uccompiler.y"
     {;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1979 "y.tab.c"
+#line 1980 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2189,7 +2190,7 @@ yyreturn:
 }
 
 
-#line 165 "uccompiler.y"
+#line 166 "uccompiler.y"
 
 void yyerror(char *error) 
 {
@@ -2198,6 +2199,7 @@ void yyerror(char *error)
         column -= yyleng - 1;
     }
     printf("Line %d, column %d: %s: %s\n",line,column,error,yytext);
+    type2 = 0;
     if(program != NULL) cleanup(program);
    
 }
