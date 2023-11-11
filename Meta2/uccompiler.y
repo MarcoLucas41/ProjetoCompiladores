@@ -43,25 +43,25 @@ void yyerror(char *);
 /* START grammar rules section -- BNF grammar */
 
 %%
-FunctionsAndDeclarations: FunctionsAndDeclarations FunctionDefinition {;}
-                        | FunctionsAndDeclarations FunctionDeclaration {;}
-                        | FunctionsAndDeclarations Declaration {;}
-                        | FunctionDefinition {;}
-                        | FunctionDeclaration {;}
-                        | Declaration {;}                          
+FunctionsAndDeclarations: FunctionsAndDeclarations FunctionDefinition {$$ = $1; addchild($$,$1);}
+                        | FunctionsAndDeclarations FunctionDeclaration {$$ = $1; addchild($$,$1);}
+                        | FunctionsAndDeclarations Declarator {$$ = $1; addchild($$,$1);}
+                        | FunctionDefinition {$$ = newnode(Program,NULL); addchild($$,$1);}
+                        | FunctionDeclaration {$$ = newnode(Program,NULL); addchild($$,$1);}
+                        | Declaration {$$ = newnode(Program,NULL); addchild($$,$1);}                        
                         ;       
-FunctionDefinition: TypeSpec FunctionDeclarator FunctionBody {;}
+FunctionDefinition: TypeSpec FunctionDeclarator FunctionBody {$$ = newnode(FuncDefinition,NULL); addchild($$,$1); addchild($$,$2); addchild($$,$3);}
 
 FunctionBody: LBRACE RBRACE {;}
-            | LBRACE DeclarationsAndStatements RBRACE {;}
+            | LBRACE DeclarationsAndStatements RBRACE {$$ = newnode(FuncBody,NULL); addchild($$,$2);}
             ;
 
 
 
 DeclarationsAndStatements: Statement DeclarationsAndStatements {;}
                          | Declaration DeclarationsAndStatements {;}
-                         | Statement {;}
-                         | Declaration {;}
+                         | Statement {$$ = $1;}
+                         | Declaration {$$ = $1;}
                          ;
 
 FunctionDeclaration: TypeSpec FunctionDeclarator SEMI {;}  
@@ -75,12 +75,12 @@ ParameterList: ParameterList COMMA ParameterDeclaration {;}
              ;
 
 
-ParameterDeclaration: TypeSpec IDENTIFIER {;}
-                    | TypeSpec {;}
+ParameterDeclaration: TypeSpec IDENTIFIER {$$ = newnode(ParamDeclaration,NULL); addchild($$,$1); addchild($$,newnode(Identifier,$2));}
+                    | TypeSpec {$$ = newnode(ParamDeclaration,NULL); addchild($$,$1);}
                     ;
 
 
-Declaration: TypeSpec Declarator ZEROPLUS1 SEMI {;}
+Declaration: TypeSpec Declarator ZEROPLUS1 SEMI {$$ = newnode(Declaration,NULL); addchild($$,$1); addchild($$,$2); addchild($$,$3);}
            | ErrorRule {;}
            ;
 
@@ -89,31 +89,31 @@ ZEROPLUS1: ZEROPLUS1 COMMA Declarator {;}
          | {;}
          ;
 
-TypeSpec: CHAR                          {;} 
-        | INT                           {;}
-        | VOID                          {;}
-        | SHORT                         {;}
-        | DOUBLE                        {;}
+TypeSpec: CHAR                          {$$ = newnode(Char,NULL);} 
+        | INT                           {$$ = newnode(Int,NULL);}
+        | VOID                          {$$ = newnode(Void,NULL);}
+        | SHORT                         {$$ = newnode(Short,NULL);}
+        | DOUBLE                        {$$ = newnode(Double,NULL);}
         ;
 
 Declarator: IDENTIFIER ASSIGN Expr {;}
           | IDENTIFIER {;}
           ;
 
-Statement: OPTIONAL4 SEMI {;}
-         | LBRACE ZEROPLUS2 RBRACE {;}
+Statement: OPTIONAL4 SEMI {$$ = $1;}
+         | LBRACE ZEROPLUS2 RBRACE {$$ = $2;}
          | LBRACE ErrorRule RBRACE {;}
-         | IF LPAR Expr RPAR Statement ELSE Statement %prec LOW {;}
-         | IF LPAR Expr RPAR Statement %prec LOW {;}
-         | WHILE LPAR Expr RPAR Statement {;}
-         | RETURN Expr SEMI {;}
-         | RETURN SEMI {;}
+         | IF LPAR Expr RPAR Statement ELSE Statement %prec LOW {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5); addchild($$,$7);}
+         | IF LPAR Expr RPAR Statement %prec LOW {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5); }
+         | WHILE LPAR Expr RPAR Statement {$$ = newnode(While,NULL); addchild($$,$3); addchild($$,$5);}
+         | RETURN Expr SEMI {$$ = newnode(Return,NULL); addchild($$,$2);}
+         | RETURN SEMI {$$ = newnode(Return,NULL); addchild($$,newnode(Null,NULL););}
          ;
 
 ErrorRule: error SEMI {;}
 
-OPTIONAL4: Expr {;}
-         | {;}
+OPTIONAL4: Expr {$$ = $1;}
+         | {$$ = newnode(Null,NULL);}
          ;
 
 
@@ -122,40 +122,40 @@ ZEROPLUS2: ZEROPLUS2 Statement {;}
          ;
 
 
-Expr: Expr ASSIGN Expr          {;}
-    | Expr COMMA Expr           {;}
-    | Expr PLUS Expr            {;}
-    | Expr MINUS Expr           {;}
-    | Expr MUL Expr             {;}
-    | Expr DIV Expr             {;}
-    | Expr MOD Expr             {;}
-    | Expr OR Expr              {;}
-    | Expr AND Expr             {;}
-    | Expr BITWISEAND Expr      {;}
-    | Expr BITWISEOR Expr       {;}
-    | Expr BITWISEXOR Expr      {;}
-    | Expr EQ Expr              {;}
-    | Expr NE Expr              {;}
-    | Expr LE Expr              {;}
-    | Expr GE Expr              {;}
-    | Expr LT Expr              {;}
-    | Expr GT Expr              {;}
-    | PLUS Expr    %prec NOT    {;}
-    | MINUS Expr   %prec NOT    {;}
-    | NOT Expr                   {;}
+Expr: Expr ASSIGN Expr          {$$ = newnode(Assign, NULL); addchild($$, $1); addchild($$, $3);}
+    | Expr COMMA Expr           {$$ = newnode(Comma, NULL); addchild($$, $1); addchild($$, $3);}
+    | Expr PLUS Expr            {$$ = newnode(Plus, NULL); addchild($$, $1); addchild($$, $3);}
+    | Expr MINUS Expr           {$$ = newnode(Minus, NULL); addchild($$, $1); addchild($$, $3);}
+    | Expr MUL Expr             {$$ = newnode(Mul, NULL); addchild($$, $1); addchild($$, $3);}
+    | Expr DIV Expr             {$$ = newnode(Div, NULL); addchild($$, $1); addchild($$, $3);}
+    | Expr MOD Expr             {$$ = newnode(Mod, NULL); addchild($$, $1); addchild($$, $3);}
+    | Expr OR Expr              {$$ = newnode(Or, NULL); addchild($$, $1); addchild($$, $3);}
+    | Expr AND Expr             {$$ = newnode(And, NULL); addchild($$, $1); addchild($$, $3);}
+    | Expr BITWISEAND Expr      {$$ = newnode(BitWiseAnd,NULL); addchild($$,$1); addchild($$,$3);}
+    | Expr BITWISEOR Expr       {$$ = newnode(BitWiseOr,NULL); addchild($$,$1); addchild($$,$3);}
+    | Expr BITWISEXOR Expr      {$$ = newnode(BitWiseXor, NULL); addchild($$, $1); addchild($$, $3);}
+    | Expr EQ Expr              {$$ = newnode(Eq, NULL); addchild($$, $1); addchild($$, $3);}
+    | Expr NE Expr              {$$ = newnode(Ne, NULL); addchild($$, $1); addchild($$, $3);}
+    | Expr LE Expr              {$$ = newnode(Le, NULL); addchild($$, $1); addchild($$, $3);}
+    | Expr GE Expr              {$$ = newnode(Ge, NULL); addchild($$, $1); addchild($$, $3);}
+    | Expr LT Expr              {$$ = newnode(Lt, NULL); addchild($$, $1); addchild($$, $3);}
+    | Expr GT Expr              {$$ = newnode(Gt, NULL); addchild($$, $1); addchild($$, $3);}
+    | PLUS Expr    %prec NOT    {$$ = newnode(Plus,NULL); addchild($$,$2);}
+    | MINUS Expr   %prec NOT    {$$ = newnode(Minus,NULL); addchild($$,$2);}
+    | NOT Expr                  {$$ = newnode(Not,NULL); addchild($$,$2);}
     | IDENTIFIER LPAR error RPAR {;}
     | IDENTIFIER LPAR RPAR {;}
     | IDENTIFIER LPAR ZEROPLUS3 RPAR {;}
-    | IDENTIFIER                {;}
-    | NATURAL                   {;}
-    | CHRLITS                   {;}
-    | DECIMAL                   {;}
-    | LPAR Expr RPAR            {;}
+    | IDENTIFIER                {$$ = newnode(Identifier,$1);}
+    | NATURAL                   {$$ = newnode(Natural,$1);}
+    | CHRLITS                   {$$ = newnode(ChrLit,$1);}
+    | DECIMAL                   {$$ = newnode(Decimal,$1);}
+    | LPAR Expr RPAR            {$$ = $2;}
     | LPAR error RPAR           {;}
     ;
 
 ZEROPLUS3: ZEROPLUS3 COMMA Expr %prec HIGHER {;}
-         | Expr %prec LOWER {;}
+         | Expr %prec LOWER {$$ = $1;}
          ;
 
 //if: n há problemas de associatividade
