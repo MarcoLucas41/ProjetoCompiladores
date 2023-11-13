@@ -8,12 +8,17 @@
     int yyparse(void);
     bool type = false;
     bool type2 = false;
+    /*
     int line = 1;
     int column = 0;
+    */
+    extern struct node *program;
+    int lex_line = 1, lex_column = 1;
+    int syn_line = -1, syn_column = -1;
     int commentLine = 0;
     int commentColumn = 0;
     int commentState= 0;
-    #define YY_USER_ACTION column += yyleng;
+    #define YY_USER_ACTION { syn_line = lex_line; syn_column = lex_column; lex_column += yyleng; }
     #define PASS_TOKEN() yylval.lexeme = strdup(yytext); 
 %}
 
@@ -33,9 +38,9 @@ reservedWords "++"|"--"|"["|"]"|"_Bool"|"_Complex"|"_Imaginary"|"auto"|"break"|"
 
 %%
 
-"/*"                    { BEGIN(COMMENT); commentLine = line; commentColumn = column-1; commentState = 1;}
+"/*"                    { BEGIN(COMMENT); commentLine = lex_line; commentColumn = lex_column-1; commentState = 1;}
 <COMMENT>.              { ; }
-<COMMENT>(\n|\r\n)      { line+=1; column = 0; }
+<COMMENT>(\n|\r\n)      { lex_line+=1; lex_column = 1; }
 <COMMENT>"*/"           { commentState = 0; BEGIN(INITIAL);}
 
 {reservedWords}         { if(type){printf("RESERVED(%s)\n",yytext);} PASS_TOKEN();return RESERVED;}
@@ -77,7 +82,7 @@ reservedWords "++"|"--"|"["|"]"|"_Bool"|"_Complex"|"_Imaginary"|"auto"|"break"|"
 
 \/\/                    { BEGIN(COMMENT2);}
 <COMMENT2>.             { ; }
-<COMMENT2>(\n|\r\n)            { line += 1; column = 0; BEGIN(INITIAL);}
+<COMMENT2>(\n|\r\n)            { lex_line += 1; lex_column = 0; BEGIN(INITIAL);}
 \/                      { if(type){printf("DIV\n");} return DIV;}
 
 \{                      { if(type) {printf("LBRACE\n");} return LBRACE;}
@@ -95,12 +100,12 @@ reservedWords "++"|"--"|"["|"]"|"_Bool"|"_Complex"|"_Imaginary"|"auto"|"break"|"
 \;                      { if(type) {printf("SEMI\n");} return SEMI;}
 
 \'([^\n\\']|\\n|\\t|\\\\|\\\'|\\\"|\\([0-7]{1,3}))\' { if(type) {printf("CHRLIT(%s)\n",yytext);BEGIN(INITIAL);} PASS_TOKEN(); return CHRLITS;}
-\'([^\n\\']*|\\\'|\\\\|\\[^\n\\']+)+(\\)?            { column -= yyleng-1; printf("Line %d, column %d: unterminated char constant\n",line,column); column += yyleng-1;BEGIN(INITIAL);}
-\'([^\n\\']*|\\\'|\\\\|\\[^\n\'])+\'                 { column -= yyleng-1; printf("Line %d, column %d: invalid char constant (%s)\n",line,column,yytext); column += yyleng-1;BEGIN(INITIAL);}
+\'([^\n\\']*|\\\'|\\\\|\\[^\n\\']+)+(\\)?            { lex_column -= yyleng-1; printf("Line %d, column %d: unterminated char constant\n",lex_line,lex_column); lex_column += yyleng-1;BEGIN(INITIAL);}
+\'([^\n\\']*|\\\'|\\\\|\\[^\n\'])+\'                 { lex_column -= yyleng-1; printf("Line %d, column %d: invalid char constant (%s)\n",lex_line,lex_column,yytext); lex_column += yyleng-1;BEGIN(INITIAL);}
                 
 " "                     { ; }
 \t                      { ; }
-\n|\r\n|\r                      { line+=1; column = 0; }
+\n|\r\n|\r                      { lex_line+=1; lex_column = 1; }
 
 {letter}({digit}|{letter})*                     { if(type) {printf("IDENTIFIER(%s)\n",yytext);} PASS_TOKEN(); return IDENTIFIER; }
 {digit}+                                        { if(type) {printf("NATURAL(%s)\n",yytext);} PASS_TOKEN(); return NATURAL; }
@@ -117,8 +122,8 @@ reservedWords "++"|"--"|"["|"]"|"_Bool"|"_Complex"|"_Imaginary"|"auto"|"break"|"
     if(type) {printf("DECIMAL(%s)\n", yytext);
 } PASS_TOKEN();return DECIMAL;}
 
-.                       { printf("Line %d, column %d: unrecognized character (%s)\n",line,column,yytext);}
-<<EOF>>                 { column+=1; return 0; }
+.                       { printf("Line %d, column %d: unrecognized character (%s)\n",syn_line,syn_column,yytext);}
+<<EOF>>                 { syn_line = lex_line; syn_column = lex_column; return 0; }
 %%
 
 
@@ -129,7 +134,8 @@ int main(int argc, char *argv[])
         if(strcmp(argv[1],"-l") == 0) type = true;
         if(strcmp(argv[1],"-t") == 0) type2 = true;
     }
-    yyparse();    /* run the lexical analysis automaton */
+    yyparse(); 
+                       /* run the lexical analysis automaton */
     return 0;
 }
 int yywrap() {  /* called on EOF, return 1 to terminate */
@@ -137,7 +143,7 @@ int yywrap() {  /* called on EOF, return 1 to terminate */
     {
         printf("Line %d, column %d: unterminated comment\n",commentLine,commentColumn);
     }
-    if (type2 && (program != NULL)) show(program,0);
-    if (program != NULL) cleanup(program);
+
+    if (program != NULL) show(program,0); cleanup(program);
     return 1;
 }
