@@ -13,6 +13,7 @@
     int column = 0;
     */
     extern struct node *program;
+    extern int error_flag;
     int lex_line = 1, lex_column = 1;
     int syn_line = -1, syn_column = -1;
     int commentLine = 0;
@@ -143,7 +144,11 @@ int yywrap() {  /* called on EOF, return 1 to terminate */
     {
         printf("Line %d, column %d: unterminated comment\n",commentLine,commentColumn);
     }
-
-    if (program != NULL) show(program,0); cleanup(program);
+    if(error_flag == 1 && program != NULL)
+    {
+        show(program,0); 
+        cleanup(program);
+    }
+        
     return 1;
 }

@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 struct node *program;
+struct node_list *error_list;
 extern int yylex(void);
 void yyerror(char *);
 extern char *yytext;
@@ -13,7 +14,7 @@ extern int syn_column;
 extern bool type2;
 
 int error_flag = 1;
-//int yydebug=1;
+int yydebug=1;
 
 %}
 
@@ -38,8 +39,6 @@ int error_flag = 1;
 %token<lexeme> CHRLITS IDENTIFIER NATURAL DECIMAL RESERVED
 %type<root_list> FunctionDeclarator Declarator DeclarationsAndStatements ZEROPLUS1 ZEROPLUS3
 %type<root> FunctionsAndDeclarations FunctionDefinition FunctionBody FunctionDeclaration ParameterList ParameterDeclaration Declaration TypeSpec Statement Expr ZEROPLUS2 OPTIONAL4 ErrorRule 
-
-
 
 
 %union{ 
@@ -104,7 +103,10 @@ TypeSpec: CHAR                          {$$ = newnode(Char,NULL);}
         | DOUBLE                        {$$ = newnode(Double,NULL);}
         ;
 
-Declarator: IDENTIFIER ASSIGN Expr {$$ = newlist(); addbrother($$,newnode(Identifier,$1)); addbrother($$,$3);}
+Declarator: IDENTIFIER ASSIGN Expr {$$ = newlist(); 
+                                    struct node *temp = newnode(Identifier,$1);
+                                    addbrother($$,temp); 
+                                    addbrother($$,$3); }
           | IDENTIFIER {$$ = newlist(); addbrother($$,newnode(Identifier,$1));}
           ;
 
@@ -175,10 +177,14 @@ ZEROPLUS3: ZEROPLUS3 COMMA Expr %prec HIGHER {$$ = $1; addbrother($$,$3);}
 %%
 void yyerror(char *error) 
 {
-    
     printf("Line %d, column %d: %s: %s\n",syn_line,syn_column,error,yytext);
     error_flag = 0;
-    if(program != NULL) cleanup(program);
+    //if(program != NULL) cleanup(program);
+
+                    //PROGRAM
+                    //DECLARATION DECLARATION
+                    //INT ++
+
     //show(program,0);
    
 }

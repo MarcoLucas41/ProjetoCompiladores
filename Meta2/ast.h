@@ -9,8 +9,10 @@ struct node {
     struct node_list *children;
 };
 
-struct node_list {
+struct node_list 
+{
     struct node *node;
+    int counter;
     struct node_list *next;
 };
 

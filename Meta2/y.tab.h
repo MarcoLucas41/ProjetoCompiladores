@@ -132,13 +132,14 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 38 "uccompiler.y"
+#line 46 "uccompiler.y"
 { 
     char *lexeme;
-    struct node *node;
+    struct node *root;
+    struct node_list *root_list;
 }
 /* Line 1529 of yacc.c.  */
-#line 142 "y.tab.h"
+#line 143 "y.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
