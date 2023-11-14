@@ -4,7 +4,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 struct node *program;
-struct node_list *error_list;
+struct node *helper;
+struct node_list *error_list; 
 extern int yylex(void);
 void yyerror(char *);
 extern char *yytext;
@@ -14,7 +15,7 @@ extern int syn_column;
 extern bool type2;
 
 int error_flag = 1;
-int yydebug=1;
+//int yydebug=1;
 
 %}
 
@@ -37,8 +38,8 @@ int yydebug=1;
 
 %token CHAR INT SHORT DOUBLE RETURN VOID SEMI LBRACE LPAR RBRACE RPAR WHILE IF COMMA ASSIGN ELSE BITWISEOR BITWISEXOR BITWISEAND AND OR EQ NE LT LE GT GE PLUS MINUS MUL DIV MOD NOT
 %token<lexeme> CHRLITS IDENTIFIER NATURAL DECIMAL RESERVED
-%type<root_list> FunctionDeclarator Declarator DeclarationsAndStatements ZEROPLUS1 ZEROPLUS3
-%type<root> FunctionsAndDeclarations FunctionDefinition FunctionBody FunctionDeclaration ParameterList ParameterDeclaration Declaration TypeSpec Statement Expr ZEROPLUS2 OPTIONAL4 ErrorRule 
+%type<root_list> FunctionDeclarator Declarator DeclarationsAndStatements ZEROPLUS1 ZEROPLUS3 Declaration
+%type<root> FunctionsAndDeclarations FunctionDefinition FunctionBody FunctionDeclaration ParameterList ParameterDeclaration TypeSpec Statement Expr ZEROPLUS2 OPTIONAL4 ErrorRule 
 
 
 %union{ 
@@ -52,10 +53,10 @@ int yydebug=1;
 %%
 FunctionsAndDeclarations: FunctionsAndDeclarations FunctionDefinition {$$ = $1; addchild($$,$2);}
                         | FunctionsAndDeclarations FunctionDeclaration {$$ = $1; addchild($$,$2);}
-                        | FunctionsAndDeclarations Declaration {$$ = $1; addchild($$,$2);}
+                        | FunctionsAndDeclarations Declaration {$$ = $1; addchildren($$,$2);}
                         | FunctionDefinition {$$ = program = newnode(Program,NULL); addchild($$,$1);}
                         | FunctionDeclaration {$$ = program = newnode(Program,NULL); addchild($$,$1);}
-                        | Declaration {$$ = program = newnode(Program,NULL); addchild($$,$1);}                        
+                        | Declaration {$$ = program = newnode(Program,NULL); addchildren($$,$1);}                        
                         ;       
 FunctionDefinition: TypeSpec FunctionDeclarator FunctionBody {$$ = newnode(FuncDefinition,NULL); addchild($$,$1); addchildren($$,$2); addchild($$,$3);}
 
@@ -66,9 +67,9 @@ FunctionBody: LBRACE RBRACE {$$ = newnode(FuncBody,NULL); addchild($$,newnode(Nu
 
 
 DeclarationsAndStatements: Statement DeclarationsAndStatements {$$ = newlist(); addbrother($$,$1); addnephews($$,$2);}
-                         | Declaration DeclarationsAndStatements {$$ = newlist(); addbrother($$,$1); addnephews($$,$2);}
+                         | Declaration DeclarationsAndStatements {$$ = $1; addnephews($$,$2);}
                          | Statement {$$ = newlist(); addbrother($$,$1);}
-                         | Declaration {$$ = newlist(); addbrother($$,$1);}
+                         | Declaration {$$ = $1;}
                          ;
 
 FunctionDeclaration: TypeSpec FunctionDeclarator SEMI {$$ = newnode(FuncDeclaration,NULL); addchild($$,$1); addchildren($$,$2);}  
@@ -87,12 +88,12 @@ ParameterDeclaration: TypeSpec IDENTIFIER {$$ = newnode(ParamDeclaration,NULL); 
                     ;
 
 
-Declaration: TypeSpec Declarator ZEROPLUS1 SEMI {$$ = newnode(Declaration,NULL); addchild($$,$1); addchildren($$,$2); addchildren($$,$3);}
+Declaration: TypeSpec Declarator ZEROPLUS1 SEMI {$$ = newlist(); struct node *temp = newnode(Declaration,NULL); addchild(temp,$1); addchildren(temp,$2); addbrother($$,temp); addnephews($$,$3); }
            | ErrorRule {;}
            ;
 
 
-ZEROPLUS1: ZEROPLUS1 COMMA Declarator {$$ = $1; addnephews($$,$3);}
+ZEROPLUS1: ZEROPLUS1 COMMA Declarator {$$ = $1; struct node *temp = newnode(Declaration,NULL); addchildren(temp,$3); addbrother($$,temp);}
          | {$$ = newlist(); addbrother($$,newnode(Null,NULL));}
          ;
 
@@ -103,10 +104,7 @@ TypeSpec: CHAR                          {$$ = newnode(Char,NULL);}
         | DOUBLE                        {$$ = newnode(Double,NULL);}
         ;
 
-Declarator: IDENTIFIER ASSIGN Expr {$$ = newlist(); 
-                                    struct node *temp = newnode(Identifier,$1);
-                                    addbrother($$,temp); 
-                                    addbrother($$,$3); }
+Declarator: IDENTIFIER ASSIGN Expr {$$ = newlist(); struct node *temp = newnode(Identifier,$1);addbrother($$,temp); addbrother($$,$3); }
           | IDENTIFIER {$$ = newlist(); addbrother($$,newnode(Identifier,$1));}
           ;
 
@@ -178,6 +176,7 @@ ZEROPLUS3: ZEROPLUS3 COMMA Expr %prec HIGHER {$$ = $1; addbrother($$,$3);}
 void yyerror(char *error) 
 {
     printf("Line %d, column %d: %s: %s\n",syn_line,syn_column,error,yytext);
+    
     error_flag = 0;
     //if(program != NULL) cleanup(program);
 

@@ -20,7 +20,7 @@ struct node *newnode(enum category category, char *token) {
     new->children = malloc(sizeof(struct node_list));
     new->children->node = NULL;
     new->children->next = NULL;
-    printf("New node created! %s\n",getCategoryName(category));
+    //printf("New node created! %s\n",getCategoryName(category));
     return new;
 }
 
@@ -40,7 +40,7 @@ void addbrother(struct node_list *root_list, struct node *child)
     struct node_list *temp = root_list;
     while(temp->next != NULL)
         temp = temp->next;
-    printf("Adding child %s to list!\n",getCategoryName(child->category));
+    //printf("Adding child %s to list!\n",getCategoryName(child->category));
     temp->next = new;
 }
 
@@ -100,7 +100,7 @@ void addchild(struct node *parent, struct node *child)
     while(children->next != NULL)
         children = children->next;
     children->next = new;
-    printf("Adding child %s to parent %s!\n",getCategoryName(child->category),getCategoryName(parent->category));
+    //printf("Adding child %s to parent %s!\n",getCategoryName(child->category),getCategoryName(parent->category));
 }
 
 
@@ -148,6 +148,6 @@ void cleanup(struct node *node)
         temp = temp->next;
     }
     free(node->children);
-    printf("Freeing node %s\n",getCategoryName(node->category));
+    //printf("Freeing node %s\n",getCategoryName(node->category));
     free(node);
 }
