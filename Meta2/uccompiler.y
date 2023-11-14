@@ -38,8 +38,8 @@ int error_flag = 1;
 
 %token CHAR INT SHORT DOUBLE RETURN VOID SEMI LBRACE LPAR RBRACE RPAR WHILE IF COMMA ASSIGN ELSE BITWISEOR BITWISEXOR BITWISEAND AND OR EQ NE LT LE GT GE PLUS MINUS MUL DIV MOD NOT
 %token<lexeme> CHRLITS IDENTIFIER NATURAL DECIMAL RESERVED
-%type<root_list> FunctionDeclarator Declarator DeclarationsAndStatements ZEROPLUS1 ZEROPLUS3 Declaration
-%type<root> FunctionsAndDeclarations FunctionDefinition FunctionBody FunctionDeclaration ParameterList ParameterDeclaration TypeSpec Statement Expr ZEROPLUS2 OPTIONAL4 ErrorRule 
+%type<root_list> FunctionDeclarator Declarator DeclarationsAndStatements ZEROPLUS1 ZEROPLUS2 ZEROPLUS3 Declaration Statement
+%type<root> FunctionsAndDeclarations FunctionDefinition FunctionBody FunctionDeclaration ParameterList ParameterDeclaration TypeSpec Expr OPTIONAL4 ErrorRule 
 
 
 %union{ 
@@ -66,9 +66,9 @@ FunctionBody: LBRACE RBRACE {$$ = newnode(FuncBody,NULL); addchild($$,newnode(Nu
 
 
 
-DeclarationsAndStatements: Statement DeclarationsAndStatements {$$ = newlist(); addbrother($$,$1); addnephews($$,$2);}
+DeclarationsAndStatements: Statement DeclarationsAndStatements {$$ = $1; addnephews($$,$2);}
                          | Declaration DeclarationsAndStatements {$$ = $1; addnephews($$,$2);}
-                         | Statement {$$ = newlist(); addbrother($$,$1);}
+                         | Statement {$$ = $1;}
                          | Declaration {$$ = $1;}
                          ;
 
@@ -94,7 +94,7 @@ Declaration: TypeSpec Declarator ZEROPLUS1 SEMI {$$ = newlist(); struct node *te
 
 
 ZEROPLUS1: ZEROPLUS1 COMMA Declarator {$$ = $1; struct node *temp = newnode(Declaration,NULL); addchildren(temp,$3); addbrother($$,temp);}
-         | {$$ = newlist(); addbrother($$,newnode(Null,NULL));}
+         | {$$ = newlist();}
          ;
 
 TypeSpec: CHAR                          {$$ = newnode(Char,NULL);} 
@@ -108,25 +108,38 @@ Declarator: IDENTIFIER ASSIGN Expr {$$ = newlist(); struct node *temp = newnode(
           | IDENTIFIER {$$ = newlist(); addbrother($$,newnode(Identifier,$1));}
           ;
 
-Statement: OPTIONAL4 SEMI {$$ = $1;}
-         | LBRACE ZEROPLUS2 RBRACE {;}
+Statement: OPTIONAL4 SEMI {$$ = newlist(); addbrother($$,$1);}
+         | LBRACE ZEROPLUS2 RBRACE { $$ = newlist(); 
+                                     struct node_list *temp = newlist(); addnephews(temp,$2);
+                                
+                                    if(temp->counter >= 2)
+                                    {
+                                        struct node *statlist = newnode(StatList,NULL);
+                                        addchildren(statlist,$2);
+                                        addbrother($$,statlist);
+                                    }
+                                    else
+                                    {
+                                        addnephews($$,$2);
+                                    }
+                                    }
          | LBRACE ErrorRule RBRACE {;}
-         | IF LPAR Expr RPAR Statement ELSE Statement %prec LOW {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5); addchild($$,$7);}
-         | IF LPAR Expr RPAR Statement %prec LOW {$$ = newnode(If,NULL); addchild($$,$3); addchild($$,$5); }
-         | WHILE LPAR Expr RPAR Statement {$$ = newnode(While,NULL); addchild($$,$3); addchild($$,$5);}
-         | RETURN Expr SEMI {$$ = newnode(Return,NULL); addchild($$,$2);}
-         | RETURN SEMI {$$ = newnode(Return,NULL); addchild($$,newnode(Null,NULL));}
+         | IF LPAR Expr RPAR Statement ELSE Statement %prec LOW {$$ = newlist(); struct node *temp = newnode(If,NULL); addchild(temp,$3); addchildren(temp,$5); addchildren(temp,$7); addbrother($$,temp);}
+         | IF LPAR Expr RPAR Statement %prec LOW {$$ = newlist(); struct node *temp = newnode(If,NULL); addchild(temp,$3); addchildren(temp,$5); addbrother($$,temp);}
+         | WHILE LPAR Expr RPAR Statement {$$ = newlist(); struct node *temp = newnode(While,NULL); addchild(temp,$3); addchildren(temp,$5); addbrother($$,temp);}
+         | RETURN Expr SEMI {$$ = newlist(); struct node *temp = newnode(Return,NULL); addchild(temp,$2); addbrother($$,temp);}
+         | RETURN SEMI {$$ = newlist(); struct node *temp = newnode(Return,NULL); addchild(temp,newnode(Null,NULL)); addbrother($$,temp);}
          ;
 
 ErrorRule: error SEMI {;}
 
 OPTIONAL4: Expr {$$ = $1;}
-         | {$$ = newnode(Null,NULL);}
+         | {;}
          ;
 
 
-ZEROPLUS2: ZEROPLUS2 Statement {$$ = newnode(StatList,NULL); addchild($$,$1); addchild($$,$2);}
-         | {$$ = newnode(Null,NULL);}
+ZEROPLUS2: ZEROPLUS2 Statement {$$ = $1; addnephews($$,$2);}
+         | {$$ = newlist();}
          ;
 
 
