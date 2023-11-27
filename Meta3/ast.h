@@ -3,9 +3,16 @@
 enum category { Program,Declaration,FuncDeclaration,FuncDefinition,ParamList,FuncBody,ParamDeclaration,StatList,Or,And,Eq,Ne,Lt,Gt,
                 Le,Ge,Add,Sub,Mul,Div,Mod,Not,Minus,Plus,Store,Comma,Call,BitWiseAnd,BitWiseXor,BitWiseOr,Char,ChrLit,Identifier,Int,
                 Short,Natural,Double,Decimal,Void,Null,If,Else,While,Return,Unknown,Error};
+
+enum type {integer_type, double_type, no_type};
+#define type_name(type) (type == integer_type ? "integer" : (type == double_type ? "double" : "none"))
+#define category_type(category) (category == Integer ? integer_type : (category == Double ? double_type : no_type))
+
 struct node {
     enum category category;
     char *token;
+    int token_line, token_column;
+    enum type type;
     struct node_list *children;
 };
 
