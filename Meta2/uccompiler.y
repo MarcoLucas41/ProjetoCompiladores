@@ -2,10 +2,9 @@
 %{
 #include "ast.h"
 #include <stdio.h>
+#include <string.h>
 #include <stdbool.h>
-struct node *program;
-struct node *helper;
-struct node_list *error_list; 
+struct node *program = NULL;
 extern int yylex(void);
 void yyerror(char *);
 extern char *yytext;
@@ -14,7 +13,7 @@ extern int syn_line;
 extern int syn_column;
 extern bool type2;
 
-int error_flag = 1;
+extern int error_flag;
 //int yydebug=1;
 
 %}
@@ -23,10 +22,13 @@ int error_flag = 1;
 %left COMMA
 %right ASSIGN
 %right ELSE
+
+%left OR
+%left AND
 %left BITWISEOR 
 %left BITWISEXOR 
 %left BITWISEAND
-%left AND OR
+
 %left EQ NE LT LE GT GE
 %left PLUS MINUS
 %left MUL DIV MOD
@@ -38,8 +40,8 @@ int error_flag = 1;
 
 %token CHAR INT SHORT DOUBLE RETURN VOID SEMI LBRACE LPAR RBRACE RPAR WHILE IF COMMA ASSIGN ELSE BITWISEOR BITWISEXOR BITWISEAND AND OR EQ NE LT LE GT GE PLUS MINUS MUL DIV MOD NOT
 %token<lexeme> CHRLITS IDENTIFIER NATURAL DECIMAL RESERVED
-%type<root_list> FunctionDeclarator Declarator DeclarationsAndStatements ZEROPLUS1 ZEROPLUS2 ZEROPLUS3 Declaration Statement
-%type<root> FunctionsAndDeclarations FunctionDefinition FunctionBody FunctionDeclaration ParameterList ParameterDeclaration TypeSpec Expr OPTIONAL4 ErrorRule 
+%type<root_list> FunctionDeclarator Declarator DeclarationsAndStatements ZEROPLUS1 ZEROPLUS2 ZEROPLUS3 Declaration
+%type<root> FunctionsAndDeclarations FunctionDefinition FunctionBody FunctionDeclaration ParameterList ParameterDeclaration TypeSpec Statement Expr OPTIONAL4 ErrorRule 
 
 
 %union{ 
@@ -60,15 +62,15 @@ FunctionsAndDeclarations: FunctionsAndDeclarations FunctionDefinition {$$ = $1; 
                         ;       
 FunctionDefinition: TypeSpec FunctionDeclarator FunctionBody {$$ = newnode(FuncDefinition,NULL); addchild($$,$1); addchildren($$,$2); addchild($$,$3);}
 
-FunctionBody: LBRACE RBRACE {$$ = newnode(FuncBody,NULL); addchild($$,newnode(Null,NULL));}
+FunctionBody: LBRACE RBRACE {$$ = newnode(FuncBody,NULL); addchild($$,newnode(Unknown,NULL));}
             | LBRACE DeclarationsAndStatements RBRACE {$$ = newnode(FuncBody,NULL); addchildren($$,$2);}
             ;
 
 
 
-DeclarationsAndStatements: Statement DeclarationsAndStatements {$$ = $1; addnephews($$,$2);}
+DeclarationsAndStatements: Statement DeclarationsAndStatements {$$ = newlist(); addbrother($$,$1); addnephews($$,$2);}
                          | Declaration DeclarationsAndStatements {$$ = $1; addnephews($$,$2);}
-                         | Statement {$$ = $1;}
+                         | Statement {$$ = newlist(); addbrother($$,$1);}
                          | Declaration {$$ = $1;}
                          ;
 
@@ -88,13 +90,19 @@ ParameterDeclaration: TypeSpec IDENTIFIER {$$ = newnode(ParamDeclaration,NULL); 
                     ;
 
 
-Declaration: TypeSpec Declarator ZEROPLUS1 SEMI {$$ = newlist(); struct node *temp = newnode(Declaration,NULL); addchild(temp,$1); addchildren(temp,$2); addbrother($$,temp); addnephews($$,$3); }
-           | ErrorRule {;}
+Declaration: TypeSpec Declarator ZEROPLUS1 SEMI {$$ = newlist(); struct node *temp = newnode(Declaration,NULL); addchild(temp,$1); addchildren(temp,$2); addbrother($$,temp); 
+
+                                                if(count_children_in_list($3) > 0)
+                                                {
+                                                    insertType($3,$1);
+                                                    addnephews($$,$3);
+                                                }}
+           | error SEMI {$$ = newlist(); addbrother($$,newnode(Error,NULL));}
            ;
 
 
-ZEROPLUS1: ZEROPLUS1 COMMA Declarator {$$ = $1; struct node *temp = newnode(Declaration,NULL); addchildren(temp,$3); addbrother($$,temp);}
-         | {$$ = newlist();}
+ZEROPLUS1: ZEROPLUS1 COMMA Declarator {$$ = $1; struct node *temp = newnode(Declaration,NULL); addchild(temp,newnode(Unknown,NULL)); addchildren(temp,$3); addbrother($$,temp);}
+         | {$$ = newlist(); }
          ;
 
 TypeSpec: CHAR                          {$$ = newnode(Char,NULL);} 
@@ -108,38 +116,51 @@ Declarator: IDENTIFIER ASSIGN Expr {$$ = newlist(); struct node *temp = newnode(
           | IDENTIFIER {$$ = newlist(); addbrother($$,newnode(Identifier,$1));}
           ;
 
-Statement: OPTIONAL4 SEMI {$$ = newlist(); addbrother($$,$1);}
-         | LBRACE ZEROPLUS2 RBRACE { $$ = newlist(); 
-                                     struct node_list *temp = newlist(); addnephews(temp,$2);
-                                
-                                    if(temp->counter >= 2)
-                                    {
-                                        struct node *statlist = newnode(StatList,NULL);
-                                        addchildren(statlist,$2);
-                                        addbrother($$,statlist);
+Statement: OPTIONAL4 SEMI {$$ = $1;}
+         | LBRACE ZEROPLUS2 RBRACE { if(count_children_in_list($2) == 0)
+                                     {
+                                        //printf("1\n");
+                                        $$ = newnode(Unknown,NULL);
+                                        cleanlist($2);
+                                        //addchildren($$,$2); 
+                                     }
+                                     if(count_children_in_list($2) == 1)
+                                     {
+                                        //printf("2\n");
+                                        $$ = search_for_known_node($2);
+                                     } 
+                                    if(count_children_in_list($2) >= 2)
+                                     {
+                                        $$ = newnode(StatList,NULL);
+                                        addchildren($$,$2);   
+                                     }
                                     }
-                                    else
-                                    {
-                                        addnephews($$,$2);
-                                    }
-                                    }
-         | LBRACE ErrorRule RBRACE {;}
-         | IF LPAR Expr RPAR Statement ELSE Statement %prec LOW {$$ = newlist(); struct node *temp = newnode(If,NULL); addchild(temp,$3); addchildren(temp,$5); addchildren(temp,$7); addbrother($$,temp);}
-         | IF LPAR Expr RPAR Statement %prec LOW {$$ = newlist(); struct node *temp = newnode(If,NULL); addchild(temp,$3); addchildren(temp,$5); addbrother($$,temp);}
-         | WHILE LPAR Expr RPAR Statement {$$ = newlist(); struct node *temp = newnode(While,NULL); addchild(temp,$3); addchildren(temp,$5); addbrother($$,temp);}
-         | RETURN Expr SEMI {$$ = newlist(); struct node *temp = newnode(Return,NULL); addchild(temp,$2); addbrother($$,temp);}
-         | RETURN SEMI {$$ = newlist(); struct node *temp = newnode(Return,NULL); addchild(temp,newnode(Null,NULL)); addbrother($$,temp);}
+         | IF LPAR Expr RPAR ErrorRule ELSE ErrorRule %prec LOW {$$ = newnode(If,NULL); enum category cat = Null; addchild($$,$3);
+                                                                 if(strcmp(getCategoryName($5->category),"Unknown") == 0){$5->category = cat;}
+                                                                 if(strcmp(getCategoryName($7->category),"Unknown") == 0){$7->category = cat;}
+                                                                 addchild($$,$5);addchild($$,$7); }
+                                                               
+         | IF LPAR Expr RPAR ErrorRule %prec LOW {$$ = newnode(If,NULL); enum category cat = Null; addchild($$,$3); if(strcmp(getCategoryName($5->category),"Unknown") == 0){$5->category = cat;}
+                                                    addchild($$,$5); addchild($$,newnode(Null,NULL));
+                                                } 
+         | WHILE LPAR Expr RPAR ErrorRule {$$ = newnode(While,NULL); enum category cat = Null; addchild($$,$3); if(strcmp(getCategoryName($5->category),"Unknown") == 0){$5->category = cat;}
+                                                    addchild($$,$5);}
+            
+         | RETURN Expr SEMI {$$ = newnode(Return,NULL); addchild($$,$2);}
+         | RETURN SEMI {$$ = newnode(Return,NULL); addchild($$,newnode(Null,NULL));}
          ;
 
-ErrorRule: error SEMI {;}
-
+ErrorRule: error {$$ = newnode(Error,NULL);}
+         | Statement {$$ = $1;}
+         ;
 OPTIONAL4: Expr {$$ = $1;}
-         | {;}
+         | {$$ = newnode(Unknown,NULL);}
          ;
 
 
-ZEROPLUS2: ZEROPLUS2 Statement {$$ = $1; addnephews($$,$2);}
-         | {$$ = newlist();}
+ZEROPLUS2: ZEROPLUS2 ErrorRule { $$ = $1; addbrother($$,$2);}
+         | {$$ = newlist(); //addbrother($$,newnode(Unknown,NULL));
+            }
          ;
 
 
@@ -164,15 +185,15 @@ Expr: Expr ASSIGN Expr          {$$ = newnode(Store, NULL); addchild($$, $1); ad
     | PLUS Expr    %prec NOT    {$$ = newnode(Plus,NULL); addchild($$,$2);}
     | MINUS Expr   %prec NOT    {$$ = newnode(Minus,NULL); addchild($$,$2);}
     | NOT Expr                  {$$ = newnode(Not,NULL); addchild($$,$2);}
-    | IDENTIFIER LPAR error RPAR {;}
-    | IDENTIFIER LPAR RPAR {;}
-    | IDENTIFIER LPAR ZEROPLUS3 RPAR {$$ = newnode(Call,NULL); addchild($$,newnode(Identifier,$1)); addchildren($$,$3);}
+    | IDENTIFIER LPAR error RPAR {$$ = newnode(Call,NULL); addchild($$,newnode(Identifier,$1)); addchild($$,newnode(Error,NULL));}
+    | IDENTIFIER LPAR RPAR       {$$ = newnode(Call,NULL); addchild($$,newnode(Identifier,$1));}
+    | IDENTIFIER LPAR ZEROPLUS3 RPAR {$$ = newnode(Call,NULL); addchild($$,newnode(Identifier,$1));addchildren($$,$3);}
     | IDENTIFIER                {$$ = newnode(Identifier,$1);}
     | NATURAL                   {$$ = newnode(Natural,$1);}
     | CHRLITS                   {$$ = newnode(ChrLit,$1);}
     | DECIMAL                   {$$ = newnode(Decimal,$1);}
     | LPAR Expr RPAR            {$$ = $2;}
-    | LPAR error RPAR           {;}
+    | LPAR error RPAR           {$$ = newnode(Error,NULL);}
     ;
 
 ZEROPLUS3: ZEROPLUS3 COMMA Expr %prec HIGHER {$$ = $1; addbrother($$,$3);}
@@ -183,6 +204,8 @@ ZEROPLUS3: ZEROPLUS3 COMMA Expr %prec HIGHER {$$ = $1; addbrother($$,$3);}
 //if: n há problemas de associatividade
 //else: é necessário associar a um IF
 
+
+
 //NULL: #include <stdio.h>
 
 %%
@@ -190,7 +213,7 @@ void yyerror(char *error)
 {
     printf("Line %d, column %d: %s: %s\n",syn_line,syn_column,error,yytext);
     
-    error_flag = 0;
+    error_flag = 1;
     //if(program != NULL) cleanup(program);
 
                     //PROGRAM
