@@ -6,6 +6,7 @@
 %{
     #include "y.tab.h"
     #include "ast.h"
+    #include "semantics.h"
     #include <stdio.h>
     #include <stdbool.h>
     #include <stdlib.h>
@@ -155,17 +156,15 @@ int main(int argc, char *argv[])
                 type2 = true;
                 yyparse(); 
             }
-            break; 
+            if(strcmp(argv[1],"-s") == 0)
+            {
+                type = false;
+                type2 = true;
+                error_flag = 1;
+                yyparse();
+            }
     }
-    /*
-    for (int i = 0; i < argc; i++)
-    {
-        if(strcmp(argv[i],"-l") == 0) type = true; yylex();}
-        if(strcmp(argv[i],"-t") == 0) type2 = true; 
-        run the lexical analysis automaton 
-    }
-    
-    */                 
+                 
     return 0;
 }
 int yywrap() {  /* called on EOF, return 1 to terminate */
@@ -177,6 +176,10 @@ int yywrap() {  /* called on EOF, return 1 to terminate */
     {
         show(program,0);
     }
+    int errors = check_program(program);
+    //printf("ERRORS: %d\n",errors);
+
+    if(errors >= 0) show_symbol_tables();
     if(program != NULL) cleanup(program); //show_stats(); 
     return 1;
 }
