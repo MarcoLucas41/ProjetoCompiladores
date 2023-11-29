@@ -4,14 +4,13 @@ enum category { Program,Declaration,FuncDeclaration,FuncDefinition,ParamList,Fun
                 Le,Ge,Add,Sub,Mul,Div,Mod,Not,Minus,Plus,Store,Comma,Call,BitWiseAnd,BitWiseXor,BitWiseOr,Char,ChrLit,Identifier,Int,
                 Short,Natural,Double,Decimal,Void,Null,If,Else,While,Return,Unknown,Error};
 
-enum type {integer_type, double_type, no_type};
-#define type_name(type) (type == integer_type ? "integer" : (type == double_type ? "double" : "none"))
-#define category_type(category) (category == Int ? integer_type : (category == Double ? double_type : no_type))
+enum type {integer_type, double_type, short_type, char_type, no_type};
+#define type_name(type) (type == integer_type ? "int" : (type == double_type ? "double" : (type == short_type ? "short" :(type == char_type ? "char" : "void"))))
+#define category_type(category) (category == Int ? integer_type : (category == Double ? double_type : (category == Short ? short_type : (category == Char ? char_type : no_type))))
 
 struct node {
     enum category category;
-    struct token *token;
-    int token_line, token_column;
+    char *token;
     enum type type;
     struct node_list *children;
 };
@@ -19,9 +18,9 @@ struct node {
 struct node_list 
 {
     struct node *node;
-    int counter;
     struct node_list *next;
 };
+
 void show_stats();
 struct node *newnode(enum category category, char *token);
 struct node_list *newlist();
