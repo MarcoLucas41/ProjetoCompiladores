@@ -21,13 +21,13 @@ void check_declaration(struct node *declaration)
 
     //id of declaration is obtained through second son(<identifier> node)
     struct node *id = getchild(declaration,1);
-    if(search_symbol(global, id->token) == NULL) 
+    if(search_symbol(global, id->token->token) == NULL) 
     {
-        insert_symbol(global, id->token, type, declaration);
+        insert_symbol(global, id->token->token, type, declaration);
     } 
     else 
     {
-        printf("Identifier %s already declared\n", id->token);
+        printf("Line %d, column %d: Symbol %s already defined\n", id->token->line,id->token->column,id->token->token);
         semantic_errors++;
     }
 }
@@ -45,13 +45,13 @@ void check_parameters(struct node *param_list,struct table *scope)
         identifier = getchild(parameter->node,1);
         if(identifier != NULL)
         {
-            if(search_symbol(scope,identifier->token) == NULL)
+            if(search_symbol(scope,identifier->token->token) == NULL)
             {
-                insert_symbol(scope,identifier->token,type_parameter,parameter->node);
+                insert_symbol(scope,identifier->token->token,type_parameter,parameter->node);
             }
             else
             {
-                printf("Identifier %s already declared\n", identifier->token);
+                printf("Line %d, column %d: Symbol %s already defined\n", identifier->token->line,identifier->token->column,identifier->token->token);
                 semantic_errors++;
             }
         }
@@ -66,26 +66,27 @@ void check_function(struct node *function)
 
     //id of function is obtained through second son(<Identifier> node)
     struct node *id = getchild(function,1);
-    if(search_symbol(global, id->token) == NULL) 
+    if(search_symbol(global, id->token->token) == NULL) 
     {
-        insert_symbol(global, id->token, type_function, function);
+        insert_symbol(global, id->token->token, type_function, function);
+        struct table *scope = (struct table *) malloc(sizeof(struct table));
+        scope->next = NULL;
+
+        insert_symbol(scope, "return", type_function, newnode(Return,NULL)); 
+
+        //list of parameters is obtained through third son(<ParamList> node)
+        check_parameters(getchild(function,2),scope);
+
+        //insert table in table list
+        insert_table(list_tables,scope,id->token->token);
     } 
     else 
     {
-        printf("Identifier %s already declared\n", id->token);
+        printf("Line %d, column %d: Symbol %s already defined\n", id->token->line,id->token->column,id->token->token);
         semantic_errors++;
     }
 
-    struct table *scope = (struct table *) malloc(sizeof(struct table));
-    scope->next = NULL;
-
-    insert_symbol(scope, "return", type_function, newnode(Return,NULL)); 
-
-    //list of parameters is obtained through third son(<ParamList> node)
-    check_parameters(getchild(function,2),scope);
-
-    //insert table in table list
-    insert_table(list_tables,scope,id->token);
+    
 }
 
 
@@ -101,8 +102,8 @@ int check_program(struct node *program)
     struct node_list *child = program->children;
     while((child = child->next) != NULL)
     {
-        if(strcmp(getCategoryName(child->node->category),"FuncDefinition") == 0) check_function(child->node);
-        if(strcmp(getCategoryName(child->node->category),"Declaration") == 0) check_declaration(child->node);
+        if( strcmp(getCategoryName(child->node->category),"Declaration") == 0 ) check_declaration(child->node);
+        if( strcmp(getCategoryName(child->node->category),"FuncDefinition") == 0 || strcmp(getCategoryName(child->node->category),"FuncDeclaration") == 0) check_function(child->node);
     }
     return semantic_errors;
 }

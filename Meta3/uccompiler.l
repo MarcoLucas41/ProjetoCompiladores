@@ -1,6 +1,6 @@
-/*---Authors---*/
-/*Marco Lucas 2021219146*/
-/*Rui Coelho  2021235407*/
+/*  --------Authors---------*/
+/*  Marco Lucas 2021219146  */
+/*  Rui Coelho  2021235407  */
 
 
 %{
@@ -22,7 +22,7 @@
     int commentColumn = 0;
     int commentState= 0;
     #define YY_USER_ACTION { syn_line = lex_line; syn_column = lex_column; lex_column += yyleng; }
-    #define PASS_TOKEN() yylval.lexeme = strdup(yytext); 
+    #define PASS_TOKEN() yylval.token = create_token(strdup(yytext),syn_line,syn_column);   
 %}
 
 

@@ -38,16 +38,16 @@ extern int error_flag;
 %nonassoc LOWER
 %nonassoc HIGHER
 
-%token CHAR INT SHORT DOUBLE RETURN VOID SEMI LBRACE LPAR RBRACE RPAR WHILE IF COMMA ASSIGN ELSE BITWISEOR BITWISEXOR BITWISEAND AND OR EQ NE LT LE GT GE PLUS MINUS MUL DIV MOD NOT
-%token<lexeme> CHRLITS IDENTIFIER NATURAL DECIMAL RESERVED
-%type<root_list> FunctionDeclarator Declarator DeclarationsAndStatements ZEROPLUS1 ZEROPLUS2 ZEROPLUS3 Declaration
-%type<root> FunctionsAndDeclarations FunctionDefinition FunctionBody FunctionDeclaration ParameterList ParameterDeclaration TypeSpec Statement Expr OPTIONAL ErrorRule 
+%token CHAR INT SHORT DOUBLE RETURN VOID SEMI LBRACE LPAR RBRACE RPAR WHILE IF COMMA ASSIGN ELSE BITWISEOR BITWISEXOR BITWISEAND AND OR EQ NE LT LE GT GE PLUS MINUS MUL DIV MOD NOT RESERVED
+%token<token> CHRLITS IDENTIFIER NATURAL DECIMAL 
+%type<node_list> FunctionDeclarator Declarator DeclarationsAndStatements ZEROPLUS1 ZEROPLUS2 ZEROPLUS3 Declaration
+%type<node> FunctionsAndDeclarations FunctionDefinition FunctionBody FunctionDeclaration ParameterList ParameterDeclaration TypeSpec Statement Expr OPTIONAL ErrorRule 
 
 
 %union{ 
-    char *lexeme;
-    struct node *root;
-    struct node_list *root_list;
+    struct token *token;
+    struct node *node;
+    struct node_list *node_list;
 }
 
 /* START grammar rules section -- BNF grammar */
@@ -116,7 +116,7 @@ Declarator: IDENTIFIER ASSIGN Expr {$$ = newlist(); struct node *temp = newnode(
           | IDENTIFIER {$$ = newlist(); addbrother($$,newnode(Identifier,$1));}
           ;
 
-Statement: OPTIONAL4 SEMI {$$ = $1;}
+Statement: OPTIONAL SEMI {$$ = $1;}
          | LBRACE ZEROPLUS2 RBRACE { if(count_children_in_list($2) == 0)
                                      {
                                         //printf("1\n");
@@ -203,7 +203,6 @@ ZEROPLUS3: ZEROPLUS3 COMMA Expr %prec HIGHER {$$ = $1; addbrother($$,$3);}
 void yyerror(char *error) 
 {
     printf("Line %d, column %d: %s: %s\n",syn_line,syn_column,error,yytext);
-    
     error_flag = 1;
 }
 /* START subroutines section */
