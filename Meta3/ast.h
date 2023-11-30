@@ -5,13 +5,12 @@ enum category { Program,Declaration,FuncDeclaration,FuncDefinition,ParamList,Fun
                 Short,Natural,Double,Decimal,Void,Null,If,Else,While,Return,Unknown,Error};
 
 enum type {integer_type, double_type, short_type, char_type, no_type};
-#define type_name(type) (type == integer_type ? "int" : (type == double_type ? "double" : (type == short_type ? "short" :(type == char_type ? "char" : "none"))))
+#define type_name(type) (type == integer_type ? "int" : (type == double_type ? "double" : (type == short_type ? "short" :(type == char_type ? "char" : "void"))))
 #define category_type(category) (category == Int ? integer_type : (category == Double ? double_type : (category == Short ? short_type : (category == Char ? char_type : no_type))))
 
 struct node {
     enum category category;
     char *token;
-    int token_line, token_column;
     enum type type;
     struct node_list *children;
 };
@@ -19,9 +18,9 @@ struct node {
 struct node_list 
 {
     struct node *node;
-    int counter;
     struct node_list *next;
 };
+
 void show_stats();
 struct node *newnode(enum category category, char *token);
 struct node_list *newlist();
