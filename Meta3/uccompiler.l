@@ -126,7 +126,7 @@ reservedWords "++"|"--"|"["|"]"|"_Bool"|"_Complex"|"_Imaginary"|"auto"|"break"|"
 } if(type2){PASS_TOKEN();return DECIMAL;} }
 
 .                       { printf("Line %d, column %d: unrecognized character (%s)\n",syn_line,syn_column,yytext);}
-<<EOF>>                 { syn_line = lex_line; syn_column = lex_column; return 0; }
+<<EOF>>                 { YY_USER_ACTION; return 0; }
 %%
 
 extern int yylex();

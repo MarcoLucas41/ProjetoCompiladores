@@ -6,3 +6,6 @@ y.output
 y.tab.c
 y.tab.h
 y.vcg
+uccompiler
+temp.txt
+settings.json
