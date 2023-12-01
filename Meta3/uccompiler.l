@@ -179,7 +179,12 @@ int yywrap() {  /* called on EOF, return 1 to terminate */
     int errors = check_program(program);
     //printf("ERRORS: %d\n",errors);
 
-    if(errors >= 0) show_symbol_tables();
+    if(errors >= 0)
+    {
+        show_symbol_tables();
+        //printf("\n");
+        //show(program,0);
+    }    
     if(program != NULL) cleanup(program); //show_stats(); 
     return 1;
 }
