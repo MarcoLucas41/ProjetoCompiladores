@@ -61,6 +61,7 @@ void check_statement(struct node *statement,struct table *scope)
         case Not:
             check_statement(getchild(statement,0),scope);
             break;
+        case Call: break;
         case Identifier:
             break;
         case Natural: 
@@ -70,6 +71,18 @@ void check_statement(struct node *statement,struct table *scope)
             statement->type = char_type;
         case Decimal:
             statement->type = double_type;
+            break;
+        case If:
+            check_statement(getchild(statement,0),scope);
+            check_statement(getchild(statement,1),scope);
+            check_statement(getchild(statement,2),scope);
+            break;
+        case While:
+            check_statement(getchild(statement,0),scope);
+            check_statement(getchild(statement,1),scope);
+            break;
+        case Return:
+            check_statement(getchild(statement,0),scope);
             break;
         default: break;
     }
@@ -267,9 +280,6 @@ void show_symbol_tables()
 
     for(list = list_tables->next; list != NULL; list = list->next)
     {
-        
-        //num_arguments = count_children_in_node(temp);
-        //printf("%d",num_arguments);
         printf("\n===== Function %s Symbol Table =====\n",list->function_name);
         for(symbol = list->table->next; symbol != NULL; symbol = symbol->next)
         {
