@@ -182,8 +182,8 @@ int yywrap() {  /* called on EOF, return 1 to terminate */
     if(errors >= 0)
     {
         show_symbol_tables();
-        //printf("\n");
-        //show(program,0);
+        printf("\n");
+            show(program,0);
     }    
     if(program != NULL) cleanup(program); //show_stats(); 
     return 1;

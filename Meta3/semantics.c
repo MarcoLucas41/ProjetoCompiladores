@@ -96,6 +96,7 @@ void check_body(struct node *body,struct table *scope)
         if(strcmp(getCategoryName(temp->node->category),"Declaration") == 0)
         {
             check_declaration(temp->node,scope);
+
         }
         else 
         {
@@ -141,14 +142,21 @@ void check_function(struct node *function)
 
     if(function->category == FuncDeclaration)
     {
-        if(search_symbol(global, id->token->token) == NULL) //
+        struct table *result = search_symbol(global, id->token->token); 
+        if(result == NULL) //function hasn't been declared before
         {
             insert_symbol(global, id->token->token, type_function, function);
         }
-        else
+        if(result != NULL && result->node->category == FuncDeclaration) //function can be defined first and declared later. This checks for consecutive declarations
         {
-            printf("Line %d, column %d: Symbol %s already defined\n", id->token->line,id->token->column,id->token->token);
-            semantic_errors++;
+            struct node *temp= getchild(result->node, 0);
+            printf("%s %s\n",getCategoryName(temp->category),getCategoryName(typespec->category));
+            if(temp->category != typespec->category)
+            {
+                printf("Line %d, column %d: Symbol %s already defined\n", id->token->line,id->token->column,id->token->token);
+                semantic_errors++;
+            }
+            
         }
     }
     if(function->category == FuncDefinition)
@@ -250,7 +258,7 @@ int check_program(struct node *program)
 void show_function(struct table *symbol)
 {
     //tab
-    printf("%s  %s(", symbol->identifier, type_name(symbol->type));
+    printf("%s\t%s(", symbol->identifier, type_name(symbol->type));
     struct node *typespec;
     struct node *param_list = getchild(symbol->node,2);
     enum type type_parameter;
@@ -274,7 +282,7 @@ void show_symbol_tables()
     printf("===== Global Symbol Table =====\n");
     for(symbol = global->next; symbol != NULL; symbol = symbol->next)
     {
-        if(strcmp(getCategoryName(symbol->node->category),"Declaration") == 0) printf("%s   %s\n", symbol->identifier, type_name(symbol->type));
+        if(strcmp(getCategoryName(symbol->node->category),"Declaration") == 0) printf("%s\t%s\n", symbol->identifier, type_name(symbol->type));
         if(strcmp(getCategoryName(symbol->node->category),"FuncDefinition") == 0 || strcmp(getCategoryName(symbol->node->category),"FuncDeclaration") == 0) show_function(symbol);
     }
 
@@ -284,11 +292,11 @@ void show_symbol_tables()
         for(symbol = list->table->next; symbol != NULL; symbol = symbol->next)
         {
             //tab
-            printf("%s  %s", symbol->identifier, type_name(symbol->type));
+            printf("%s\t%s", symbol->identifier, type_name(symbol->type));
             if(strcmp(getCategoryName(symbol->node->category),"ParamDeclaration") == 0)
             {
                 //tab
-                printf("    param\n");
+                printf("\tparam\n");
             }
             else printf("\n");
             
