@@ -336,8 +336,30 @@ struct table_list *insert_table(struct table_list *table_list,struct table *tabl
     return new;
 }
 
+void free_table(struct table *table) {
+    struct table *current = table;
+    while (current != NULL) {
+        struct table *next = current->next;
+        free(current->identifier);
+        free(current);
+        current = next;
+    }
+}
 
+void free_table_list(struct table_list *table_list) {
+    struct table_list *current = table_list;
+    while (current != NULL) {
+        struct table_list *next = current->next;
+        free_table(current->table);
+        free(current);
+        current = next;
+    }
+}
 
+void cleanup_symbol_tables() {
+    free_table(global);
+    free_table_list(list_tables);
+}
 
 // insert a new symbol in the list, unless it is already there
 struct table *insert_symbol(struct table *table, char *identifier, enum type type, struct node *node) {
