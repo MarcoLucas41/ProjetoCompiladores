@@ -183,8 +183,8 @@ int yywrap() {  /* called on EOF, return 1 to terminate */
     {
         show_symbol_tables();
         printf("\n");
-            show(program,0);
+        show_annoted_AST(program, 0);
     }    
-    if(program != NULL) cleanup(program); //show_stats(); 
+    if(program != NULL) cleanup(program); //show_stats(); cleanup_symbol_tables()
     return 1;
 }

@@ -24,5 +24,7 @@ struct table *search_symbol(struct table *table, char *identifier);
 struct table_list *insert_table(struct table_list *table_list,struct table *table,char *function_name);
 
 void show_symbol_tables();
+void show_annoted_AST(struct node *node, int depth);
+void cleanup_symbol_tables();
 
 #endif

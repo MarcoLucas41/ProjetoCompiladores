@@ -13,30 +13,15 @@ struct table *global;
 struct table_list *list_tables;
 
 
-void check_declaration(struct node *declaration,struct table *scope) 
-{
-    //type of declaration is obtained through first son(<typespec> node)
-    struct node *typespec = getchild(declaration, 0);
-    enum type type = category_type(typespec->category);
-
-    //id of declaration is obtained through second son(<identifier> node)
-    struct node *id = getchild(declaration,1);
-    if(search_symbol(scope, id->token->token) == NULL) 
-    {
-        insert_symbol(scope, id->token->token, type, declaration);
-    } 
-    else 
-    {
-        printf("Line %d, column %d: Symbol %s already defined\n", id->token->line,id->token->column,id->token->token);
-        semantic_errors++;
-    }
-}
-
 void check_statement(struct node *statement,struct table *scope)
 {
     switch(statement->category)
     {
         case Store:
+            check_statement(getchild(statement,0),scope);
+            check_statement(getchild(statement,1),scope);
+            statement->type = getchild(statement,0)->type;
+            break;
         case Comma:
         case Add:
         case Sub:
@@ -55,6 +40,7 @@ void check_statement(struct node *statement,struct table *scope)
         case Gt:
             check_statement(getchild(statement,0),scope);
             check_statement(getchild(statement,1),scope);
+
             break;
         case Plus:
         case Minus:
@@ -63,12 +49,29 @@ void check_statement(struct node *statement,struct table *scope)
             break;
         case Call: break;
         case Identifier:
+            if(search_symbol(scope, statement->token->token) == NULL) //no id in the current function
+            {
+                if(search_symbol(global, statement->token->token) == NULL) // no id in global variables
+                {
+                    printf("Line %d, column %d: Unknown symbol %s\n", statement->token->line,statement->token->column,statement->token->token);
+                    semantic_errors++;
+                }
+                else 
+                {
+                    statement->type = search_symbol(global, statement->token->token)->type;
+                }
+            }
+            else
+            {
+                statement->type = search_symbol(scope, statement->token->token)->type;
+            }
             break;
-        case Natural: 
+        case Natural:
             statement->type = integer_type;
             break;
         case ChrLit:
-            statement->type = char_type;
+            statement->type = integer_type;
+            break;
         case Decimal:
             statement->type = double_type;
             break;
@@ -86,6 +89,36 @@ void check_statement(struct node *statement,struct table *scope)
             break;
         default: break;
     }
+}
+
+
+
+
+
+void check_declaration(struct node *declaration,struct table *scope) 
+{
+    //type of declaration is obtained through first son(<typespec> node)
+    struct node *typespec = getchild(declaration, 0);
+    enum type type = category_type(typespec->category);
+
+    //id of declaration is obtained through second son(<identifier> node)
+    struct node *id = getchild(declaration,1);
+    if(search_symbol(scope, id->token->token) == NULL) 
+    {
+        insert_symbol(scope, id->token->token, type, declaration);
+    } 
+    else 
+    {
+        printf("Line %d, column %d: Symbol %s already defined\n", id->token->line,id->token->column,id->token->token);
+        semantic_errors++;
+    }
+
+    struct node *expr = getchild(declaration,2);
+    if(expr != NULL)
+    {
+        check_statement(expr,scope);
+    }
+
 }
 
 void check_body(struct node *body,struct table *scope)
@@ -273,6 +306,83 @@ void show_function(struct table *symbol)
     }
     printf(")\n");
 }
+
+void show_annoted_AST(struct node *node, int depth)
+{
+    struct node_list *temp = node->children->next;    
+    //if(strcmp(getCategoryName(node->category),"vasv") != 0)
+    if(strcmp(getCategoryName(node->category),"Unknown") != 0)
+    {
+        if(depth > 0)
+        {
+            for(int i = 0; i < depth; i++)
+            {
+                printf("..");
+            }
+        }
+        if(node->category == Declaration) // either a declaration or a statement
+        {
+
+        }
+        if(node->token != NULL)
+        {
+            printf("%s(%s)",getCategoryName(node->category), node->token->token);
+        }
+        else
+        {
+            printf("%s",getCategoryName(node->category));
+        }
+        /*
+        switch(node->category)
+        {
+            case Store:
+            case Comma:
+            case Add:
+            case Sub:
+            case Mul:
+            case Div:
+            case Mod:
+            case And:
+            case BitWiseAnd:
+            case BitWiseOr:
+            case BitWiseXor:
+            case Eq:
+            case Ne:
+            case Le:
+            case Ge:
+            case Lt:
+            case Gt:
+            case Plus:
+            case Minus:
+            case Not:
+            case Call: 
+            case Identifier:
+            case Natural: 
+            case ChrLit:
+            case Decimal:
+                printf(" - %s",type_name(node->type));
+                break;
+            default:
+                break;
+        }
+        */
+        printf("\n");
+
+        while(temp != NULL)
+        {
+            show_annoted_AST(temp->node,depth+1);
+            temp = temp->next;
+        }
+    }      
+}
+
+
+
+
+
+
+
+
 void show_symbol_tables() 
 {
     //int num_arguments;
@@ -291,18 +401,16 @@ void show_symbol_tables()
         printf("\n===== Function %s Symbol Table =====\n",list->function_name);
         for(symbol = list->table->next; symbol != NULL; symbol = symbol->next)
         {
-            //tab
             printf("%s\t%s", symbol->identifier, type_name(symbol->type));
             if(strcmp(getCategoryName(symbol->node->category),"ParamDeclaration") == 0)
             {
-                //tab
                 printf("\tparam\n");
             }
             else printf("\n");
-            
         }
 
     }
+    //cleanup_symbol_tables();
 }
 
 
