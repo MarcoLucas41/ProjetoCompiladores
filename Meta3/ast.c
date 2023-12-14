@@ -140,7 +140,17 @@ void show(struct node *node, int depth)
         }
         if(node->token != NULL)
         {
-            printf("%s(%s)\n",getCategoryName(node->category), node->token->token);
+            switch(node->category)
+            {
+                case Identifier:
+                case Natural:
+                case ChrLit:
+                case Decimal:
+                    printf("%s(%s)\n",getCategoryName(node->category), node->token->token);
+                    break;
+                default:
+                    break;
+            }
         }
         else
         {
@@ -166,8 +176,9 @@ void cleanup(struct node *node)
         temp = temp->next;
     }
     free(node->children);
-    free(node->token);
     //printf("Freeing node %s\n",getCategoryName(node->category));
+    free(node->token);
+   
     num_frees +=1;
     free(node);
 }
