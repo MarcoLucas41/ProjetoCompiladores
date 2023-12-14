@@ -219,13 +219,19 @@ void check_function(struct node *function)
         {
             struct node *temp= getchild(result->node, 0);
             //printf("%s %s\n",getCategoryName(temp->category),getCategoryName(typespec->category));
-            if(temp->category != typespec->category)
+            if(temp->category == typespec->category)
             {
                 printf("Line %d, column %d: Symbol %s already defined\n", id->token->line,id->token->column,id->token->token);
                 semantic_errors++;
-            }
-            
+            }    
         }
+        /*
+        if(result != NULL && result->node->category == FuncDefinition)
+        {
+            printf("yes sir\n");
+        }
+        */
+
         
     }
     if(function->category == FuncDefinition)
@@ -272,9 +278,10 @@ void check_function(struct node *function)
                 insert_table(list_tables,scope,id->token->token);
             }
         }
-        if(result != NULL && result->node->category == FuncDefinition)
+        if(result != NULL && result->node->category == FuncDefinition) //error for repeated function definitions with same id
         {
             printf("Line %d, column %d: Symbol %s already defined\n", id->token->line,id->token->column,id->token->token);
+
             semantic_errors++;
         }
         
@@ -393,6 +400,13 @@ void show_annoted_AST(struct node *node, int depth, struct table *table)
             case Declaration:
                 special_case = 2;
                 break;
+            case FuncDeclaration:
+            case FuncDefinition:
+                special_case = 0;
+                break;
+            case Return:
+                if(special_case == 2) special_case = 0; 
+                break; 
             case Store:
             case Comma:
             case Add:
@@ -423,7 +437,7 @@ void show_annoted_AST(struct node *node, int depth, struct table *table)
                 {
                     special_case = 0; 
                     break;
-                }    
+                }
                 match = search_symbol(global,node->token->token);
                 if(match != NULL && (match->node->category == FuncDeclaration || match->node->category == FuncDefinition))
                 {
@@ -539,7 +553,8 @@ void free_table_list(struct table_list *table_list) {
 }
 
 // calls memory cleareace functions
-void cleanup_symbol_tables() {
+void cleanup_symbol_tables() 
+{
     free_table(global);
     free_table_list(list_tables);
 }
