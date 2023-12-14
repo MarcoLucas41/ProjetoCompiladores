@@ -15,7 +15,6 @@
     bool type = false;
     bool type2 = false;
     extern struct node *program;
-    extern struct table *global;
     int error_flag = 0;
     int lex_line = 1, lex_column = 1;
     int syn_line = -1, syn_column = -1;
@@ -184,7 +183,7 @@ int yywrap() {  /* called on EOF, return 1 to terminate */
     {
         show_symbol_tables();
         printf("\n");
-        show_annoted_AST(program, 0, global);
+        show_annoted_AST(program, 0);
         //cleanup_symbol_tables();
 
     }    

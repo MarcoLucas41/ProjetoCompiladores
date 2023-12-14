@@ -77,7 +77,7 @@ void check_statement(struct node *statement,struct table *scope)
                 statement->type = search_symbol(scope, statement->token->token)->type;
             }
             
-            if(special_case)
+            if(special_case == 3)
             {
                 if(search_symbol(scope,"return")->type != statement->type) //return type is not same as defined
                 {
@@ -107,7 +107,7 @@ void check_statement(struct node *statement,struct table *scope)
             check_statement(getchild(statement,1),scope);
             break;
         case Return:
-            special_case = 1;
+            special_case = 3;
             check_statement(getchild(statement,0),scope);
             //printf("%s\n",type_name(getchild(statement,0)->type));
 
@@ -355,7 +355,7 @@ void show_parameters(struct table *symbol)
 }
 
 // prints annoted AST
-void show_annoted_AST(struct node *node, int depth, struct table *table)
+void show_annoted_AST(struct node *node, int depth)
 {
     struct node_list *temp = node->children->next;
     struct table *match; 
@@ -460,7 +460,7 @@ void show_annoted_AST(struct node *node, int depth, struct table *table)
 
         while(temp != NULL)
         {
-            show_annoted_AST(temp->node,depth+1,table);
+            show_annoted_AST(temp->node,depth+1);
             temp = temp->next;
         }
     }      
