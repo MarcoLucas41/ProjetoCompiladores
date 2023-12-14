@@ -5,9 +5,14 @@
 #include "semantics.h"
 
 int semantic_errors = 0;
+int special_case = 0;
+int local = 0;
 
 //global symbol table
 struct table *global;
+
+//auxiliary scope for accessing different tables
+struct table_list *aux;
 
 //list of function tables
 struct table_list *list_tables;
@@ -20,7 +25,7 @@ void check_statement(struct node *statement,struct table *scope)
         case Store:
             check_statement(getchild(statement,0),scope);
             check_statement(getchild(statement,1),scope);
-            statement->type = getchild(statement,0)->type;
+            //statement->type = getchild(statement,0)->type;
             break;
         case Comma:
         case Add:
@@ -40,17 +45,21 @@ void check_statement(struct node *statement,struct table *scope)
         case Gt:
             check_statement(getchild(statement,0),scope);
             check_statement(getchild(statement,1),scope);
-
             break;
         case Plus:
         case Minus:
         case Not:
             check_statement(getchild(statement,0),scope);
             break;
-        case Call: break;
+        case Call:
+            //trabalhar aqui é importante
+            printf("1\n"); 
+            check_statement(getchild(statement,1),scope);
+            break;
         case Identifier:
             if(search_symbol(scope, statement->token->token) == NULL) //no id in the current function
             {
+                printf("2\n"); 
                 if(search_symbol(global, statement->token->token) == NULL) // no id in global variables
                 {
                     printf("Line %d, column %d: Unknown symbol %s\n", statement->token->line,statement->token->column,statement->token->token);
@@ -60,9 +69,12 @@ void check_statement(struct node *statement,struct table *scope)
                 {
                     statement->type = search_symbol(global, statement->token->token)->type;
                 }
+
             }
             else
             {
+                printf("3 %s\n",statement->token->token); 
+                //printf("%s\n",type_name(search_symbol(scope, statement->token->token)->type));
                 statement->type = search_symbol(scope, statement->token->token)->type;
             }
             break;
@@ -129,7 +141,6 @@ void check_body(struct node *body,struct table *scope)
         if(strcmp(getCategoryName(temp->node->category),"Declaration") == 0)
         {
             check_declaration(temp->node,scope);
-
         }
         else 
         {
@@ -183,7 +194,7 @@ void check_function(struct node *function)
         if(result != NULL && result->node->category == FuncDeclaration) //function can be defined first and declared later. This checks for consecutive declarations
         {
             struct node *temp= getchild(result->node, 0);
-            printf("%s %s\n",getCategoryName(temp->category),getCategoryName(typespec->category));
+            //printf("%s %s\n",getCategoryName(temp->category),getCategoryName(typespec->category));
             if(temp->category != typespec->category)
             {
                 printf("Line %d, column %d: Symbol %s already defined\n", id->token->line,id->token->column,id->token->token);
@@ -191,6 +202,7 @@ void check_function(struct node *function)
             }
             
         }
+        
     }
     if(function->category == FuncDefinition)
     {
@@ -235,8 +247,8 @@ void check_function(struct node *function)
                 // insert table in table list
                 insert_table(list_tables,scope,id->token->token);
             }
-            
-        } 
+        }
+        
 
     }
     
@@ -288,10 +300,9 @@ int check_program(struct node *program)
 
 
 
-void show_function(struct table *symbol)
+void show_parameters(struct table *symbol)
 {
-    //tab
-    printf("%s\t%s(", symbol->identifier, type_name(symbol->type));
+    printf("%s(", type_name(symbol->type));
     struct node *typespec;
     struct node *param_list = getchild(symbol->node,2);
     enum type type_parameter;
@@ -304,12 +315,13 @@ void show_function(struct table *symbol)
         if(parameter->next == NULL) printf("%s",type_name(type_parameter));
         else printf("%s,",type_name(type_parameter));
     }
-    printf(")\n");
+    printf(")");
 }
 
-void show_annoted_AST(struct node *node, int depth)
+void show_annoted_AST(struct node *node, int depth, struct table *table)
 {
-    struct node_list *temp = node->children->next;    
+    struct node_list *temp = node->children->next;
+    struct table *match; 
     //if(strcmp(getCategoryName(node->category),"vasv") != 0)
     if(strcmp(getCategoryName(node->category),"Unknown") != 0)
     {
@@ -320,10 +332,6 @@ void show_annoted_AST(struct node *node, int depth)
                 printf("..");
             }
         }
-        if(node->category == Declaration) // either a declaration or a statement
-        {
-
-        }
         if(node->token != NULL)
         {
             printf("%s(%s)",getCategoryName(node->category), node->token->token);
@@ -332,9 +340,17 @@ void show_annoted_AST(struct node *node, int depth)
         {
             printf("%s",getCategoryName(node->category));
         }
-        /*
+        
         switch(node->category)
         {
+            case Call:
+                printf(" - %s",type_name(node->type));
+                special_case = 1;
+                break;
+            case ParamDeclaration:
+            case Declaration:
+                special_case = 2;
+                break;
             case Store:
             case Comma:
             case Add:
@@ -355,32 +371,45 @@ void show_annoted_AST(struct node *node, int depth)
             case Plus:
             case Minus:
             case Not:
-            case Call: 
-            case Identifier:
             case Natural: 
             case ChrLit:
             case Decimal:
                 printf(" - %s",type_name(node->type));
                 break;
+            case Identifier:
+                if(special_case == 2)
+                {
+                    special_case = 0; 
+                    break;
+                }    
+                match = search_symbol(global,node->token->token);
+                if(match != NULL && (match->node->category == FuncDeclaration || match->node->category == FuncDefinition))
+                {
+                    if(special_case)
+                    {
+                        printf(" - ");
+                        show_parameters(match);
+                        break;
+                    }
+                    special_case = 0;
+                    break;   
+                }
+                printf(" - %s",type_name(node->type));
+                break;
+                
             default:
                 break;
         }
-        */
+        
         printf("\n");
 
         while(temp != NULL)
         {
-            show_annoted_AST(temp->node,depth+1);
+            show_annoted_AST(temp->node,depth+1,table);
             temp = temp->next;
         }
     }      
 }
-
-
-
-
-
-
 
 
 void show_symbol_tables() 
@@ -393,7 +422,12 @@ void show_symbol_tables()
     for(symbol = global->next; symbol != NULL; symbol = symbol->next)
     {
         if(strcmp(getCategoryName(symbol->node->category),"Declaration") == 0) printf("%s\t%s\n", symbol->identifier, type_name(symbol->type));
-        if(strcmp(getCategoryName(symbol->node->category),"FuncDefinition") == 0 || strcmp(getCategoryName(symbol->node->category),"FuncDeclaration") == 0) show_function(symbol);
+        if(strcmp(getCategoryName(symbol->node->category),"FuncDefinition") == 0 || strcmp(getCategoryName(symbol->node->category),"FuncDeclaration") == 0)
+        {
+            printf("%s\t", symbol->identifier); 
+            show_parameters(symbol);
+            printf("\n");
+        }    
     }
 
     for(list = list_tables->next; list != NULL; list = list->next)
@@ -410,16 +444,7 @@ void show_symbol_tables()
         }
 
     }
-    //cleanup_symbol_tables();
 }
-
-
-
-
-
-
-
-
 
 
 struct table_list *insert_table(struct table_list *table_list,struct table *table,char *function_name)
@@ -444,6 +469,16 @@ struct table_list *insert_table(struct table_list *table_list,struct table *tabl
     return new;
 }
 
+// look up a function table by its name
+struct table_list *search_function(struct table_list *table_list, char *identifier) {
+    struct table_list *function;
+    for(function = table_list->next; function != NULL; function = function->next)
+        if(strcmp(function->function_name, identifier) == 0)
+            return function;
+    return NULL;
+}
+
+// frees memory for table
 void free_table(struct table *table) {
     struct table *current = table;
     while (current != NULL) {
@@ -454,6 +489,7 @@ void free_table(struct table *table) {
     }
 }
 
+// frees memory for list of function tables
 void free_table_list(struct table_list *table_list) {
     struct table_list *current = table_list;
     while (current != NULL) {
